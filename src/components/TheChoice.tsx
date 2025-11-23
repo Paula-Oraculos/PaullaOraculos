@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { X, Check } from "lucide-react";
+import paulaCards from "@/assets/paula-cards.png";
 
 export const TheChoice = () => {
   return (
@@ -75,16 +76,12 @@ export const TheChoice = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="relative"
           >
-            {/* Placeholder for Paula's photo */}
-            <div className="relative aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30 flex items-center justify-center">
-              <div className="text-center p-8">
-                <p className="text-slate-400 text-lg mb-4">
-                  [Placeholder para foto da Paula segurando as cartas vermelha e azul]
-                </p>
-                <p className="text-sm text-slate-500">
-                  Recomendação: Imagem vertical de alta qualidade (min 800x800px)
-                </p>
-              </div>
+            <div className="relative aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30">
+              <img 
+                src={paulaCards} 
+                alt="Paula Oráculos segurando cartas vermelha e azul de Tarot"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />
           </motion.div>
