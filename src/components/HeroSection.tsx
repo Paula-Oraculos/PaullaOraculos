@@ -4,7 +4,12 @@ import { Sparkles } from "lucide-react";
 
 export const HeroSection = () => {
   const scrollToOffer = () => {
-    document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+    const offerElement = document.getElementById('oferta');
+    if (offerElement) {
+      const yOffset = -100;
+      const y = offerElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -46,7 +51,7 @@ export const HeroSection = () => {
             <Button 
               size="lg"
               onClick={scrollToOffer}
-              className="bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-lg px-12 py-8 h-auto font-bold hover:opacity-90 transition-opacity animate-pulse-glow"
+              className="bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-lg px-12 py-8 h-auto font-bold hover:opacity-90 hover:scale-105 transition-all duration-300 animate-pulse-glow"
             >
               QUERO DIZER SIM AO MEU CHAMADO
             </Button>

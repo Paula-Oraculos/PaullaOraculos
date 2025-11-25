@@ -25,6 +25,15 @@ export const OfferSection = () => {
     window.location.href = "https://payfast.greenn.com.br/144718";
   };
 
+  const scrollToOffer = () => {
+    const offerElement = document.getElementById('oferta');
+    if (offerElement) {
+      const yOffset = -100;
+      const y = offerElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="py-20 px-4 relative" id="oferta">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-mystic/5 to-transparent" />
@@ -55,7 +64,7 @@ export const OfferSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-8 md:p-12 glassmorphism border-gold-mystic/50 glow-gold">
+          <Card className="p-8 md:p-12 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.01]">
             {/* Benefits List */}
             <div className="mb-8">
               <h3 className="text-2xl font-serif mb-6 gradient-text">Você vai receber:</h3>
@@ -87,18 +96,18 @@ export const OfferSection = () => {
 
             {/* Pricing */}
             <div className="text-center mb-8">
-              <p className="text-slate-400 line-through text-lg mb-2">De R$ 594,00</p>
+              <p className="text-slate-400 line-through text-lg mb-2">De R$ 997,00</p>
               <div className="text-5xl md:text-6xl font-bold gradient-text mb-2">
-                12x de R$ 29,70
+                12x de R$ 49,70
               </div>
-              <p className="text-2xl text-slate-300">ou R$ 297,00 à vista</p>
+              <p className="text-2xl text-slate-300">ou R$ 497,00 à vista</p>
             </div>
 
             {/* CTA Button */}
             <Button
               onClick={handleCheckout}
               size="lg"
-              className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-xl py-8 h-auto font-bold hover:opacity-90 transition-opacity animate-pulse-glow mb-6"
+              className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-xl py-8 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 animate-pulse-glow mb-6"
             >
               <Zap className="w-6 h-6 mr-2" />
               QUERO ME TORNAR UMA ORACULISTA DESPERTA
@@ -120,7 +129,7 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full">
+            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
               <Shield className="w-12 h-12 text-gold-bright mx-auto mb-4" />
               <h4 className="text-lg font-semibold mb-2">Garantia Blindada</h4>
               <p className="text-sm text-slate-400">
@@ -135,7 +144,7 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full">
+            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
               <Zap className="w-12 h-12 text-gold-bright mx-auto mb-4" />
               <h4 className="text-lg font-semibold mb-2">Acesso Imediato</h4>
               <p className="text-sm text-slate-400">
@@ -150,7 +159,7 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full">
+            <Card className="p-6 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
               <Gift className="w-12 h-12 text-gold-bright mx-auto mb-4" />
               <h4 className="text-lg font-semibold mb-2">Bônus Exclusivos</h4>
               <p className="text-sm text-slate-400">
