@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Heart, Users } from "lucide-react";
+import paulaPortrait from "@/assets/paula-portrait.jpg";
 
 export const AboutMentor = () => {
   return (
@@ -28,16 +29,12 @@ export const AboutMentor = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            {/* Placeholder for Paula's photo */}
-            <div className="relative aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30 flex items-center justify-center">
-              <div className="text-center p-8">
-                <p className="text-slate-400 text-lg mb-4">
-                  [Foto da Paula - Circular ou Retrato]
-                </p>
-                <p className="text-sm text-slate-500">
-                  Recomendação: Foto profissional de alta qualidade
-                </p>
-              </div>
+            <div className="relative aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30">
+              <img 
+                src={paulaPortrait} 
+                alt="Paula Oráculos - Mentora e Criadora do Método Oraculista Desperta"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />
           </motion.div>
@@ -61,7 +58,7 @@ export const AboutMentor = () => {
             </p>
 
             <div className="space-y-4">
-              <Card className="p-4 glassmorphism border-gold-mystic/30">
+              <Card className="p-4 glassmorphism border-gold-mystic/30 transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center">
                     <Sparkles className="w-5 h-5 text-cosmic-dark" />
@@ -73,7 +70,7 @@ export const AboutMentor = () => {
                 </div>
               </Card>
 
-              <Card className="p-4 glassmorphism border-gold-mystic/30">
+              <Card className="p-4 glassmorphism border-gold-mystic/30 transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center">
                     <Users className="w-5 h-5 text-cosmic-dark" />
@@ -85,7 +82,7 @@ export const AboutMentor = () => {
                 </div>
               </Card>
 
-              <Card className="p-4 glassmorphism border-gold-mystic/30">
+              <Card className="p-4 glassmorphism border-gold-mystic/30 transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center">
                     <Heart className="w-5 h-5 text-cosmic-dark" />

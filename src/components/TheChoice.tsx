@@ -31,7 +31,7 @@ export const TheChoice = () => {
             className="space-y-6"
           >
             {/* Blue Card - Reject */}
-            <Card className="p-6 bg-blue-950/30 border-blue-500/30 opacity-50 hover:opacity-60 transition-opacity">
+            <Card className="p-6 bg-blue-950/30 border-blue-500/30 opacity-70 hover:opacity-80 transition-all duration-300 hover:scale-[1.02]">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
                   <X className="w-6 h-6 text-blue-400" />
@@ -47,7 +47,7 @@ export const TheChoice = () => {
             </Card>
 
             {/* Red Card - Accept */}
-            <Card className="p-6 glassmorphism border-gold-mystic/50 glow-gold">
+            <Card className="p-6 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.02] hover:glow-gold">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
                   <Check className="w-6 h-6 text-cosmic-dark" />

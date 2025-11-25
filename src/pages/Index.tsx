@@ -7,7 +7,6 @@ import { AboutMentor } from "@/components/AboutMentor";
 import { OfferSection } from "@/components/OfferSection";
 import { FooterSection } from "@/components/FooterSection";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -21,7 +20,6 @@ const Index = () => {
       <OfferSection />
       <FooterSection />
       <ExitIntentModal />
-      <FloatingWhatsApp />
     </div>
   );
 };

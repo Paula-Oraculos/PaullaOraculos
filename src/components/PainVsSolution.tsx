@@ -48,7 +48,7 @@ export const PainVsSolution = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="p-6 glassmorphism border-red-500/30 h-full">
+              <Card className="p-6 glassmorphism border-red-500/30 h-full transition-all duration-300 hover:scale-[1.02] hover:border-red-500/50">
                 <pain.icon className="w-12 h-12 text-red-400 mb-4" />
                 <h3 className="text-xl font-semibold mb-3">{pain.title}</h3>
                 <p className="text-slate-300">{pain.description}</p>
@@ -65,7 +65,7 @@ export const PainVsSolution = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Card className="p-12 glassmorphism border-gold-mystic/50 glow-gold max-w-3xl mx-auto">
+          <Card className="p-12 glassmorphism border-gold-mystic/50 glow-gold max-w-3xl mx-auto transition-all duration-300 hover:scale-[1.02]">
             <Sparkles className="w-16 h-16 text-gold-bright mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-serif mb-6 gradient-text">
               A Verdade Sagrada
