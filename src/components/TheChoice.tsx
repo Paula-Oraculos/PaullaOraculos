@@ -31,14 +31,14 @@ export const TheChoice = () => {
             className="space-y-6"
           >
             {/* Blue Card - Reject */}
-            <Card className="p-6 bg-blue-950/30 border-blue-500/30 opacity-70 hover:opacity-80 transition-all duration-300 hover:scale-[1.02]">
+            <Card className="p-6 bg-blue-950/50 border-blue-500/40 opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.02]">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <X className="w-6 h-6 text-blue-400" />
+                <div className="w-12 h-12 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0">
+                  <X className="w-6 h-6 text-blue-300" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 text-blue-300">A Carta Azul</h3>
-                  <p className="text-slate-400">
+                  <h3 className="text-xl font-semibold mb-2 text-blue-200">A Carta Azul</h3>
+                  <p className="text-slate-300">
                     Ignorar o chamado e continuar com dúvidas, sem segurança para atender, 
                     sentindo que algo falta mas sem saber o próximo passo.
                   </p>
