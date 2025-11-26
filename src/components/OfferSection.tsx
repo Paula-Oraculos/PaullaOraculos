@@ -64,7 +64,7 @@ export const OfferSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-6 md:p-8 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.01]">
+          <Card className="p-4 md:p-6 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.01]">
             {/* Benefits List */}
             <div className="mb-6">
               <h3 className="text-xl font-serif mb-4 gradient-text">Você vai receber:</h3>
@@ -107,7 +107,7 @@ export const OfferSection = () => {
             <Button
               onClick={handleCheckout}
               size="lg"
-              className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-lg py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 animate-pulse-glow mb-4"
+              className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-base py-4 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 animate-pulse-glow mb-4"
             >
               <Zap className="w-5 h-5 mr-2" />
               QUERO ME TORNAR UMA ORACULISTA DESPERTA
@@ -129,9 +129,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="p-4 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Shield className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Garantia Blindada</h4>
+            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Shield className="w-8 h-8 text-gold-bright mx-auto mb-2" />
+              <h4 className="text-sm font-semibold mb-1.5">Garantia Blindada</h4>
               <p className="text-xs text-slate-400">
                 7 dias para testar. Não gostou? Devolvemos 100% do investimento.
               </p>
@@ -144,9 +144,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="p-4 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Zap className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Acesso Imediato</h4>
+            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Zap className="w-8 h-8 text-gold-bright mx-auto mb-2" />
+              <h4 className="text-sm font-semibold mb-1.5">Acesso Imediato</h4>
               <p className="text-xs text-slate-400">
                 Comece agora mesmo. Assim que confirmar o pagamento, tudo liberado.
               </p>
@@ -159,9 +159,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="p-4 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Gift className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Bônus Exclusivos</h4>
+            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Gift className="w-8 h-8 text-gold-bright mx-auto mb-2" />
+              <h4 className="text-sm font-semibold mb-1.5">Bônus Exclusivos</h4>
               <p className="text-xs text-slate-400">
                 Materiais extras que vão acelerar sua jornada oracular.
               </p>
