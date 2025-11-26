@@ -86,8 +86,8 @@ export const TheMethod = () => {
               >
                 <AccordionTrigger className="hover:no-underline py-6">
                   <div className="flex items-center gap-4 text-left">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
-                      <span className="text-3xl font-bold text-cosmic-dark">{module.number}</span>
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
+                      <span className="text-xl font-bold text-cosmic-dark">{module.number}</span>
                     </div>
                     <div>
                       <div className="text-sm text-gold-bright mb-1">Módulo {module.number}</div>
