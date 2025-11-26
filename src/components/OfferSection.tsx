@@ -129,9 +129,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Shield className="w-8 h-8 text-gold-bright mx-auto mb-2" />
-              <h4 className="text-sm font-semibold mb-1.5">Garantia Blindada</h4>
+            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Shield className="w-10 h-10 text-gold-bright mx-auto mb-3" />
+              <h4 className="text-base font-semibold mb-2">Garantia Blindada</h4>
               <p className="text-xs text-slate-400">
                 7 dias para testar. Não gostou? Devolvemos 100% do investimento.
               </p>
@@ -144,9 +144,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Zap className="w-8 h-8 text-gold-bright mx-auto mb-2" />
-              <h4 className="text-sm font-semibold mb-1.5">Acesso Imediato</h4>
+            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Zap className="w-10 h-10 text-gold-bright mx-auto mb-3" />
+              <h4 className="text-base font-semibold mb-2">Acesso Imediato</h4>
               <p className="text-xs text-slate-400">
                 Comece agora mesmo. Assim que confirmar o pagamento, tudo liberado.
               </p>
@@ -159,9 +159,9 @@ export const OfferSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="p-3 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Gift className="w-8 h-8 text-gold-bright mx-auto mb-2" />
-              <h4 className="text-sm font-semibold mb-1.5">Bônus Exclusivos</h4>
+            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
+              <Gift className="w-10 h-10 text-gold-bright mx-auto mb-3" />
+              <h4 className="text-base font-semibold mb-2">Bônus Exclusivos</h4>
               <p className="text-xs text-slate-400">
                 Materiais extras que vão acelerar sua jornada oracular.
               </p>

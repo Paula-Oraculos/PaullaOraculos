@@ -65,9 +65,9 @@ export const PainVsSolution = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Card className="p-12 glassmorphism border-gold-mystic/50 glow-gold max-w-3xl mx-auto transition-all duration-300 hover:scale-[1.02]">
-            <Sparkles className="w-16 h-16 text-gold-bright mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-serif mb-6 gradient-text">
+          <Card className="p-8 glassmorphism border-gold-mystic/50 glow-gold max-w-3xl mx-auto transition-all duration-300 hover:scale-[1.02]">
+            <Sparkles className="w-12 h-12 text-gold-bright mx-auto mb-6" />
+            <h2 className="text-2xl md:text-3xl font-serif mb-6 gradient-text">
               A Verdade Sagrada
             </h2>
             <p className="text-xl text-slate-200 leading-relaxed mb-6">
