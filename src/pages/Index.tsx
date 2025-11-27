@@ -4,6 +4,7 @@ import { TheChoice } from "@/components/TheChoice";
 import { PainVsSolution } from "@/components/PainVsSolution";
 import { TheMethod } from "@/components/TheMethod";
 import { AboutMentor } from "@/components/AboutMentor";
+import { Testimonials } from "@/components/Testimonials";
 import { OfferSection } from "@/components/OfferSection";
 import { FooterSection } from "@/components/FooterSection";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
@@ -17,6 +18,7 @@ const Index = () => {
       <PainVsSolution />
       <TheMethod />
       <AboutMentor />
+      <Testimonials />
       <OfferSection />
       <FooterSection />
       <ExitIntentModal />
