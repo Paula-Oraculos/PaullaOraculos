@@ -50,8 +50,8 @@ export const AboutMentor = () => {
               Paula Oráculos
             </h3>
             
-            <p className="text-lg text-slate-300 leading-relaxed">
-              Oraculista profissional há mais de uma década, Paula desenvolveu o Método 
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Oraculista profissional com vasta experiência, Paula desenvolveu o Método 
               Oraculista Desperta após atender milhares de consulentes e perceber que 
               o verdadeiro poder não está em "prever o futuro", mas em ativar a sabedoria 
               interior de cada pessoa.
