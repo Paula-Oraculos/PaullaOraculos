@@ -38,6 +38,12 @@
     --sidebar-border: oklch(0.92 0.004 286.32);
     --sidebar-ring: oklch(0.852 0.199 91.936);
 
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 210 100% 63%;
+    --color-4: 195 100% 63%;
+    --color-5: 90 100% 63%;
+
     --cosmic-dark: #0f0c29;
     --cosmic-mid: #302b63;
     --cosmic-light: #24243e;
