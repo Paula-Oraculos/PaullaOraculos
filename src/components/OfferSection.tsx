@@ -98,7 +98,7 @@ export const OfferSection = () => {
             <div className="text-center mb-6">
               <p className="text-slate-400 line-through text-base mb-1">De R$ 997,00</p>
               <div className="text-4xl md:text-5xl font-bold gradient-text mb-1">
-                12x de R$ 49,70
+                12x de R$ 51,10
               </div>
               <p className="text-xl text-slate-300">ou R$ 497,00 à vista</p>
             </div>
