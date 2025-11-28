@@ -57,11 +57,14 @@ export const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-serif mb-4 md:mb-6 px-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-3 sm:mb-4 md:mb-6 px-4 leading-tight">
             Histórias de Transformação
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Veja o que nossas alunas estão alcançando com o Método Oraculista Desperta
+          </p>
+          <p className="text-xs sm:text-sm text-gold-bright/80 mt-2 px-4 md:hidden">
+            👉 Deslize para ver mais depoimentos
           </p>
         </motion.div>
 
@@ -119,11 +122,11 @@ export const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto px-4"
         >
-          <div className="glassmorphism border border-primary/30 rounded-2xl p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-serif mb-4 gradient-text">
+          <div className="glassmorphism border border-primary/30 rounded-2xl p-5 sm:p-6 md:p-8">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-serif mb-3 sm:mb-4 gradient-text leading-tight">
               Você quer ter clientes alinhados e valorizando seu trabalho?
             </h3>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed mb-5 sm:mb-6">
               Mesmo começando agora, com esse acompanhamento eu te ajudo a ter esse nível 
               de satisfação com teu propósito e a prosperar fazendo a diferença na vida das pessoas.
             </p>
@@ -131,10 +134,11 @@ export const Testimonials = () => {
             <Button 
               onClick={scrollToOffer}
               size="lg"
-              className="w-full md:w-auto bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-base md:text-lg px-8 md:px-12 py-4 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-105 transition-all duration-300 animate-pulse-glow"
+              className="w-full md:w-auto bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-105 transition-all duration-300 animate-pulse-glow leading-tight"
             >
-              <Zap className="w-5 h-5 mr-2" />
-              Quero Me Tornar Uma Oraculista Desperta
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
+              <span className="hidden sm:inline">Quero Me Tornar Uma Oraculista Desperta</span>
+              <span className="sm:hidden">Garantir Minha Vaga</span>
             </Button>
           </div>
         </motion.div>

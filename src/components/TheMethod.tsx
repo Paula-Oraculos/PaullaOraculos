@@ -63,10 +63,10 @@ export const TheMethod = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-serif mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4 sm:mb-6 leading-tight">
             O Método Oraculista Desperta
           </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto">
             6 módulos progressivos que te levam do zero à oraculista profissional em 45 dias
           </p>
         </motion.div>
@@ -82,25 +82,25 @@ export const TheMethod = () => {
             >
               <AccordionItem 
                 value={`item-${index}`}
-                className="glassmorphism border-gold-mystic/30 rounded-lg px-6 hover:glow-gold hover:scale-[1.01] transition-all duration-300"
+                className="glassmorphism border-gold-mystic/30 rounded-lg px-4 sm:px-6 hover:glow-gold hover:scale-[1.01] transition-all duration-300"
               >
-                <AccordionTrigger className="hover:no-underline py-6">
-                  <div className="flex items-center gap-4 text-left">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
-                      <span className="text-xl font-bold text-cosmic-dark">{module.number}</span>
+                <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
+                  <div className="flex items-center gap-3 sm:gap-4 text-left">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
+                      <span className="text-base sm:text-lg md:text-xl font-bold text-cosmic-dark">{module.number}</span>
                     </div>
                     <div>
-                      <div className="text-sm text-gold-bright mb-1">Módulo {module.number}</div>
-                      <div className="text-xl font-semibold">{module.title}</div>
+                      <div className="text-xs sm:text-sm text-gold-bright mb-1">Módulo {module.number}</div>
+                      <div className="text-base sm:text-lg md:text-xl font-semibold">{module.title}</div>
                     </div>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pb-6 pt-2">
-                  <p className="text-slate-300 mb-4 ml-16">{module.description}</p>
-                  <ul className="space-y-2 ml-16">
+                <AccordionContent className="pb-4 sm:pb-6 pt-2">
+                  <p className="text-sm sm:text-base text-slate-300 mb-3 sm:mb-4 ml-0 sm:ml-12 md:ml-16">{module.description}</p>
+                  <ul className="space-y-2 ml-0 sm:ml-12 md:ml-16">
                     {module.topics.map((topic, i) => (
-                      <li key={i} className="flex items-center gap-2 text-slate-400">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gold-bright" />
+                      <li key={i} className="flex items-center gap-2 text-sm sm:text-base text-slate-400">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold-bright flex-shrink-0" />
                         {topic}
                       </li>
                     ))}
