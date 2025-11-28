@@ -2,29 +2,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check, Shield, Zap, Gift, Clock } from "lucide-react";
-
-const benefits = [
-  "6 módulos completos em vídeo-aulas",
-  "Método das 3 Camadas (exclusivo)",
-  "Apostila completa em PDF",
-  "Grupo VIP de prática e trocas",
-  "Certificado de conclusão",
-  "Acesso vitalício à plataforma",
-  "Atualizações futuras incluídas",
-  "Suporte direto da mentora",
-];
-
-const bonuses = [
-  "Bonus 1: Ebook 'Rituais de Proteção para Oraculistas'",
-  "Bonus 2: Planilha de Gestão de Atendimentos",
-  "Bonus 3: Templates de Posts para Redes Sociais",
-];
-
+const benefits = ["6 módulos completos em vídeo-aulas", "Método das 3 Camadas (exclusivo)", "Apostila completa em PDF", "Grupo VIP de prática e trocas", "Certificado de conclusão", "Acesso vitalício à plataforma", "Atualizações futuras incluídas", "Suporte direto da mentora"];
+const bonuses = ["Bonus 1: Ebook 'Rituais de Proteção para Oraculistas'", "Bonus 2: Planilha de Gestão de Atendimentos", "Bonus 3: Templates de Posts para Redes Sociais"];
 export const OfferSection = () => {
   const handleCheckout = () => {
     window.location.href = "https://payfast.greenn.com.br/144718";
   };
-
   const scrollToOffer = () => {
     const offerElement = document.getElementById('oferta');
     if (offerElement) {
@@ -32,22 +15,27 @@ export const OfferSection = () => {
       const extraMargin = 40;
       const yOffset = -(headerHeight + extraMargin);
       const y = offerElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section className="py-12 px-4 relative" id="oferta">
+  return <section className="py-12 px-4 relative" id="oferta">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-mystic/5 to-transparent" />
       
       <div className="container mx-auto max-w-6xl relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.6
+      }} className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/50 text-red-300 mb-3 sm:mb-4">
             <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
             <span className="text-xs sm:text-sm font-semibold">OFERTA POR TEMPO LIMITADO</span>
@@ -60,12 +48,17 @@ export const OfferSection = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.div initial={{
+        opacity: 0,
+        scale: 0.95
+      }} whileInView={{
+        opacity: 1,
+        scale: 1
+      }} viewport={{
+        once: true
+      }} transition={{
+        duration: 0.8
+      }}>
           <Card className="p-5 sm:p-6 md:p-8 lg:p-10 glassmorphism border-gold-mystic/50 glow-gold">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-6 sm:gap-8 lg:gap-10">
               {/* Coluna Direita - Área de Preço Destacada (PRIMEIRO NO MOBILE) */}
@@ -91,13 +84,9 @@ export const OfferSection = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Button
-                      onClick={handleCheckout}
-                      size="lg"
-                      className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-sm md:text-base lg:text-lg py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] leading-tight"
-                    >
+                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-sm md:text-base lg:text-lg py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] leading-tight">
                       <Zap className="w-5 h-5 md:w-6 md:h-6 mr-2 flex-shrink-0" />
-                      <span className="block">GARANTIR MINHA VAGA AGORA</span>
+                      <span className="block text-xs font-extrabold">GARANTIR MINHA VAGA AGORA</span>
                     </Button>
 
                     {/* Guarantee */}
@@ -120,12 +109,10 @@ export const OfferSection = () => {
                 <div>
                   <h3 className="text-xl sm:text-2xl font-serif mb-4 sm:mb-5 gradient-text">Você vai receber:</h3>
                   <ul className="space-y-2 sm:space-y-3">
-                    {benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start gap-2 sm:gap-3">
+                    {benefits.map((benefit, index) => <li key={index} className="flex items-start gap-2 sm:gap-3">
                         <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-1" />
                         <span className="text-slate-200 text-sm sm:text-base leading-relaxed">{benefit}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
 
@@ -136,12 +123,10 @@ export const OfferSection = () => {
                     <h4 className="text-lg sm:text-xl font-semibold text-purple-300">Bônus Exclusivos</h4>
                   </div>
                   <ul className="space-y-2 sm:space-y-3">
-                    {bonuses.map((bonus, index) => (
-                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-slate-300 text-sm sm:text-base">
+                    {bonuses.map((bonus, index) => <li key={index} className="flex items-start gap-2 sm:gap-3 text-slate-300 text-sm sm:text-base">
                         <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                         <span>{bonus}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
               </div>
@@ -149,6 +134,5 @@ export const OfferSection = () => {
           </Card>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
