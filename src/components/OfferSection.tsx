@@ -37,10 +37,10 @@ export const OfferSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 relative" id="oferta">
+    <section className="py-12 px-4 relative" id="oferta">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold-mystic/5 to-transparent" />
       
-      <div className="container mx-auto max-w-4xl relative z-10">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,123 +66,87 @@ export const OfferSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <Card className="p-4 md:p-6 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.01]">
-            {/* Benefits List */}
-            <div className="mb-6">
-              <h3 className="text-xl font-serif mb-4 gradient-text">Você vai receber:</h3>
-              <ul className="space-y-2">
-                {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-slate-200 text-sm">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <Card className="p-6 md:p-8 lg:p-10 glassmorphism border-gold-mystic/50 glow-gold">
+            <div className="grid lg:grid-cols-[1fr_400px] gap-8 lg:gap-10">
+              {/* Coluna Esquerda - Benefícios e Bônus */}
+              <div className="space-y-6">
+                {/* Benefits List */}
+                <div>
+                  <h3 className="text-2xl font-serif mb-5 gradient-text">Você vai receber:</h3>
+                  <ul className="space-y-3">
+                    {benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
+                        <span className="text-slate-200 text-base leading-relaxed">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-            {/* Bonuses */}
-            <div className="mb-6 p-4 rounded-lg bg-purple-900/20 border border-purple-500/30">
-              <div className="flex items-center gap-2 mb-3">
-                <Gift className="w-5 h-5 text-purple-400" />
-                <h4 className="text-lg font-semibold text-purple-300">Bônus Exclusivos</h4>
+                {/* Bonuses */}
+                <div className="p-5 rounded-xl bg-purple-900/20 border border-purple-500/30">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Gift className="w-6 h-6 text-purple-400" />
+                    <h4 className="text-xl font-semibold text-purple-300">Bônus Exclusivos</h4>
+                  </div>
+                  <ul className="space-y-3">
+                    {bonuses.map((bonus, index) => (
+                      <li key={index} className="flex items-start gap-3 text-slate-300 text-base">
+                        <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                        <span>{bonus}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <ul className="space-y-2">
-                {bonuses.map((bonus, index) => (
-                  <li key={index} className="flex items-start gap-2 text-slate-300 text-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
-                    <span>{bonus}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
-            {/* Pricing */}
-            <div className="text-center mb-6">
-              <p className="text-slate-400 line-through text-base mb-1">De R$ 997,00</p>
-              <div className="text-4xl md:text-5xl font-bold gradient-text mb-1">
-                12x de R$ 51,10
+              {/* Coluna Direita - Área de Preço Destacada */}
+              <div className="lg:sticky lg:top-24 h-fit">
+                <div className="bg-gradient-to-br from-gold-mystic/10 via-purple-500/5 to-gold-mystic/10 rounded-2xl p-6 md:p-8 border-2 border-gold-mystic/60 shadow-[0_0_40px_rgba(218,165,32,0.3)] relative overflow-hidden">
+                  {/* Animated background effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold-bright/5 to-transparent animate-pulse" />
+                  
+                  <div className="relative z-10 space-y-6">
+                    {/* Urgency Badge */}
+                    <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-red-500/20 border border-red-500/50 text-red-300 mx-auto w-fit">
+                      <Clock className="w-4 h-4" />
+                      <span className="text-xs font-bold uppercase">Oferta Limitada</span>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="text-center space-y-3">
+                      <p className="text-slate-400 line-through text-lg">De R$ 997,00</p>
+                      <div className="text-5xl md:text-6xl font-bold gradient-text leading-tight">
+                        12x de R$ 51,10
+                      </div>
+                      <p className="text-2xl text-slate-200 font-semibold">ou R$ 497,00 à vista</p>
+                    </div>
+
+                    {/* CTA Button */}
+                    <Button
+                      onClick={handleCheckout}
+                      size="lg"
+                      className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-lg py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)]"
+                    >
+                      <Zap className="w-6 h-6 mr-2" />
+                      QUERO ME TORNAR UMA ORACULISTA DESPERTA
+                    </Button>
+
+                    {/* Guarantee */}
+                    <div className="flex items-center justify-center gap-2 text-sm text-slate-300 pt-2">
+                      <Shield className="w-5 h-5 text-green-400" />
+                      <span className="font-medium">Garantia incondicional de 7 dias</span>
+                    </div>
+
+                    {/* Security Badge */}
+                    <div className="text-center pt-4 border-t border-white/10">
+                      <p className="text-slate-400 text-sm">🔒 Pagamento 100% seguro via Greenn</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p className="text-xl text-slate-300">ou R$ 497,00 à vista</p>
-            </div>
-
-            {/* CTA Button */}
-            <Button
-              onClick={handleCheckout}
-              size="lg"
-              className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-base py-4 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 animate-pulse-glow mb-4"
-            >
-              <Zap className="w-5 h-5 mr-2" />
-              QUERO ME TORNAR UMA ORACULISTA DESPERTA
-            </Button>
-
-            {/* Guarantee */}
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
-              <Shield className="w-4 h-4 text-green-400" />
-              <span>Garantia incondicional de 7 dias</span>
             </div>
           </Card>
-        </motion.div>
-
-        {/* Additional Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Shield className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Garantia Blindada</h4>
-              <p className="text-xs text-slate-400">
-                7 dias para testar. Não gostou? Devolvemos 100% do investimento.
-              </p>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Zap className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Acesso Imediato</h4>
-              <p className="text-xs text-slate-400">
-                Comece agora mesmo. Assim que confirmar o pagamento, tudo liberado.
-              </p>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Card className="p-5 glassmorphism border-gold-mystic/30 text-center h-full transition-all duration-300 hover:scale-105 hover:border-gold-mystic/50">
-              <Gift className="w-10 h-10 text-gold-bright mx-auto mb-3" />
-              <h4 className="text-base font-semibold mb-2">Bônus Exclusivos</h4>
-              <p className="text-xs text-slate-400">
-                Materiais extras que vão acelerar sua jornada oracular.
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-
-        {/* Social Proof */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-8"
-        >
-          <p className="text-slate-400 text-sm mb-1">🔒 Pagamento 100% seguro via Greenn</p>
-          <p className="text-xs text-slate-500">
-            Mais de 500 alunas já transformaram suas vidas
-          </p>
         </motion.div>
       </div>
     </section>
