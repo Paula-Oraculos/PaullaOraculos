@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Star, Play } from "lucide-react";
+import { Star, Play, Zap } from "lucide-react";
 import { ShootingStars } from "@/components/ui/shooting-stars";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
@@ -118,22 +118,24 @@ export const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto px-4"
         >
-          <div className="glassmorphism border border-primary/30 rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
+          <div className="glassmorphism border border-primary/30 rounded-2xl p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-serif mb-4 gradient-text">
               Você quer ter clientes alinhados e valorizando seu trabalho?
             </h3>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
               Mesmo começando agora, com esse acompanhamento eu te ajudo a ter esse nível 
               de satisfação com teu propósito e a prosperar fazendo a diferença na vida das pessoas.
             </p>
+            
+            <Button 
+              onClick={scrollToOffer}
+              size="lg"
+              className="w-full md:w-auto bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-base md:text-lg px-8 md:px-12 py-4 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-105 transition-all duration-300 animate-pulse-glow"
+            >
+              <Zap className="w-5 h-5 mr-2" />
+              Quero Me Tornar Uma Oraculista Desperta
+            </Button>
           </div>
-          
-          <RainbowButton 
-            onClick={scrollToOffer}
-            className="w-full md:w-auto text-base md:text-lg px-8 md:px-12 py-4 md:py-6 h-auto"
-          >
-            Quero Me Tornar Uma Oraculista Desperta
-          </RainbowButton>
         </motion.div>
       </div>
     </section>
