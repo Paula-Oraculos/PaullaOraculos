@@ -28,7 +28,9 @@ export const OfferSection = () => {
   const scrollToOffer = () => {
     const offerElement = document.getElementById('oferta');
     if (offerElement) {
-      const yOffset = -100;
+      const headerHeight = 80;
+      const extraMargin = 40;
+      const yOffset = -(headerHeight + extraMargin);
       const y = offerElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
