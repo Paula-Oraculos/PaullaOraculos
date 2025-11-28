@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check, Shield, Zap, Gift, Clock } from "lucide-react";
+import { Check, Shield, Zap, Gift, Clock, ShoppingCart } from "lucide-react";
 const benefits = ["6 módulos completos em vídeo-aulas", "Método das 3 Camadas (exclusivo)", "Apostila completa em PDF", "Grupo VIP de prática e trocas", "Certificado de conclusão", "Acesso vitalício à plataforma", "Atualizações futuras incluídas", "Suporte direto da mentora"];
 const bonuses = ["Bonus 1: Ebook 'Rituais de Proteção para Oraculistas'", "Bonus 2: Planilha de Gestão de Atendimentos", "Bonus 3: Templates de Posts para Redes Sociais"];
 export const OfferSection = () => {
@@ -96,9 +96,9 @@ export const OfferSection = () => {
                     </div>
 
                     {/* Security Badge */}
-                    <div className="text-center pt-3 sm:pt-4 border-t border-white/10">
+                    <ShoppingCart className="text-center pt-3 sm:pt-4 border-t border-white/10">
                       <p className="text-slate-400 text-xs sm:text-sm">🔒 Pagamento 100% seguro via Greenn</p>
-                    </div>
+                    </ShoppingCart>
                   </div>
                 </div>
               </div>
