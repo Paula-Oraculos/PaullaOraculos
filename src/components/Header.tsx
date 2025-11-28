@@ -17,8 +17,12 @@ export const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-cosmic-dark/70 backdrop-blur-xl border-b border-white/10">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={logoPaula} alt="Paula Oráculos" className="h-10 w-auto opacity-90" />
-          <h1 className="text-xl font-serif gradient-text">Paula Oráculos</h1>
+          <img 
+            src={logoPaula} 
+            alt="Paula Oráculos" 
+            className="h-12 w-auto drop-shadow-[0_0_8px_rgba(218,165,32,0.5)] hover:drop-shadow-[0_0_12px_rgba(218,165,32,0.7)] transition-all duration-300" 
+          />
+          <h1 className="text-xl font-serif gradient-text hidden sm:block">Paula Oráculos</h1>
         </div>
         <Button 
           onClick={scrollToOffer}
