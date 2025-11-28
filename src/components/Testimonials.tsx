@@ -36,8 +36,14 @@ const testimonials = [
 
 export const Testimonials = () => {
   const scrollToOffer = () => {
-    const offerSection = document.getElementById('oferta');
-    offerSection?.scrollIntoView({ behavior: 'smooth' });
+    const offerElement = document.getElementById('oferta');
+    if (offerElement) {
+      const headerHeight = 80;
+      const extraMargin = 40;
+      const yOffset = -(headerHeight + extraMargin);
+      const y = offerElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
