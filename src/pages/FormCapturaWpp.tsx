@@ -284,10 +284,6 @@ const FormCapturaWpp = () => {
             </p>
           </div>
 
-          {/* Bottom tagline */}
-          <p className="text-center text-purple-300 mt-8 text-sm animate-fade-in">
-            ✨ Mais de 1.000 pessoas já fazem parte dessa jornada espiritual ✨
-          </p>
         </div>
       </div>
     </div>
