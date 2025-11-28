@@ -84,9 +84,12 @@ export const OfferSection = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)]">
-                      <Zap className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-                      <span className="text-xs md:text-sm font-extrabold whitespace-normal text-center leading-tight">GARANTIR MINHA VAGA AGORA</span>
+                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] flex-col gap-1.5">
+                      <div className="flex items-center gap-2">
+                        <Zap className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                        <span className="text-xs md:text-sm font-extrabold whitespace-normal text-center leading-tight">GARANTIR MINHA VAGA AGORA</span>
+                      </div>
+                      <span className="text-[10px] md:text-xs text-cosmic-dark/70 font-normal">🔒 Pagamento 100% seguro via Greenn</span>
                     </Button>
 
                     {/* Guarantee */}
@@ -95,10 +98,6 @@ export const OfferSection = () => {
                       <span className="font-medium">Garantia incondicional de 7 dias</span>
                     </div>
 
-                    {/* Security Badge */}
-                    <ShoppingCart className="text-center pt-3 sm:pt-4 border-t border-white/10">
-                      <p className="text-slate-400 text-xs sm:text-sm">🔒 Pagamento 100% seguro via Greenn</p>
-                    </ShoppingCart>
                   </div>
                 </div>
               </div>
