@@ -120,6 +120,10 @@
     background-clip: text;
   }
   
+  .text-balance {
+    text-wrap: balance;
+  }
+  
   .glow-gold {
     box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
   }

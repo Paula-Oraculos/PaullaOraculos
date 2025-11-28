@@ -179,37 +179,37 @@ const FormCapturaWpp = () => {
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12">
         <div className="max-w-2xl w-full">
           {/* Logo/Brand */}
-          <div className="text-center mb-8 animate-fade-in">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Moon className="h-10 w-10 text-purple-300 animate-pulse" />
-              <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 animate-gradient-text">
+          <div className="text-center mb-6 sm:mb-8 animate-fade-in">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <Moon className="h-8 w-8 md:h-10 md:w-10 text-purple-300 animate-pulse" />
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 animate-gradient-text">
                 Paula Oráculos
               </h1>
-              <Stars className="h-10 w-10 text-pink-300 animate-pulse" />
+              <Stars className="h-8 w-8 md:h-10 md:w-10 text-pink-300 animate-pulse" />
             </div>
             <div className="flex items-center justify-center gap-2 text-purple-300">
-              <Sparkles className="h-5 w-5 animate-pulse" />
-              <p className="text-lg md:text-xl font-light tracking-wide">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
+              <p className="text-base sm:text-lg md:text-xl font-light tracking-wide">
                 Desperte sua Consciência Espiritual
               </p>
-              <Sparkles className="h-5 w-5 animate-pulse" />
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
             </div>
           </div>
 
           {/* Main Card */}
-          <div className="backdrop-blur-lg bg-white/10 border border-purple-400/30 rounded-3xl p-8 md:p-12 shadow-2xl animate-slide-up">
+          <div className="backdrop-blur-lg bg-white/10 border border-purple-400/30 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl animate-slide-up">
             {/* Title */}
-            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-3 sm:mb-4 leading-tight">
               Junte-se ao Nosso Grupo Gratuito
             </h2>
             
             {/* Subtitle */}
-            <p className="text-purple-200 text-center mb-8 text-lg leading-relaxed">
+            <p className="text-purple-200 text-center mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
               Receba mensagens diárias de orientação espiritual, tarot, oráculos e conexão com o universo místico
             </p>
 
             {/* Benefits */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               {[
                 '🌙 Leituras exclusivas de tarot e oráculos',
                 '✨ Rituais e simpatias para manifestação',
@@ -219,7 +219,7 @@ const FormCapturaWpp = () => {
               ].map((benefit, index) => (
                 <div 
                   key={index}
-                  className="flex items-center gap-3 text-white text-lg animate-fade-in"
+                  className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="flex-shrink-0 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
