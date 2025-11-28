@@ -64,11 +64,28 @@ export const ExitIntentModal = () => {
     };
   }, [hasShown]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
       const validatedData = formSchema.parse(formData);
+      
+      // Envia dados para o webhook do n8n
+      await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: validatedData.name,
+          whatsapp: validatedData.phone.replace(/\D/g, ''),
+          data_cadastro: new Date().toISOString(),
+          origem: 'Landing Page Paula Oráculos',
+          tag: 'captura-pop-up'
+        })
+      }).catch(error => {
+        console.error('Erro ao enviar para webhook:', error);
+      });
       
       // Redirect to WhatsApp group
       window.location.href = "https://chat.whatsapp.com/HRKM7t5DY54Da7HUoFiIXi?mode=ems_copy_t";

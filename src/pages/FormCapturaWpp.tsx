@@ -34,7 +34,8 @@ const FormCapturaWpp = () => {
             nome: name.trim(),
             whatsapp: whatsapp.replace(/\D/g, ''), // Remove formatação, envia só números
             data_cadastro: new Date().toISOString(),
-            origem: 'Landing Page Paula Oráculos'
+            origem: 'Landing Page Paula Oráculos',
+            tag: 'captura-wpp'
           })
         });
 
