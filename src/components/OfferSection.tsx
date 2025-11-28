@@ -84,9 +84,9 @@ export const OfferSection = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-sm md:text-base lg:text-lg py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] leading-tight">
-                      <Zap className="w-5 h-5 md:w-6 md:h-6 mr-2 flex-shrink-0" />
-                      <span className="block text-xs font-extrabold">GARANTIR MINHA VAGA AGORA</span>
+                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)]">
+                      <Zap className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                      <span className="text-xs md:text-sm font-extrabold whitespace-normal text-center leading-tight">GARANTIR MINHA VAGA AGORA</span>
                     </Button>
 
                     {/* Guarantee */}
