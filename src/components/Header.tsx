@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import logoPaula from "@/assets/logo-paula.png";
 
 export const Header = () => {
   const scrollToOffer = () => {
@@ -16,9 +16,9 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-cosmic-dark/70 backdrop-blur-xl border-b border-white/10">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-gold-bright" />
-          <h1 className="text-2xl font-serif gradient-text">Paula Oráculos</h1>
+        <div className="flex items-center gap-3">
+          <img src={logoPaula} alt="Paula Oráculos" className="h-10 w-auto opacity-90" />
+          <h1 className="text-xl font-serif gradient-text">Paula Oráculos</h1>
         </div>
         <Button 
           onClick={scrollToOffer}
