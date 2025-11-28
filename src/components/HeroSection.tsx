@@ -15,16 +15,16 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20">
+    <section className="relative min-h-[80vh] sm:min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-20">
       {/* Background overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.15),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(212,175,55,0.15),transparent_50%)]" />
       
-      <div className="container relative z-10 px-4 py-20 mx-auto text-center">
+      <div className="container relative z-10 px-4 py-10 sm:py-16 md:py-20 mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto space-y-8"
+          className="max-w-4xl mx-auto space-y-5 sm:space-y-6 md:space-y-8"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
