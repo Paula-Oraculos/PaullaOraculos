@@ -9,6 +9,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselDots,
 } from "@/components/ui/carousel";
 
 const videoTestimonials = [
@@ -110,6 +111,7 @@ export const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <CarouselDots className="mt-4 sm:mt-6" />
             <CarouselPrevious className="hidden sm:flex -left-12 bg-primary/20 hover:bg-primary/40 border-primary/30" />
             <CarouselNext className="hidden sm:flex -right-12 bg-primary/20 hover:bg-primary/40 border-primary/30" />
           </Carousel>
