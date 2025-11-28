@@ -126,10 +126,10 @@ export const OfferSection = () => {
                     <Button
                       onClick={handleCheckout}
                       size="lg"
-                      className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-lg py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)]"
+                      className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark text-sm md:text-base lg:text-lg py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] leading-tight"
                     >
-                      <Zap className="w-6 h-6 mr-2" />
-                      QUERO ME TORNAR UMA ORACULISTA DESPERTA
+                      <Zap className="w-5 h-5 md:w-6 md:h-6 mr-2 flex-shrink-0" />
+                      <span className="block">QUERO ME TORNAR UMA ORACULISTA DESPERTA</span>
                     </Button>
 
                     {/* Guarantee */}
