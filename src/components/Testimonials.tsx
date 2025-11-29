@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Zap } from "lucide-react";
+import { Zap, Play } from "lucide-react";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -25,6 +26,8 @@ const videoTestimonials = [
 ];
 
 export const Testimonials = () => {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  
   const scrollToOffer = () => {
     const offerElement = document.getElementById('oferta');
     if (offerElement) {
@@ -96,15 +99,34 @@ export const Testimonials = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <Card className="glassmorphism border-primary/20 hover:border-primary/40 overflow-hidden transition-all duration-300 shadow-lg hover:shadow-primary/20">
-                      <div className="aspect-[9/16] w-full bg-secondary/20">
-                        <iframe
-                          src={`https://www.youtube.com/embed/${video.id}?rel=0`}
-                          title={video.title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          loading="lazy"
-                          className="w-full h-full"
-                        />
+                      <div className="aspect-[9/16] w-full bg-secondary/20 relative">
+                        {activeVideo === video.id ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${video.id}?rel=0&autoplay=1`}
+                            title={video.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full"
+                          />
+                        ) : (
+                          <div 
+                            className="w-full h-full cursor-pointer relative group"
+                            onClick={() => setActiveVideo(video.id)}
+                          >
+                            <img
+                              src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                              alt={video.title}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </Card>
                   </motion.div>
