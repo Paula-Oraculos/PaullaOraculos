@@ -10,17 +10,49 @@ const FormCapturaWpp = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const windowSizeRef = useRef({ width: 0, height: 0 });
+  const rafRef = useRef<number>();
 
   useEffect(() => {
+    // Cache window dimensions
+    windowSizeRef.current = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+
+    const handleResize = () => {
+      windowSizeRef.current = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 20 - 10,
-        y: (e.clientY / window.innerHeight) * 20 - 10
+      // Cancel previous RAF if it exists
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+
+      // Use RAF to batch DOM updates and avoid forced reflows
+      rafRef.current = requestAnimationFrame(() => {
+        const { width, height } = windowSizeRef.current;
+        setMousePosition({
+          x: (e.clientX / width) * 20 - 10,
+          y: (e.clientY / height) * 20 - 10
+        });
       });
     };
 
+    window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
