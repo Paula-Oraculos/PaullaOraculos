@@ -85,7 +85,7 @@ export const TheMethod = () => {
                 className="glassmorphism border-gold-mystic/30 rounded-lg px-4 sm:px-6 hover:glow-gold hover:scale-[1.01] transition-all duration-300"
               >
                 <AccordionTrigger className="hover:no-underline py-4 sm:py-6">
-                  <div className="flex items-start flex-wrap sm:flex-nowrap gap-3 sm:gap-4 text-left">
+                  <div className="flex items-center gap-3 sm:gap-4 text-left">
                     <div className="w-10 h-10 min-w-[2.5rem] sm:w-12 sm:h-12 sm:min-w-[3rem] md:w-14 md:h-14 md:min-w-[3.5rem] rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
                       <span className="text-base sm:text-lg md:text-xl font-bold text-cosmic-dark">{module.number}</span>
                     </div>
