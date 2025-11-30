@@ -34,6 +34,9 @@ export const TheChoice = () => {
               <img 
                 src={paulaCards} 
                 alt="Paula Oráculos segurando cartas vermelha e azul de Tarot"
+                width="880"
+                height="880"
+                fetchPriority="high"
                 className="w-full h-full object-cover"
               />
             </div>
