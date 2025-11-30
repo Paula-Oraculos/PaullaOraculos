@@ -156,7 +156,7 @@ export const ExitIntentModal = () => {
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-1.5 px-3 py-2 bg-cosmic-dark/50 border border-gold-mystic/30 border-r-0 rounded-l-lg text-slate-100 hover:bg-cosmic-dark/70 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-mystic"
+                className="flex items-center gap-1.5 px-3 h-10 bg-cosmic-dark/50 border border-gold-mystic/30 border-r-0 rounded-l-lg text-slate-100 hover:bg-cosmic-dark/70 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-mystic"
               >
                 <span className="text-lg">{selectedCountry.flag}</span>
                 <span className="text-sm font-medium">+{selectedCountry.ddi}</span>
