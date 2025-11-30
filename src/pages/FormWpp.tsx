@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, Moon, Stars, ArrowRight, ChevronDown } from 'lucide-react';
 import { countries } from '@/lib/countries';
 
@@ -7,6 +7,8 @@ const FormCapturaWpp = () => {
   const [whatsapp, setWhatsapp] = useState('');
   const [country, setCountry] = useState('Brasil');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -19,6 +21,17 @@ const FormCapturaWpp = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleJoinGroup = async () => {
@@ -226,19 +239,40 @@ const FormCapturaWpp = () => {
 
               <div>
                 <div className="flex gap-2">
-                  <div className="relative">
-                    <select
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      className="appearance-none w-32 sm:w-40 px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all cursor-pointer"
+                  <div ref={dropdownRef} className="relative w-32 sm:w-40">
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className="w-full px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all flex items-center justify-between"
                     >
-                      {countries.map((c) => (
-                        <option key={c.name} value={c.name} className="bg-purple-900 text-white">
-                          {c.flag} +{c.ddi}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-200 pointer-events-none" />
+                      <span className="flex items-center gap-1">
+                        <span className="text-xl">{selectedCountry.flag}</span>
+                        <span className="text-sm">+{selectedCountry.ddi}</span>
+                      </span>
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                    
+                    {isDropdownOpen && (
+                      <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-purple-900 border border-purple-300/50 rounded-2xl shadow-lg backdrop-blur-sm">
+                        {countries.map((c) => (
+                          <button
+                            key={c.name}
+                            type="button"
+                            onClick={() => {
+                              setCountry(c.name);
+                              setIsDropdownOpen(false);
+                            }}
+                            className={`w-full px-3 py-2 flex items-center gap-2 hover:bg-purple-400/20 transition-colors text-left ${
+                              country === c.name ? 'bg-purple-400/30' : ''
+                            }`}
+                          >
+                            <span className="text-lg">{c.flag}</span>
+                            <span className="text-sm text-white flex-1">{c.name}</span>
+                            <span className="text-xs text-purple-200">+{c.ddi}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <input
                     type="tel"
