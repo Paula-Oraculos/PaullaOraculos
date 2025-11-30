@@ -91,11 +91,11 @@ export const AboutMentor = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30">
+            <div className="relative aspect-[3/4] sm:aspect-square rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30">
               <img 
                 src={paulaPortrait} 
                 alt="Paula Oráculos - Mentora e Criadora do Método Oraculista Desperta"
-                className="w-full h-full object-cover object-[center_20%]"
+                className="w-full h-full object-cover object-center"
               />
             </div>
             <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />

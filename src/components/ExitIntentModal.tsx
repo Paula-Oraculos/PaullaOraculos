@@ -156,11 +156,25 @@ export const ExitIntentModal = () => {
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    setIsDropdownOpen(false);
+                  } else if (e.key === 'ArrowDown' && !isDropdownOpen) {
+                    e.preventDefault();
+                    setIsDropdownOpen(true);
+                  } else if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsDropdownOpen(!isDropdownOpen);
+                  }
+                }}
+                aria-expanded={isDropdownOpen}
+                aria-haspopup="listbox"
+                aria-label={`País selecionado: ${selectedCountry.name}. Código +${selectedCountry.ddi}`}
                 className="flex items-center gap-1.5 px-3 h-10 bg-cosmic-dark/50 border border-gold-mystic/30 border-r-0 rounded-l-lg text-slate-100 hover:bg-cosmic-dark/70 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-mystic"
               >
-                <span className="text-lg">{selectedCountry.flag}</span>
+                <span className="text-lg" aria-hidden="true">{selectedCountry.flag}</span>
                 <span className="text-sm font-medium">+{selectedCountry.ddi}</span>
-                <ChevronDown className="h-3 w-3 text-slate-400" />
+                <ChevronDown className="h-3 w-3 text-slate-400" aria-hidden="true" />
               </button>
               
               <Input
@@ -175,20 +189,33 @@ export const ExitIntentModal = () => {
               />
               
               {isDropdownOpen && (
-                <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-cosmic-dark border border-gold-mystic/30 rounded-lg shadow-lg">
+                <div 
+                  role="listbox"
+                  aria-label="Selecionar país"
+                  className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-cosmic-dark border border-gold-mystic/30 rounded-lg shadow-lg"
+                >
                   {countries.map((c) => (
                     <button
                       key={c.name}
                       type="button"
+                      role="option"
+                      aria-selected={formData.country === c.name}
                       onClick={() => {
                         setFormData({ ...formData, country: c.name });
                         setIsDropdownOpen(false);
                       }}
-                      className={`w-full px-4 py-2 flex items-center gap-2 hover:bg-gold-mystic/10 transition-colors text-left ${
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setFormData({ ...formData, country: c.name });
+                          setIsDropdownOpen(false);
+                        }
+                      }}
+                      className={`w-full px-4 py-2 flex items-center gap-2 hover:bg-gold-mystic/10 transition-colors text-left focus:outline-none focus:ring-2 focus:ring-gold-mystic focus:ring-inset ${
                         formData.country === c.name ? 'bg-gold-mystic/20' : ''
                       }`}
                     >
-                      <span className="text-lg">{c.flag}</span>
+                      <span className="text-lg" aria-hidden="true">{c.flag}</span>
                       <span className="text-sm text-slate-100 flex-1">{c.name}</span>
                       <span className="text-xs text-slate-400">+{c.ddi}</span>
                     </button>
