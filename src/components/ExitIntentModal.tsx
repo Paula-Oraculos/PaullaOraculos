@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,8 @@ export const ExitIntentModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", country: "Brasil" });
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   
   const selectedCountry = countries.find(c => c.name === formData.country) || countries[0];
@@ -66,6 +68,17 @@ export const ExitIntentModal = () => {
       clearTimeout(inactivityTimer);
     };
   }, [hasShown]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,20 +152,41 @@ export const ExitIntentModal = () => {
           
           <div>
             <Label htmlFor="country" className="text-slate-200">País</Label>
-            <div className="relative">
-              <select
-                id="country"
-                value={formData.country}
-                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark/50 border border-gold-mystic/30 text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-mystic appearance-none cursor-pointer"
+            <div ref={dropdownRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark/50 border border-gold-mystic/30 text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-mystic flex items-center justify-between"
               >
-                {countries.map((c) => (
-                  <option key={c.name} value={c.name} className="bg-cosmic-dark text-slate-100">
-                    {c.flag} {c.name} (+{c.ddi})
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">{selectedCountry.flag}</span>
+                  <span className="text-sm">{selectedCountry.name}</span>
+                  <span className="text-xs text-slate-400">(+{selectedCountry.ddi})</span>
+                </span>
+                <ChevronDown className="h-4 w-4 text-slate-400" />
+              </button>
+              
+              {isDropdownOpen && (
+                <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-cosmic-dark border border-gold-mystic/30 rounded-lg shadow-lg">
+                  {countries.map((c) => (
+                    <button
+                      key={c.name}
+                      type="button"
+                      onClick={() => {
+                        setFormData({ ...formData, country: c.name });
+                        setIsDropdownOpen(false);
+                      }}
+                      className={`w-full px-4 py-2 flex items-center gap-2 hover:bg-gold-mystic/10 transition-colors text-left ${
+                        formData.country === c.name ? 'bg-gold-mystic/20' : ''
+                      }`}
+                    >
+                      <span className="text-lg">{c.flag}</span>
+                      <span className="text-sm text-slate-100 flex-1">{c.name}</span>
+                      <span className="text-xs text-slate-400">+{c.ddi}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           
