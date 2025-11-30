@@ -15,7 +15,7 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[80vh] sm:min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-20">
+    <section className="relative min-h-[60vh] sm:min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-20">
       {/* Background overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.15),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(212,175,55,0.15),transparent_50%)]" />
       

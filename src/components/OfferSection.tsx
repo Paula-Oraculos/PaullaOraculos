@@ -84,12 +84,12 @@ export const OfferSection = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-5 md:py-6 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] flex-col gap-1.5">
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-                        <span className="text-xs md:text-sm font-extrabold whitespace-normal text-center leading-tight">GARANTIR MINHA VAGA AGORA</span>
+                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-4 md:py-5 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] flex flex-col items-center gap-1">
+                      <div className="flex items-center justify-center gap-2">
+                        <Zap className="w-4 h-4 flex-shrink-0" />
+                        <span className="text-xs sm:text-sm font-extrabold leading-tight">GARANTIR MINHA VAGA AGORA</span>
                       </div>
-                      <span className="text-[10px] md:text-xs text-cosmic-dark/70 font-normal">🔒 Pagamento 100% seguro via Greenn</span>
+                      <span className="text-[10px] sm:text-xs text-cosmic-dark/70 font-normal leading-tight">🔒 Pagamento 100% seguro via Greenn</span>
                     </Button>
 
                     {/* Guarantee */}
