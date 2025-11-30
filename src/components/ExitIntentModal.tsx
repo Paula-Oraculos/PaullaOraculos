@@ -9,9 +9,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ChevronDown } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { countries } from "@/lib/countries";
 
 const formSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
@@ -21,8 +22,10 @@ const formSchema = z.object({
 export const ExitIntentModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", country: "Brasil" });
   const { toast } = useToast();
+  
+  const selectedCountry = countries.find(c => c.name === formData.country) || countries[0];
 
   useEffect(() => {
     let inactivityTimer: NodeJS.Timeout;
@@ -79,6 +82,7 @@ export const ExitIntentModal = () => {
         body: JSON.stringify({
           nome: validatedData.name,
           whatsapp: validatedData.phone.replace(/\D/g, ''),
+          pais: formData.country,
           data_cadastro: new Date().toISOString(),
           origem: 'Landing Page Paula Oráculos',
           tag: 'captura-pop-up'
@@ -134,17 +138,41 @@ export const ExitIntentModal = () => {
           </div>
           
           <div>
+            <Label htmlFor="country" className="text-slate-200">País</Label>
+            <div className="relative">
+              <select
+                id="country"
+                value={formData.country}
+                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark/50 border border-gold-mystic/30 text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-mystic appearance-none cursor-pointer"
+              >
+                {countries.map((c) => (
+                  <option key={c.name} value={c.name} className="bg-cosmic-dark text-slate-100">
+                    {c.flag} {c.name} (+{c.ddi})
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+            </div>
+          </div>
+          
+          <div>
             <Label htmlFor="phone" className="text-slate-200">WhatsApp</Label>
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="(00) 00000-0000"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="bg-cosmic-dark/50 border-gold-mystic/30 text-slate-100 placeholder:text-slate-500"
-              required
-              maxLength={20}
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 font-medium">
+                {selectedCountry.flag} +{selectedCountry.ddi}
+              </span>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="Número de telefone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
+                className="bg-cosmic-dark/50 border-gold-mystic/30 text-slate-100 placeholder:text-slate-500 pl-20"
+                required
+                maxLength={20}
+              />
+            </div>
           </div>
 
           <Button
