@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logoPaula from "@/assets/logo-paula.png";
+import logoPaula from "@/assets/logo-paula.webp";
 
 export const Header = () => {
   const scrollToOffer = () => {

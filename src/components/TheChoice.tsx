@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { X, Check } from "lucide-react";
-import paulaCards from "@/assets/paula-cards.png";
+import paulaCards from "@/assets/paula-cards.webp";
 
 export const TheChoice = () => {
   return (

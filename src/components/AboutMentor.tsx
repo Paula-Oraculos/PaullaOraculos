@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Heart, Users } from "lucide-react";
-import paulaPortrait from "@/assets/paula-portrait.jpg";
+import paulaPortrait from "@/assets/paula-portrait.webp";
 export const AboutMentor = () => {
   return <section className="py-20 px-4 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-purple-900/10" />
