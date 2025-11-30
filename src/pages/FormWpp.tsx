@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Moon, Stars, ArrowRight } from 'lucide-react';
+import { Sparkles, Moon, Stars, ArrowRight, ChevronDown } from 'lucide-react';
+import { countries } from '@/lib/countries';
 
 const FormCapturaWpp = () => {
   const [name, setName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [country, setCountry] = useState('Brasil');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -32,7 +34,8 @@ const FormCapturaWpp = () => {
           },
           body: JSON.stringify({
             nome: name.trim(),
-            whatsapp: whatsapp.replace(/\D/g, ''), // Remove formatação, envia só números
+            whatsapp: whatsapp.replace(/\D/g, ''),
+            pais: country,
             data_cadastro: new Date().toISOString(),
             origem: 'Landing Page Paula Oráculos',
             tag: 'captura-wpp'
@@ -63,26 +66,7 @@ const FormCapturaWpp = () => {
     }
   };
 
-  const formatWhatsApp = (value: string) => {
-    // Remove tudo que não é número
-    const numbers = value.replace(/\D/g, '');
-    
-    // Formata: (XX) XXXXX-XXXX
-    if (numbers.length <= 2) {
-      return numbers;
-    } else if (numbers.length <= 7) {
-      return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
-    } else if (numbers.length <= 11) {
-      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
-    } else {
-      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
-    }
-  };
-
-  const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatWhatsApp(e.target.value);
-    setWhatsapp(formatted);
-  };
+  const selectedCountry = countries.find(c => c.name === country) || countries[0];
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -241,15 +225,33 @@ const FormCapturaWpp = () => {
               </div>
 
               <div>
-                <input
-                  type="tel"
-                  placeholder="(00) 00000-0000"
-                  value={whatsapp}
-                  onChange={handleWhatsAppChange}
-                  maxLength={15}
-                  className="w-full px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-lg transition-all"
-                  onKeyPress={(e) => e.key === 'Enter' && handleJoinGroup()}
-                />
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <select
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      className="appearance-none w-32 sm:w-40 px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all cursor-pointer"
+                    >
+                      {countries.map((c) => (
+                        <option key={c.name} value={c.name} className="bg-purple-900 text-white">
+                          {c.flag} +{c.ddi}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-200 pointer-events-none" />
+                  </div>
+                  <input
+                    type="tel"
+                    placeholder="Número de telefone"
+                    value={whatsapp}
+                    onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ''))}
+                    className="flex-1 px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-lg transition-all"
+                    onKeyPress={(e) => e.key === 'Enter' && handleJoinGroup()}
+                  />
+                </div>
+                <p className="text-purple-200 text-xs mt-2 ml-2">
+                  {selectedCountry.flag} {selectedCountry.name} (+{selectedCountry.ddi})
+                </p>
               </div>
 
               <button
