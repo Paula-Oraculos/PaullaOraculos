@@ -151,20 +151,28 @@ export const ExitIntentModal = () => {
           </div>
           
           <div>
-            <Label htmlFor="country" className="text-slate-200">País</Label>
-            <div ref={dropdownRef} className="relative">
+            <Label htmlFor="phone" className="text-slate-200">WhatsApp</Label>
+            <div ref={dropdownRef} className="relative flex gap-0">
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-4 py-2 rounded-lg bg-cosmic-dark/50 border border-gold-mystic/30 text-slate-100 focus:outline-none focus:ring-2 focus:ring-gold-mystic flex items-center justify-between"
+                className="flex items-center gap-1.5 px-3 py-2 bg-cosmic-dark/50 border border-gold-mystic/30 border-r-0 rounded-l-lg text-slate-100 hover:bg-cosmic-dark/70 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-mystic"
               >
-                <span className="flex items-center gap-2">
-                  <span className="text-lg">{selectedCountry.flag}</span>
-                  <span className="text-sm">{selectedCountry.name}</span>
-                  <span className="text-xs text-slate-400">(+{selectedCountry.ddi})</span>
-                </span>
-                <ChevronDown className="h-4 w-4 text-slate-400" />
+                <span className="text-lg">{selectedCountry.flag}</span>
+                <span className="text-sm font-medium">+{selectedCountry.ddi}</span>
+                <ChevronDown className="h-3 w-3 text-slate-400" />
               </button>
+              
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="Número de telefone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
+                className="bg-cosmic-dark/50 border-gold-mystic/30 text-slate-100 placeholder:text-slate-500 rounded-l-none flex-1"
+                required
+                maxLength={20}
+              />
               
               {isDropdownOpen && (
                 <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-cosmic-dark border border-gold-mystic/30 rounded-lg shadow-lg">
@@ -187,25 +195,6 @@ export const ExitIntentModal = () => {
                   ))}
                 </div>
               )}
-            </div>
-          </div>
-          
-          <div>
-            <Label htmlFor="phone" className="text-slate-200">WhatsApp</Label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 font-medium">
-                {selectedCountry.flag} +{selectedCountry.ddi}
-              </span>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="Número de telefone"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
-                className="bg-cosmic-dark/50 border-gold-mystic/30 text-slate-100 placeholder:text-slate-500 pl-20"
-                required
-                maxLength={20}
-              />
             </div>
           </div>
 

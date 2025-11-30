@@ -95,7 +95,7 @@ export const AboutMentor = () => {
               <img 
                 src={paulaPortrait} 
                 alt="Paula Oráculos - Mentora e Criadora do Método Oraculista Desperta"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_20%]"
               />
             </div>
             <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />
