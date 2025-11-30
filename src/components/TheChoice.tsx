@@ -49,13 +49,13 @@ export const TheChoice = () => {
           >
             {/* Blue Card - Reject */}
             <Card className="p-4 sm:p-6 bg-blue-950/50 border-blue-500/40 opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(0,191,255,0.5)]">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-wrap sm:flex-nowrap items-start gap-3 sm:gap-4">
+                <div className="w-10 h-10 min-w-[2.5rem] sm:w-12 sm:h-12 sm:min-w-[3rem] rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0">
                   <X className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300" />
                 </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-blue-200">A Carta Azul</h3>
-                  <p className="text-sm sm:text-base text-slate-300">
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-blue-200 break-words">A Carta Azul</h3>
+                  <p className="text-sm sm:text-base text-slate-300 break-words">
                     Ignorar o chamado e continuar com dúvidas, sem segurança para atender, 
                     sentindo que algo falta mas sem saber o próximo passo.
                   </p>
@@ -65,13 +65,13 @@ export const TheChoice = () => {
 
             {/* Red Card - Accept */}
             <Card className="p-4 sm:p-6 glassmorphism border-gold-mystic/50 glow-gold transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(220,20,60,0.6)]">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-wrap sm:flex-nowrap items-start gap-3 sm:gap-4">
+                <div className="w-10 h-10 min-w-[2.5rem] sm:w-12 sm:h-12 sm:min-w-[3rem] rounded-full bg-gradient-to-br from-gold-mystic to-gold-bright flex items-center justify-center flex-shrink-0">
                   <Check className="w-5 h-5 sm:w-6 sm:h-6 text-cosmic-dark" />
                 </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 gradient-text">A Carta Vermelha</h3>
-                  <p className="text-sm sm:text-base text-slate-200">
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 gradient-text break-words">A Carta Vermelha</h3>
+                  <p className="text-sm sm:text-base text-slate-200 break-words">
                     Aceitar o despertar e viver da sua missão, com método comprovado, 
                     segurança para atender e prosperidade alinhada ao seu propósito.
                   </p>
