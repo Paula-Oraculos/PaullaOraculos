@@ -270,12 +270,12 @@ const FormCapturaWpp = () => {
               </div>
 
               <div>
-                <div className="flex gap-2">
-                  <div ref={dropdownRef} className="relative w-32 sm:w-40">
+                <div className="flex gap-2 w-full overflow-hidden">
+                  <div ref={dropdownRef} className="relative w-28 sm:w-36 flex-shrink-0">
                     <button
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="w-full px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all flex items-center justify-between"
+                      className="w-full px-2 sm:px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all flex items-center justify-between"
                     >
                       <span className="flex items-center gap-1">
                         <span className="text-xl">{selectedCountry.flag}</span>
@@ -311,7 +311,7 @@ const FormCapturaWpp = () => {
                     placeholder="Número de telefone"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ''))}
-                    className="flex-1 px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-lg transition-all"
+                    className="flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all"
                     onKeyPress={(e) => e.key === 'Enter' && handleJoinGroup()}
                   />
                 </div>
