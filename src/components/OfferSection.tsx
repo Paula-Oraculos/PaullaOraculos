@@ -84,12 +84,12 @@ export const OfferSection = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark py-4 md:py-5 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] flex flex-col items-center gap-1">
-                      <div className="flex items-center justify-center gap-2">
+                    <Button onClick={handleCheckout} size="lg" className="w-full bg-gradient-to-r from-gold-mystic to-gold-bright text-cosmic-dark px-4 py-4 md:py-5 h-auto font-bold hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_30px_rgba(218,165,32,0.4)] hover:shadow-[0_0_40px_rgba(218,165,32,0.6)] flex flex-col items-center gap-1 overflow-hidden">
+                      <div className="flex items-center justify-center gap-2 w-full">
                         <Zap className="w-4 h-4 flex-shrink-0" />
-                        <span className="text-xs sm:text-sm font-extrabold leading-tight">GARANTIR MINHA VAGA AGORA</span>
+                        <span className="text-xs sm:text-sm font-extrabold leading-tight whitespace-nowrap">GARANTIR MINHA VAGA</span>
                       </div>
-                      <span className="text-[10px] sm:text-xs text-cosmic-dark/70 font-normal leading-tight">🔒 Pagamento 100% seguro via Greenn</span>
+                      <span className="text-[10px] sm:text-xs text-cosmic-dark/70 font-normal leading-tight text-center px-2">🔒 Pagamento seguro via Greenn</span>
                     </Button>
 
                     {/* Guarantee */}
