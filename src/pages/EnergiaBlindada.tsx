@@ -137,8 +137,8 @@ const EnergiaBlindada = () => {
                   letterSpacing: "-0.5px",
                 }}
               >
-                Pare de Ser uma{" "}
-                <span className="block text-[1.15em] mt-2">Esponja Emocional</span>
+                Pare de Ser a Lixeira{" "}
+                <span className="block text-[1.15em] mt-2">Emocional dos Outros</span>
               </h1>
 
               <p className="text-[1.1rem] md:text-[1.15rem] text-white font-normal leading-[1.7] mb-6">
