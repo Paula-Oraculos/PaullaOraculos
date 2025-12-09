@@ -42,15 +42,23 @@ const EnergiaBlindada = () => {
     setIsSubmitting(true);
 
     try {
+      // Format phone: remove mask and add country code
+      const phoneDigits = whatsapp.replace(/\D/g, "");
+      const formattedPhone = `55${phoneDigits}`;
+      
       await fetch("https://editor.parmabr.digital/webhook/paulaoraculos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "no-cors",
         body: JSON.stringify({
           nome: name,
-          whatsapp: whatsapp,
+          whatsapp: formattedPhone,
+          whatsapp_original: whatsapp,
           data_cadastro: new Date().toISOString(),
           origem: "Energia Blindada",
+          tag: "energia-blindada",
+          pais: "Brasil",
+          url: window.location.href,
         }),
       });
     } catch (error) {
