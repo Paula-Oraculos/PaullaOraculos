@@ -161,7 +161,7 @@ const EnergiaBlindadaObrigado = () => {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-6 rounded-xl text-base font-bold uppercase tracking-wider text-white flex items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(37,211,102,0.4)]"
+              className="w-full py-4 px-6 rounded-xl text-base font-bold uppercase tracking-wider text-white flex items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(37,211,102,0.4)] text-center"
               style={{
                 background: "#25D366",
                 boxShadow: "0 15px 40px rgba(37, 211, 102, 0.3)",
