@@ -121,37 +121,36 @@ const EnergiaBlindadaObrigado = () => {
                 border: "1px solid rgba(201, 163, 82, 0.2)",
               }}
             >
-              <p className="text-[#c9a352] font-medium text-sm mb-4 flex items-center gap-2">
-                <span>ℹ️</span>
-                Para acessar <strong>imediatamente</strong> siga as instruções abaixo:
-              </p>
+              <div className="flex items-start gap-2 mb-4">
+                <span className="text-[#c9a352] text-base">ℹ️</span>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Para acessar <strong className="text-[#e8d4a0]">imediatamente</strong> siga as instruções abaixo:
+                </p>
+              </div>
 
-              <ol className="space-y-3 text-white/90 text-sm">
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold">
+              <ol className="space-y-4 text-white/90 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
                     1
                   </span>
-                  <span>
-                    Clique nos <strong className="text-[#e8d4a0]">três pontinhos</strong> no canto
-                    superior direito dessa janela 📱
+                  <span className="leading-relaxed">
+                    Clique nos <strong className="text-[#e8d4a0]">três pontinhos</strong> no canto superior direito dessa janela 📱
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
                     2
                   </span>
-                  <span>
-                    Em seguida clique na opção{" "}
-                    <strong className="text-[#e8d4a0]">"Abrir com o navegador"</strong>
+                  <span className="leading-relaxed">
+                    Em seguida clique na opção <strong className="text-[#e8d4a0]">"Abrir com o navegador"</strong>
                   </span>
                 </li>
-                <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
                     3
                   </span>
-                  <span>
-                    Depois de abrir com o navegador,{" "}
-                    <strong className="text-[#e8d4a0]">clique no botão abaixo</strong>
+                  <span className="leading-relaxed">
+                    Depois de abrir com o navegador, <strong className="text-[#e8d4a0]">clique no botão abaixo</strong>
                   </span>
                 </li>
               </ol>
