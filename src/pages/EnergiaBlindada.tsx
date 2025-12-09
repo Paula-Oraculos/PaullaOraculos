@@ -116,14 +116,18 @@ const EnergiaBlindada = () => {
             {/* Hero Content */}
             <div className="animate-[fadeInLeft_1s_ease-out]">
               {/* Animated Logo */}
-              <div className="w-11 h-11 mb-5 relative animate-[glow-gold_3s_ease-in-out_infinite]">
-                <div
-                  className="w-full h-full border-[1.5px] border-[#c9a352] rounded-full relative animate-[rotate-logo_20s_linear_infinite]"
+              <div className="w-10 h-14 mb-5 relative animate-[glow-gold_3s_ease-in-out_infinite]">
+                <div 
+                  className="w-full h-full border-2 border-[#c9a352] rounded-sm bg-[rgba(201,163,82,0.05)] relative"
+                  style={{ boxShadow: "0 0 20px rgba(201, 163, 82, 0.3)" }}
                 >
-                  <div
-                    className="absolute w-1.5 h-1.5 bg-[#c9a352] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    style={{ boxShadow: "0 0 20px rgba(201, 163, 82, 0.4)" }}
-                  />
+                  <div className="absolute inset-1.5 border border-[#c9a352]/50 rounded-sm flex items-center justify-center">
+                    <span className="text-[#c9a352] text-xl">✦</span>
+                  </div>
+                  <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-[#c9a352]/70" />
+                  <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-[#c9a352]/70" />
+                  <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-[#c9a352]/70" />
+                  <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-[#c9a352]/70" />
                 </div>
               </div>
 
@@ -137,8 +141,8 @@ const EnergiaBlindada = () => {
                   letterSpacing: "-0.5px",
                 }}
               >
-                Pare de Ser a Lixeira{" "}
-                <span className="block text-[1.15em] mt-2">Emocional dos Outros</span>
+                Pare de Ser a{" "}
+                <span className="block text-[1.15em] mt-2">Lixeira Emocional dos Outros</span>
               </h1>
 
               <p className="text-[1.1rem] md:text-[1.15rem] text-white font-normal leading-[1.7] mb-6">
@@ -220,7 +224,7 @@ const EnergiaBlindada = () => {
                 </h2>
 
                 <p className="text-center text-[0.9rem] text-[#c5c5c5] mb-7 font-light leading-[1.5]">
-                  Junte-se a milhares de mulheres que transformaram sua energia
+                  Seja uma das primeiras a blindar sua energia
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -236,7 +240,7 @@ const EnergiaBlindada = () => {
                       id="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Como você gostaria de ser chamada?"
+                      placeholder="Qual seu nome?"
                       required
                       className="w-full px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none focus:ring-[4px]"
                       style={{
