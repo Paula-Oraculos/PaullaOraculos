@@ -1,29 +1,53 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { countries } from "@/lib/countries";
+import { ChevronDown } from "lucide-react";
 
 const EnergiaBlindada = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<typeof countries[number]>(countries[0]); // Brasil
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const formCardRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  // Phone mask for Brazilian format
+  // Dynamic phone mask based on country
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 11) value = value.slice(0, 11);
-
-    if (value.length > 10) {
-      value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-    } else if (value.length > 6) {
-      value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-    } else if (value.length > 2) {
-      value = value.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+    
+    // Brazilian format: (00) 00000-0000
+    if (selectedCountry.ddi === "55") {
+      if (value.length > 11) value = value.slice(0, 11);
+      if (value.length > 10) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      } else if (value.length > 6) {
+        value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+      } else if (value.length > 2) {
+        value = value.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+      }
+    } else {
+      // International format: more flexible, max 15 digits
+      if (value.length > 15) value = value.slice(0, 15);
     }
 
     setWhatsapp(value);
   };
+
+  // Close dropdown when clicking outside
+  const handleClickOutside = (e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setIsCountryDropdownOpen(false);
+    }
+  };
+
+  // Add event listener for click outside
+  useState(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  });
 
   // Mouse tracking effect for form card
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -44,7 +68,7 @@ const EnergiaBlindada = () => {
     try {
       // Format phone: remove mask and add country code
       const phoneDigits = whatsapp.replace(/\D/g, "");
-      const formattedPhone = `55${phoneDigits}`;
+      const formattedPhone = `${selectedCountry.ddi}${phoneDigits}`;
       
       await fetch("https://editor.parmabr.digital/webhook/paulaoraculos", {
         method: "POST",
@@ -57,7 +81,7 @@ const EnergiaBlindada = () => {
           data_cadastro: new Date().toISOString(),
           origem: "Energia Blindada",
           tag: "energia-blindada",
-          pais: "Brasil",
+          pais: selectedCountry.name,
           url: window.location.href,
         }),
       });
@@ -275,29 +299,81 @@ const EnergiaBlindada = () => {
                     >
                       Seu WhatsApp
                     </label>
-                    <input
-                      type="tel"
-                      id="whatsapp"
-                      value={whatsapp}
-                      onChange={handleWhatsappChange}
-                      placeholder="(00) 00000-0000"
-                      required
-                      className="w-full px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none"
-                      style={{
-                        background: "rgba(255,255,255,0.04)",
-                        border: "2px solid rgba(255,255,255,0.15)",
-                      }}
-                      onFocus={(e) => {
-                        e.target.style.background = "rgba(255,255,255,0.06)";
-                        e.target.style.borderColor = "#c9a352";
-                        e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
-                      }}
-                      onBlur={(e) => {
-                        e.target.style.background = "rgba(255,255,255,0.04)";
-                        e.target.style.borderColor = "rgba(255,255,255,0.15)";
-                        e.target.style.boxShadow = "none";
-                      }}
-                    />
+                    <div className="flex gap-2">
+                      {/* Country Selector */}
+                      <div ref={dropdownRef} className="relative">
+                        <button
+                          type="button"
+                          onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                          className="flex items-center gap-1.5 px-3 py-4 rounded-xl text-base text-white transition-all duration-300 whitespace-nowrap"
+                          style={{
+                            background: "rgba(255,255,255,0.04)",
+                            border: "2px solid rgba(255,255,255,0.15)",
+                          }}
+                        >
+                          <span className="text-xl">{selectedCountry.flag}</span>
+                          <span className="text-sm text-white/70">+{selectedCountry.ddi}</span>
+                          <ChevronDown className={`w-4 h-4 text-white/50 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {/* Dropdown */}
+                        {isCountryDropdownOpen && (
+                          <div 
+                            className="absolute top-full left-0 mt-2 w-64 max-h-60 overflow-y-auto rounded-xl z-50"
+                            style={{
+                              background: "rgba(20, 20, 20, 0.98)",
+                              backdropFilter: "blur(20px)",
+                              border: "1px solid rgba(201, 163, 82, 0.3)",
+                              boxShadow: "0 20px 40px rgba(0,0,0,0.6)",
+                            }}
+                          >
+                            {countries.map((country) => (
+                              <button
+                                key={`${country.ddi}-${country.name}`}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedCountry(country);
+                                  setIsCountryDropdownOpen(false);
+                                  setWhatsapp(""); // Reset phone when changing country
+                                }}
+                                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(201,163,82,0.15)] ${
+                                  selectedCountry.name === country.name ? 'bg-[rgba(201,163,82,0.2)]' : ''
+                                }`}
+                              >
+                                <span className="text-xl">{country.flag}</span>
+                                <span className="text-white text-sm flex-1">{country.name}</span>
+                                <span className="text-white/50 text-sm">+{country.ddi}</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Phone Input */}
+                      <input
+                        type="tel"
+                        id="whatsapp"
+                        value={whatsapp}
+                        onChange={handleWhatsappChange}
+                        placeholder={selectedCountry.ddi === "55" ? "(00) 00000-0000" : "Número de telefone"}
+                        required
+                        className="flex-1 px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none"
+                        style={{
+                          background: "rgba(255,255,255,0.04)",
+                          border: "2px solid rgba(255,255,255,0.15)",
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.background = "rgba(255,255,255,0.06)";
+                          e.target.style.borderColor = "#c9a352";
+                          e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.background = "rgba(255,255,255,0.04)";
+                          e.target.style.borderColor = "rgba(255,255,255,0.15)";
+                          e.target.style.boxShadow = "none";
+                        }}
+                      />
+                    </div>
                   </div>
 
                   <button
