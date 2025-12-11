@@ -299,13 +299,13 @@ const EnergiaBlindada = () => {
                     >
                       Seu WhatsApp
                     </label>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-stretch">
                       {/* Country Selector */}
-                      <div ref={dropdownRef} className="relative">
+                      <div ref={dropdownRef} className="relative flex-shrink-0">
                         <button
                           type="button"
                           onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                          className="flex items-center gap-1.5 px-3 py-4 rounded-xl text-base text-white transition-all duration-300 whitespace-nowrap"
+                          className="h-full flex items-center gap-1.5 px-3 rounded-xl text-base text-white transition-all duration-300 whitespace-nowrap min-h-[56px]"
                           style={{
                             background: "rgba(255,255,255,0.04)",
                             border: "2px solid rgba(255,255,255,0.15)",
@@ -357,7 +357,7 @@ const EnergiaBlindada = () => {
                         onChange={handleWhatsappChange}
                         placeholder={selectedCountry.ddi === "55" ? "(00) 00000-0000" : "Número de telefone"}
                         required
-                        className="flex-1 px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none"
+                        className="flex-1 min-w-0 px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none min-h-[56px]"
                         style={{
                           background: "rgba(255,255,255,0.04)",
                           border: "2px solid rgba(255,255,255,0.15)",
