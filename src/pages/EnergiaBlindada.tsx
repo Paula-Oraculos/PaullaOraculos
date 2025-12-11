@@ -103,7 +103,7 @@ const EnergiaBlindada = () => {
   return (
     <>
       <Helmet>
-        <title>Energia Blindada | Pare de Ser Drenada e Recupere Sua Vitalidade</title>
+        <title>Energia Blindada | Pare de Ter Sua Energia Drenada e Recupere Sua Vitalidade</title>
         <meta
           name="description"
           content="Descubra técnicas práticas para proteger sua energia, deixar de absorver emoções alheias e recuperar sua vitalidade. Grupo VIP exclusivo com Paula Oráculos."
@@ -194,7 +194,7 @@ const EnergiaBlindada = () => {
                   "Pare de absorver as emoções e problemas dos outros",
                   "Recupere sua energia e vitalidade",
                   "Crie uma blindagem energética poderosa",
-                  "Volte a se sentir VIVA novamente",
+                  "Sua mente limpa, seus pensamentos em ordem",
                 ].map((item, index) => (
                   <li
                     key={index}
@@ -256,7 +256,7 @@ const EnergiaBlindada = () => {
                 </h2>
 
                 <p className="text-center text-[0.9rem] text-[#c5c5c5] mb-7 font-light leading-[1.5]">
-                  Seja uma das primeiras a blindar sua energia
+                  Esteja entre quem vai blindar sua energia primeiro
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -410,7 +410,7 @@ const EnergiaBlindada = () => {
                 {
                   emoji: "😓",
                   title: "Cansaço que nunca acaba.",
-                  text: "Você acorda exausta, vai dormir exausta. É como se algo estivesse te drenando 24 horas por dia, sugando toda sua energia vital.",
+                  text: "Você acorda sem energia, vai dormir sem energia. É como se algo estivesse te drenando 24 horas por dia, sugando toda sua vitalidade.",
                 },
                 {
                   emoji: "🌧️",
@@ -425,7 +425,7 @@ const EnergiaBlindada = () => {
                 {
                   emoji: "😞",
                   title: "Ninguém te entende.",
-                  text: 'Eles acham que é frescura, que você está inventando. Mas você SABE que é real e está cansada de se sentir sozinha nisso.',
+                  text: 'Eles acham que é frescura, que você está inventando. Mas você SABE que é real e não aguenta mais se sentir só nisso.',
                 },
               ].map((card, index) => (
                 <article
