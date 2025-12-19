@@ -13,6 +13,7 @@ import { Sparkles, ChevronDown } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { countries } from "@/lib/countries";
+import { applyPhoneMask, getPhoneConfig, validatePhone } from "@/lib/phoneUtils";
 
 const formSchema = z.object({
   name: z.string().trim().min(2, "Nome deve ter pelo menos 2 caracteres").max(100, "Nome muito longo"),
@@ -23,11 +24,20 @@ export const ExitIntentModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", country: "Brasil" });
+  const [phoneError, setPhoneError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   
   const selectedCountry = countries.find(c => c.name === formData.country) || countries[0];
+  const phoneConfig = getPhoneConfig(selectedCountry.ddi);
+
+  const handlePhoneChange = (value: string) => {
+    const maskedValue = applyPhoneMask(value, selectedCountry.ddi);
+    setFormData({ ...formData, phone: maskedValue });
+    const validation = validatePhone(maskedValue, selectedCountry.ddi);
+    setPhoneError(validation.valid ? "" : validation.message);
+  };
 
   useEffect(() => {
     let inactivityTimer: NodeJS.Timeout;
@@ -82,6 +92,13 @@ export const ExitIntentModal = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Valida telefone antes de enviar
+    const phoneValidation = validatePhone(formData.phone, selectedCountry.ddi);
+    if (!phoneValidation.valid) {
+      setPhoneError(phoneValidation.message);
+      return;
+    }
     
     try {
       const validatedData = formSchema.parse(formData);
@@ -227,13 +244,17 @@ export const ExitIntentModal = () => {
               <Input
                 id="phone"
                 type="tel"
-                placeholder="Número de telefone"
+                placeholder={phoneConfig.placeholder}
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
-                className="bg-cosmic-dark/50 border-gold-mystic/30 text-slate-100 placeholder:text-slate-500 rounded-l-none flex-1"
+                onChange={(e) => handlePhoneChange(e.target.value)}
+                className={`bg-cosmic-dark/50 text-slate-100 placeholder:text-slate-500 rounded-l-none flex-1 ${
+                  phoneError ? 'border-red-500' : 'border-gold-mystic/30'
+                }`}
                 required
-                maxLength={20}
               />
+              {phoneError && (
+                <p className="absolute -bottom-5 left-0 text-red-400 text-xs">{phoneError}</p>
+              )}
               
               {isDropdownOpen && (
                 <div 
