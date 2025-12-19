@@ -70,7 +70,7 @@ const EnergiaBlindada = () => {
       const phoneDigits = whatsapp.replace(/\D/g, "");
       const formattedPhone = `${selectedCountry.ddi}${phoneDigits}`;
       
-      await fetch("https://editor.parmabr.digital/webhook/paulaoraculos", {
+      await fetch("https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "no-cors",

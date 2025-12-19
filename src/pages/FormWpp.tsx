@@ -72,7 +72,7 @@ const FormCapturaWpp = () => {
       
       try {
         // Envia dados para o webhook do n8n
-        const response = await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
+        const response = await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
