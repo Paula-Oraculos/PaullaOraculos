@@ -2,11 +2,13 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { countries } from "@/lib/countries";
+import { applyPhoneMask, getPhoneConfig, validatePhone } from "@/lib/phoneUtils";
 import { ChevronDown } from "lucide-react";
 
 const EnergiaBlindada = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<typeof countries[number]>(countries[0]); // Brasil
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
@@ -14,26 +16,16 @@ const EnergiaBlindada = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
+  const phoneConfig = getPhoneConfig(selectedCountry.ddi);
+
   // Dynamic phone mask based on country
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
+    const maskedValue = applyPhoneMask(e.target.value, selectedCountry.ddi);
+    setWhatsapp(maskedValue);
     
-    // Brazilian format: (00) 00000-0000
-    if (selectedCountry.ddi === "55") {
-      if (value.length > 11) value = value.slice(0, 11);
-      if (value.length > 10) {
-        value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-      } else if (value.length > 6) {
-        value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-      } else if (value.length > 2) {
-        value = value.replace(/(\d{2})(\d{0,5})/, "($1) $2");
-      }
-    } else {
-      // International format: more flexible, max 15 digits
-      if (value.length > 15) value = value.slice(0, 15);
-    }
-
-    setWhatsapp(value);
+    // Valida em tempo real
+    const validation = validatePhone(maskedValue, selectedCountry.ddi);
+    setPhoneError(validation.valid ? "" : validation.message);
   };
 
   // Close dropdown when clicking outside
@@ -62,6 +54,13 @@ const EnergiaBlindada = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+
+    // Valida telefone antes de enviar
+    const validation = validatePhone(whatsapp, selectedCountry.ddi);
+    if (!validation.valid) {
+      setPhoneError(validation.message);
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -394,29 +393,38 @@ const EnergiaBlindada = () => {
                       </div>
 
                       {/* Phone Input */}
-                      <input
-                        type="tel"
-                        id="whatsapp"
-                        value={whatsapp}
-                        onChange={handleWhatsappChange}
-                        placeholder={selectedCountry.ddi === "55" ? "(00) 00000-0000" : "Número de telefone"}
-                        required
-                        className="flex-1 min-w-0 px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none min-h-[56px]"
-                        style={{
-                          background: "rgba(255,255,255,0.04)",
-                          border: "2px solid rgba(255,255,255,0.15)",
-                        }}
-                        onFocus={(e) => {
-                          e.target.style.background = "rgba(255,255,255,0.06)";
-                          e.target.style.borderColor = "#c9a352";
-                          e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
-                        }}
-                        onBlur={(e) => {
-                          e.target.style.background = "rgba(255,255,255,0.04)";
-                          e.target.style.borderColor = "rgba(255,255,255,0.15)";
-                          e.target.style.boxShadow = "none";
-                        }}
-                      />
+                      <div className="flex-1 min-w-0 flex flex-col">
+                        <input
+                          type="tel"
+                          id="whatsapp"
+                          value={whatsapp}
+                          onChange={handleWhatsappChange}
+                          placeholder={phoneConfig.placeholder}
+                          required
+                          className="w-full px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none min-h-[56px]"
+                          style={{
+                            background: "rgba(255,255,255,0.04)",
+                            border: phoneError ? "2px solid #ef4444" : "2px solid rgba(255,255,255,0.15)",
+                          }}
+                          onFocus={(e) => {
+                            e.target.style.background = "rgba(255,255,255,0.06)";
+                            if (!phoneError) {
+                              e.target.style.borderColor = "#c9a352";
+                              e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
+                            }
+                          }}
+                          onBlur={(e) => {
+                            e.target.style.background = "rgba(255,255,255,0.04)";
+                            if (!phoneError) {
+                              e.target.style.borderColor = "rgba(255,255,255,0.15)";
+                            }
+                            e.target.style.boxShadow = "none";
+                          }}
+                        />
+                        {phoneError && (
+                          <span className="text-red-400 text-xs mt-1">{phoneError}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
 

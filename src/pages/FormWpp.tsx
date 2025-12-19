@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, Moon, Stars, ArrowRight, ChevronDown } from 'lucide-react';
 import { countries } from '@/lib/countries';
+import { applyPhoneMask, getPhoneConfig, validatePhone } from '@/lib/phoneUtils';
 
 const FormCapturaWpp = () => {
   const [name, setName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [country, setCountry] = useState('Brasil');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -67,6 +69,13 @@ const FormCapturaWpp = () => {
   }, []);
 
   const handleJoinGroup = async () => {
+    // Valida telefone
+    const validation = validatePhone(whatsapp, selectedCountry.ddi);
+    if (!validation.valid) {
+      setPhoneError(validation.message);
+      return;
+    }
+
     if (name.trim() && whatsapp.trim()) {
       setIsSubmitting(true);
       
@@ -159,6 +168,14 @@ const FormCapturaWpp = () => {
   };
 
   const selectedCountry = countries.find(c => c.name === country) || countries[0];
+  const phoneConfig = getPhoneConfig(selectedCountry.ddi);
+
+  const handleWhatsappChange = (value: string) => {
+    const maskedValue = applyPhoneMask(value, selectedCountry.ddi);
+    setWhatsapp(maskedValue);
+    const validation = validatePhone(maskedValue, selectedCountry.ddi);
+    setPhoneError(validation.valid ? "" : validation.message);
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -355,16 +372,22 @@ const FormCapturaWpp = () => {
                   </div>
                   <input
                     type="tel"
-                    placeholder="Número de telefone"
+                    placeholder={phoneConfig.placeholder}
                     value={whatsapp}
-                    onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ''))}
-                    className="flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all"
+                    onChange={(e) => handleWhatsappChange(e.target.value)}
+                    className={`flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/20 border text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all ${
+                      phoneError ? 'border-red-400' : 'border-purple-300/50'
+                    }`}
                     onKeyPress={(e) => e.key === 'Enter' && handleJoinGroup()}
                   />
                 </div>
-                <p className="text-purple-200 text-xs mt-2 ml-2">
-                  {selectedCountry.flag} {selectedCountry.name} (+{selectedCountry.ddi})
-                </p>
+                {phoneError ? (
+                  <p className="text-red-400 text-xs mt-2 ml-2">{phoneError}</p>
+                ) : (
+                  <p className="text-purple-200 text-xs mt-2 ml-2">
+                    {selectedCountry.flag} {selectedCountry.name} (+{selectedCountry.ddi})
+                  </p>
+                )}
               </div>
 
               <button
