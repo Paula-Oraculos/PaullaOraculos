@@ -105,7 +105,7 @@ const EnergiaBlindada = () => {
         return urlParams.get(param) || '';
       };
 
-      await fetch("https://paulaoraculos-n8n.cloudfy.live/webhook-test/paulaoraculos", {
+      await fetch("https://editor.parmabr.digital/webhook/paulaoraculos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

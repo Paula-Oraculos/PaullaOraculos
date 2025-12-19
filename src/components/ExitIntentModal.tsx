@@ -140,7 +140,7 @@ export const ExitIntentModal = () => {
       };
 
       // Envia dados para o webhook do n8n
-      await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook-test/paulaoraculos', {
+      await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
