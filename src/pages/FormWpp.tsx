@@ -117,7 +117,7 @@ const FormCapturaWpp = () => {
         };
 
         // Envia dados para o webhook do n8n
-        await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
+        await fetch('https://editor.parmabr.digital/webhook/paulaoraculos-123', {
           method: 'POST',
           mode: 'no-cors',
           headers: {
