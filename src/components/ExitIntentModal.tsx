@@ -86,6 +86,42 @@ export const ExitIntentModal = () => {
     try {
       const validatedData = formSchema.parse(formData);
       
+      // Funções para formatar data
+      const formatarData = () => {
+        const agora = new Date();
+        const dia = agora.getDate().toString().padStart(2, '0');
+        const mes = (agora.getMonth() + 1).toString().padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = agora.getHours().toString().padStart(2, '0');
+        const minutos = agora.getMinutes().toString().padStart(2, '0');
+        const segundos = agora.getSeconds().toString().padStart(2, '0');
+        return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
+      };
+
+      const obterDiaSemana = () => {
+        const diasSemana = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+        return diasSemana[new Date().getDay()];
+      };
+
+      const obterHora = () => {
+        const hora = new Date().getHours();
+        if (hora >= 5 && hora < 12) return 'manhã';
+        if (hora >= 12 && hora < 18) return 'tarde';
+        return 'noite';
+      };
+
+      const obterDispositivo = () => {
+        const ua = navigator.userAgent;
+        if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
+        if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
+        return 'desktop';
+      };
+
+      const obterUTM = (param: string) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param) || '';
+      };
+
       // Envia dados para o webhook do n8n
       await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
         method: 'POST',
@@ -93,12 +129,23 @@ export const ExitIntentModal = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          nome: validatedData.name,
-          whatsapp: validatedData.phone.replace(/\D/g, ''),
-          pais: formData.country,
-          data_cadastro: new Date().toISOString(),
-          origem: 'Landing Page Paula Oráculos',
-          tag: 'captura-pop-up'
+          id_unico: `em-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
+          Nome: validatedData.name,
+          Whatsapp: `${selectedCountry?.ddi || '55'}${validatedData.phone.replace(/\D/g, '')}`,
+          Status: "Novo",
+          Data: formatarData(),
+          Hora: obterHora(),
+          Dia_Semana: obterDiaSemana(),
+          Tag: "captura-pop-up",
+          Origem: "Formulário Pop-up",
+          Grupo: "Grupo Paula Oráculos",
+          Pais: formData.country,
+          DDI: selectedCountry?.ddi || '55',
+          Dispositivo: obterDispositivo(),
+          UTM_Source: obterUTM('utm_source'),
+          UTM_Campaign: obterUTM('utm_campaign'),
+          UTM_Medium: obterUTM('utm_medium'),
+          URL: window.location.href,
         })
       }).catch(error => {
         console.error('Erro ao enviar para webhook:', error);
