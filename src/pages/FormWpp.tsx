@@ -117,7 +117,7 @@ const FormCapturaWpp = () => {
         };
 
         // Envia dados para o webhook do n8n
-        await fetch('https://editor.parmabr.digital/webhook/paulaoraculos-123', {
+        await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -127,6 +127,7 @@ const FormCapturaWpp = () => {
             id_unico: `fw-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
             Nome: name.trim(),
             Whatsapp: `${selectedCountry.ddi}${whatsapp.replace(/\D/g, '')}`,
+            DDI: selectedCountry.ddi,
             Status: "Novo",
             Data: formatarData(),
             Hora: obterHora(),
@@ -135,12 +136,11 @@ const FormCapturaWpp = () => {
             Origem: "Formulário Landing Page",
             Grupo: "Grupo Paula Oráculos",
             Pais: country,
-            DDI: selectedCountry.ddi,
-            Dispositivo: obterDispositivo(),
+            URL: window.location.href,
             UTM_Source: obterUTM('utm_source'),
             UTM_Campaign: obterUTM('utm_campaign'),
             UTM_Medium: obterUTM('utm_medium'),
-            URL: window.location.href,
+            Dispositivo: obterDispositivo(),
           })
         });
 

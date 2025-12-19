@@ -105,7 +105,7 @@ const EnergiaBlindada = () => {
         return urlParams.get(param) || '';
       };
 
-      await fetch("https://editor.parmabr.digital/webhook/paulaoraculos-123", {
+      await fetch("https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -113,6 +113,7 @@ const EnergiaBlindada = () => {
           id_unico: `eb-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
           Nome: name,
           Whatsapp: formattedPhone,
+          DDI: selectedCountry.ddi,
           Status: "Novo",
           Data: formatarData(),
           Hora: obterHora(),
@@ -121,12 +122,11 @@ const EnergiaBlindada = () => {
           Origem: "Formulário Energia Blindada",
           Grupo: "VIP Energia Blindada",
           Pais: selectedCountry.name,
-          DDI: selectedCountry.ddi,
-          Dispositivo: obterDispositivo(),
+          URL: window.location.href,
           UTM_Source: obterUTM('utm_source'),
           UTM_Campaign: obterUTM('utm_campaign'),
           UTM_Medium: obterUTM('utm_medium'),
-          URL: window.location.href,
+          Dispositivo: obterDispositivo(),
         }),
       });
     } catch (error) {
