@@ -140,7 +140,7 @@ export const ExitIntentModal = () => {
       };
 
       // Envia dados para o webhook do n8n
-      await fetch('https://editor.parmabr.digital/webhook/paulaoraculos-123', {
+      await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
         method: 'POST',
         mode: 'no-cors',
         headers: {
@@ -149,7 +149,8 @@ export const ExitIntentModal = () => {
         body: JSON.stringify({
           id_unico: `em-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
           Nome: validatedData.name,
-          Whatsapp: `${selectedCountry?.ddi || '55'}${validatedData.phone.replace(/\D/g, '')}`,
+          Whatsapp: `${selectedCountry?.ddi || '+55'}${validatedData.phone.replace(/\D/g, '')}`,
+          DDI: selectedCountry?.ddi || '+55',
           Status: "Novo",
           Data: formatarData(),
           Hora: obterHora(),
@@ -158,12 +159,11 @@ export const ExitIntentModal = () => {
           Origem: "Formulário Pop-up",
           Grupo: "Grupo Paula Oráculos",
           Pais: formData.country,
-          DDI: selectedCountry?.ddi || '55',
-          Dispositivo: obterDispositivo(),
+          URL: window.location.href,
           UTM_Source: obterUTM('utm_source'),
           UTM_Campaign: obterUTM('utm_campaign'),
           UTM_Medium: obterUTM('utm_medium'),
-          URL: window.location.href,
+          Dispositivo: obterDispositivo(),
         })
       }).catch(error => {
         console.error('Erro ao enviar para webhook:', error);
