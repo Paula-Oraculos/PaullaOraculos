@@ -117,8 +117,9 @@ const FormCapturaWpp = () => {
         };
 
         // Envia dados para o webhook do n8n
-        const response = await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
+        await fetch('https://editor.parmabr.digital/webhook/paulaoraculos', {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -143,17 +144,13 @@ const FormCapturaWpp = () => {
           })
         });
 
-        if (response.ok) {
-          // Sucesso - redireciona para o grupo
-          console.log('Cadastro realizado com sucesso!');
-          window.open('https://api.whatsapp.com/message/BIKYOKADPBMEF1?autoload=1&app_absent=0', '_blank');
-          
-          // Limpa os campos
-          setName('');
-          setWhatsapp('');
-        } else {
-          throw new Error('Erro ao enviar dados');
-        }
+        // Com no-cors não conseguimos verificar response.ok, então assumimos sucesso
+        console.log('Cadastro enviado!');
+        window.open('https://api.whatsapp.com/message/BIKYOKADPBMEF1?autoload=1&app_absent=0', '_blank');
+        
+        // Limpa os campos
+        setName('');
+        setWhatsapp('');
       } catch (error) {
         console.error('Erro ao cadastrar:', error);
         alert('Houve um erro ao processar seu cadastro. Mas vamos te levar ao grupo mesmo assim! 😊');

@@ -107,6 +107,7 @@ const EnergiaBlindada = () => {
 
       await fetch("https://editor.parmabr.digital/webhook/paulaoraculos", {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_unico: `eb-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
