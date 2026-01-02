@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { Eye, Radio, Sparkles, TrendingUp, Shield } from 'lucide-react';
+import { Radio, Sparkles, TrendingUp, Bot, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface MobileNavProps {
@@ -7,17 +7,16 @@ interface MobileNavProps {
 }
 
 const navItems = [
-  { path: '/dash/visao', label: 'Visão', icon: Eye },
   { path: '/dash/live', label: 'Live', icon: Radio },
   { path: '/dash/crm', label: 'CRM', icon: Sparkles },
   { path: '/dash/colheita', label: 'Colheita', icon: TrendingUp },
+  { path: '/dash/guardiao', label: 'Guardião', icon: Bot },
+  { path: '/dash/visao', label: 'Config', icon: Settings },
 ];
 
-const adminItem = { path: '/dash/templo', label: 'Templo', icon: Shield };
-
-export const MobileNav = ({ isAdmin }: MobileNavProps) => {
+export const MobileNav = ({ isAdmin: _isAdmin }: MobileNavProps) => {
   const location = useLocation();
-  const items = isAdmin ? [...navItems, adminItem] : navItems;
+  const items = navItems;
 
   return (
     <nav 

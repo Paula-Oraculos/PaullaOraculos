@@ -14,6 +14,7 @@ import { Live } from "./pages/dashboard/Live";
 import { OraculoCRM } from "./pages/dashboard/OraculoCRM";
 import { Colheita } from "./pages/dashboard/Colheita";
 import { Templo } from "./pages/dashboard/Templo";
+import { Guardiao } from "./pages/dashboard/Guardiao";
 
 const queryClient = new QueryClient();
 
@@ -31,11 +32,12 @@ const App = () => (
           
           {/* Dashboard Routes */}
           <Route path="/dash" element={<DashLayout />}>
-            <Route index element={<Navigate to="/dash/visao" replace />} />
-            <Route path="visao" element={<Visao />} />
+            <Route index element={<Navigate to="/dash/live" replace />} />
             <Route path="live" element={<Live />} />
             <Route path="crm" element={<OraculoCRM />} />
             <Route path="colheita" element={<Colheita />} />
+            <Route path="guardiao" element={<Guardiao />} />
+            <Route path="visao" element={<Visao />} />
             <Route path="templo" element={<Templo />} />
           </Route>
           

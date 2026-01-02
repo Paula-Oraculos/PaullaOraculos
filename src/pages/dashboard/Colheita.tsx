@@ -23,8 +23,7 @@ export const Colheita = () => {
   // Filter transactions
   const filteredSales = sales.filter(sale => {
     const matchesSearch = !searchQuery || 
-      sale.leadName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      sale.leadPhone?.includes(searchQuery);
+      sale.leadName.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDate = !dateFilter || sale.date.includes(dateFilter);
     return matchesSearch && matchesDate;
   });
@@ -246,20 +245,6 @@ export const Colheita = () => {
               {filteredSales.slice(0, 15).map((sale) => (
                 <tr key={sale.id} style={{ borderBottom: `1px solid ${colors.border}` }} className="hover:bg-white/5">
                   <td className="p-3 text-sm">{sale.leadName}</td>
-                  <td className="p-3 text-sm">
-                    {sale.leadPhone ? (
-                      <a 
-                        href={`https://wa.me/${sale.leadPhone.replace(/\D/g, '')}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 hover:underline"
-                        style={{ color: '#25D366' }}
-                      >
-                        <Phone className="w-3 h-3" />
-                        {sale.leadPhone}
-                      </a>
-                    ) : '-'}
-                  </td>
                   <td className="p-3 text-sm" style={{ color: colors.textSecondary }}>{sale.product}</td>
                   <td className="p-3 text-sm font-medium" style={{ color: colors.accent }}>{formatCurrency(sale.value)}</td>
                   <td className="p-3">

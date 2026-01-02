@@ -127,7 +127,7 @@ export const Live = () => {
                       <div>
                         <p className="font-medium text-sm">{entry.name}</p>
                         <p className="text-xs" style={{ color: colors.textSecondary }}>
-                          {entry.groupName} • {entry.timestamp}
+                          {entry.groupName} • {entry.timestamp instanceof Date ? entry.timestamp.toLocaleTimeString('pt-BR') : String(entry.timestamp)}
                         </p>
                       </div>
                     </div>

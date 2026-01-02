@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { Eye, Radio, Sparkles, TrendingUp, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Radio, Sparkles, TrendingUp, Bot, Settings, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
@@ -8,13 +8,14 @@ interface DashSidebarProps {
 }
 
 const navItems = [
-  { path: '/dash/visao', label: 'Visão', icon: Eye, description: 'Integrações' },
   { path: '/dash/live', label: 'Live', icon: Radio, description: 'Modo ao vivo' },
   { path: '/dash/crm', label: 'Oráculo CRM', icon: Sparkles, description: 'Gestão de leads' },
   { path: '/dash/colheita', label: 'Colheita', icon: TrendingUp, description: 'Vendas' },
+  { path: '/dash/guardiao', label: 'Guardião', icon: Bot, description: 'Automação WhatsApp' },
+  { path: '/dash/visao', label: 'Configurações', icon: Settings, description: 'Integrações' },
 ];
 
-const adminItem = { path: '/dash/templo', label: 'Templo', icon: Shield, description: 'Administração' };
+const adminItem = { path: '/dash/templo', label: 'Usuários', icon: Shield, description: 'Administração' };
 
 export const DashSidebar = ({ isAdmin }: DashSidebarProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
