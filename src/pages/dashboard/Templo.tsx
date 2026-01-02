@@ -13,7 +13,7 @@ export const Templo = () => {
   const { addLead } = useLeads();
   const { toast } = useToast();
   const [newUser, setNewUser] = useState({ name: '', email: '', role: 'paula' as UserRole });
-  const [newLead, setNewLead] = useState({ name: '', phone: '', nivelConsciencia: 'frio' as const });
+  const [newLead, setNewLead] = useState({ name: '', phone: '', nivelConsciencia: 'frio' as 'frio' | 'morno' | 'quente' });
 
   const handleAddUser = () => {
     if (!newUser.name || !newUser.email) return;
@@ -88,7 +88,7 @@ export const Templo = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           <Input placeholder="Nome" value={newLead.name} onChange={(e) => setNewLead({ ...newLead, name: e.target.value })} className="bg-[#121212] border-gray-700 text-white" />
           <Input placeholder="WhatsApp" value={newLead.phone} onChange={(e) => setNewLead({ ...newLead, phone: e.target.value })} className="bg-[#121212] border-gray-700 text-white" />
-          <Select value={newLead.nivelConsciencia} onValueChange={(v) => setNewLead({ ...newLead, nivelConsciencia: v as 'frio' | 'morno' | 'quente' })}>
+          <Select value={newLead.nivelConsciencia} onValueChange={(v: 'frio' | 'morno' | 'quente') => setNewLead({ ...newLead, nivelConsciencia: v })}>
             <SelectTrigger className="bg-[#121212] border-gray-700 text-white"><SelectValue /></SelectTrigger>
             <SelectContent><SelectItem value="frio">Frio</SelectItem><SelectItem value="morno">Morno</SelectItem><SelectItem value="quente">Quente</SelectItem></SelectContent>
           </Select>
