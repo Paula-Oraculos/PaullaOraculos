@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import { useMemo } from "react";
 
 export const HeroSection = () => {
   const scrollToOffer = () => {
@@ -13,6 +14,17 @@ export const HeroSection = () => {
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
+
+  // Generate stable star positions once
+  const stars = useMemo(() => 
+    [...Array(20)].map((_, i) => ({
+      id: i,
+      left: `${(i * 5 + 2.5) % 100}%`,
+      top: `${(i * 7 + 3) % 100}%`,
+      duration: 2 + (i % 4),
+      delay: (i % 5) * 0.4,
+    })), []
+  );
 
   return (
     <section className="relative min-h-[60vh] sm:min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-20">
@@ -62,24 +74,24 @@ export const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Decorative stars */}
+      {/* Decorative stars - stable positions */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {stars.map((star) => (
           <motion.div
-            key={i}
+            key={star.id}
             className="absolute w-1 h-1 bg-gold-bright rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: star.left,
+              top: star.top,
             }}
             animate={{
               opacity: [0.2, 1, 0.2],
               scale: [0.8, 1.2, 0.8],
             }}
             transition={{
-              duration: 2 + Math.random() * 2,
+              duration: star.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: star.delay,
             }}
           />
         ))}
