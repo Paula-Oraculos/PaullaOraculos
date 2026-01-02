@@ -20,6 +20,16 @@ const formSchema = z.object({
   phone: z.string().trim().min(10, "Telefone inválido").max(20, "Telefone muito longo"),
 });
 
+// Check if we're in Lovable preview or dev environment
+const isDevEnvironment = () => {
+  if (typeof window === 'undefined') return true;
+  const hostname = window.location.hostname;
+  return hostname.includes('lovable.app') || 
+         hostname.includes('localhost') || 
+         hostname.includes('127.0.0.1') ||
+         hostname.includes('webcontainer');
+};
+
 export const ExitIntentModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
@@ -27,6 +37,7 @@ export const ExitIntentModal = () => {
   const [phoneError, setPhoneError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pageLoadTime = useRef(Date.now());
   const { toast } = useToast();
   
   const selectedCountry = countries.find(c => c.name === formData.country) || countries[0];
@@ -40,10 +51,20 @@ export const ExitIntentModal = () => {
   };
 
   useEffect(() => {
+    // Skip all exit intent logic in dev/preview environments
+    if (isDevEnvironment()) return;
+    
     let inactivityTimer: NodeJS.Timeout;
+    const MIN_TIME_ON_PAGE = 15000; // 15 seconds minimum before showing modal
+
+    const canShowModal = () => {
+      return !hasShown && (Date.now() - pageLoadTime.current) > MIN_TIME_ON_PAGE;
+    };
 
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !hasShown) {
+      // Only trigger on desktop and when mouse leaves from top
+      if (e.clientY <= 0 && canShowModal()) {
+        // Ignore if it's likely an iframe mouseleave (rapid in/out)
         setIsOpen(true);
         setHasShown(true);
       }
@@ -52,26 +73,31 @@ export const ExitIntentModal = () => {
     const resetInactivityTimer = () => {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
-        if (!hasShown) {
+        if (canShowModal()) {
           setIsOpen(true);
           setHasShown(true);
         }
       }, 60000); // 60 seconds
     };
 
-    // Desktop: Mouse leave
-    document.addEventListener("mouseleave", handleMouseLeave);
+    // Desktop: Mouse leave (only if not mobile)
+    const isMobile = /mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(navigator.userAgent);
+    if (!isMobile) {
+      document.addEventListener("mouseleave", handleMouseLeave);
+    }
 
     // Mobile: Inactivity timer
     const events = ["mousedown", "mousemove", "keypress", "scroll", "touchstart"];
     events.forEach(event => {
-      document.addEventListener(event, resetInactivityTimer);
+      document.addEventListener(event, resetInactivityTimer, { passive: true });
     });
 
     resetInactivityTimer();
 
     return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave);
+      if (!isMobile) {
+        document.removeEventListener("mouseleave", handleMouseLeave);
+      }
       events.forEach(event => {
         document.removeEventListener(event, resetInactivityTimer);
       });
