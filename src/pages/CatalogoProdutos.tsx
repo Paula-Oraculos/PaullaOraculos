@@ -15,8 +15,15 @@ import {
   ChevronDown,
   ArrowRight,
   MessageCircle,
-  Star
+  Star,
+  HelpCircle
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import {
   Carousel,
   CarouselContent,
@@ -99,6 +106,38 @@ const products = [
     cta: "Garantir Minha Vaga",
     link: "https://payfast.greenn.com.br/144718",
     highlight: true
+  }
+];
+
+// FAQ data
+const faqItems = [
+  {
+    question: "Preciso ter experiência prévia com espiritualidade?",
+    answer: "Não! Nossos cursos e mentorias são desenvolvidos para todos os níveis. Se você está começando do zero ou já tem experiência, o conteúdo se adapta ao seu momento. O importante é ter abertura e disposição para aprender."
+  },
+  {
+    question: "Qual a diferença entre o curso e a mentoria?",
+    answer: "O curso Energia Blindada e o workshop Tarot do Zero são conteúdos específicos e pontuais. Já a Mentoria Oraculista Desperta é um programa completo de transformação que inclui acompanhamento personalizado, estratégias de negócio e suporte contínuo para você se tornar uma oraculista profissional."
+  },
+  {
+    question: "Por quanto tempo tenho acesso ao conteúdo?",
+    answer: "Os cursos Energia Blindada e Tarot do Zero têm acesso vitalício. Na Mentoria Oraculista Desperta, você tem acesso ao conteúdo gravado para sempre, além do acompanhamento ativo durante o período da mentoria."
+  },
+  {
+    question: "Posso parcelar o pagamento?",
+    answer: "Sim! Oferecemos opções de parcelamento em até 12x no cartão de crédito. Também aceitamos PIX com desconto especial. Todas as opções são exibidas no checkout de cada produto."
+  },
+  {
+    question: "E se eu não gostar do conteúdo?",
+    answer: "Oferecemos garantia de 7 dias em todos os nossos produtos. Se por qualquer motivo você não ficar satisfeita, basta solicitar o reembolso dentro deste prazo e devolvemos 100% do seu investimento, sem perguntas."
+  },
+  {
+    question: "Como funciona o grupo gratuito Oráculo Diário?",
+    answer: "O Oráculo Diário é um grupo no WhatsApp onde compartilhamos mensagens de sabedoria, reflexões e conteúdos exclusivos diariamente. É uma forma de você experimentar nossa energia e conteúdo antes de investir em um curso ou mentoria."
+  },
+  {
+    question: "Consigo realmente trabalhar como oraculista?",
+    answer: "Absolutamente! Temos dezenas de alunas formadas que hoje trabalham profissionalmente como oraculistas, atendendo consulentes online e presencialmente. Na Mentoria Oraculista Desperta, ensinamos não só a técnica, mas também como estruturar seu negócio, captar clientes e precificar seus atendimentos."
   }
 ];
 
@@ -592,6 +631,72 @@ const CatalogoProdutos = () => {
                 </p>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-20 px-4 relative">
+          <div className="container mx-auto max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center mx-auto mb-4">
+                <HelpCircle className="w-8 h-8 text-[#050505]" />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-serif mb-4">
+                <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                  Perguntas Frequentes
+                </span>
+              </h2>
+              <p className="text-lg text-white/60">
+                Tire suas dúvidas sobre nossos produtos e serviços
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <Accordion type="single" collapsible className="space-y-4">
+                {faqItems.map((item, index) => (
+                  <AccordionItem 
+                    key={index} 
+                    value={`item-${index}`}
+                    className="bg-white/[0.03] border border-[#c9a352]/20 rounded-xl px-6 data-[state=open]:border-[#c9a352]/50 transition-colors"
+                  >
+                    <AccordionTrigger className="text-left py-5 hover:no-underline group">
+                      <span className="text-white font-medium pr-4 group-hover:text-[#c9a352] transition-colors">
+                        {item.question}
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-white/60 pb-5 leading-relaxed">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mt-10"
+            >
+              <p className="text-white/50 mb-4">Ainda tem dúvidas?</p>
+              <Button 
+                onClick={scrollToForm}
+                variant="outline"
+                className="border-[#c9a352]/50 text-[#c9a352] hover:bg-[#c9a352]/10"
+              >
+                Entre no grupo e fale conosco
+                <MessageCircle className="w-4 h-4 ml-2" />
+              </Button>
+            </motion.div>
           </div>
         </section>
 
