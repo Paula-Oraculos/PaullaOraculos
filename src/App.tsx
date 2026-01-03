@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import FormWpp from "./pages/FormWpp";
 import EnergiaBlindada from "./pages/EnergiaBlindada";
 import EnergiaBlindadaObrigado from "./pages/EnergiaBlindadaObrigado";
+import CatalogoProdutos from "./pages/CatalogoProdutos";
 import { DashLayout } from "./components/dashboard/DashLayout";
 import { Visao } from "./pages/dashboard/Visao";
 import { Live } from "./pages/dashboard/Live";
@@ -26,6 +27,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/produtos" element={<CatalogoProdutos />} />
           <Route path="/form-wpp" element={<FormWpp />} />
           <Route path="/wp-energiablindada" element={<EnergiaBlindada />} />
           <Route path="/wp-energiablindada/obrigado" element={<EnergiaBlindadaObrigado />} />
