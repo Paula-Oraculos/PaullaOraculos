@@ -7,7 +7,7 @@ const FormCapturaWpp = () => {
   const [name, setName] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [phoneError, setPhoneError] = useState('');
-  const [country, setCountry] = useState('Brasil');
+  const [selectedCountry, setSelectedCountry] = useState<typeof countries[number]>(countries[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -68,111 +68,99 @@ const FormCapturaWpp = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleJoinGroup = async () => {
-    // Valida telefone
+  const phoneConfig = getPhoneConfig(selectedCountry.ddi);
+
+  const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const maskedValue = applyPhoneMask(e.target.value, selectedCountry.ddi);
+    setWhatsapp(maskedValue);
+    const validation = validatePhone(maskedValue, selectedCountry.ddi);
+    setPhoneError(validation.valid ? "" : validation.message);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
     const validation = validatePhone(whatsapp, selectedCountry.ddi);
     if (!validation.valid) {
       setPhoneError(validation.message);
       return;
     }
 
-    if (name.trim() && whatsapp.trim()) {
-      setIsSubmitting(true);
-      
-      try {
-        // Funções para formatar data
-        const formatarData = () => {
-          const agora = new Date();
-          const dia = agora.getDate().toString().padStart(2, '0');
-          const mes = (agora.getMonth() + 1).toString().padStart(2, '0');
-          const ano = agora.getFullYear();
-          const horas = agora.getHours().toString().padStart(2, '0');
-          const minutos = agora.getMinutes().toString().padStart(2, '0');
-          const segundos = agora.getSeconds().toString().padStart(2, '0');
-          return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
-        };
+    setIsSubmitting(true);
 
-        const obterDiaSemana = () => {
-          const diasSemana = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
-          return diasSemana[new Date().getDay()];
-        };
+    try {
+      const phoneDigits = whatsapp.replace(/\D/g, '');
+      const formattedPhone = `${selectedCountry.ddi}${phoneDigits}`;
 
-        const obterHora = () => {
-          const hora = new Date().getHours();
-          if (hora >= 5 && hora < 12) return 'manhã';
-          if (hora >= 12 && hora < 18) return 'tarde';
-          return 'noite';
-        };
+      const formatarData = () => {
+        const agora = new Date();
+        const dia = agora.getDate().toString().padStart(2, '0');
+        const mes = (agora.getMonth() + 1).toString().padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = agora.getHours().toString().padStart(2, '0');
+        const minutos = agora.getMinutes().toString().padStart(2, '0');
+        const segundos = agora.getSeconds().toString().padStart(2, '0');
+        return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
+      };
 
-        const obterDispositivo = () => {
-          const ua = navigator.userAgent;
-          if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
-          if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
-          return 'desktop';
-        };
+      const obterDiaSemana = () => {
+        const diasSemana = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+        return diasSemana[new Date().getDay()];
+      };
 
-        const obterUTM = (param: string) => {
-          const urlParams = new URLSearchParams(window.location.search);
-          return urlParams.get(param) || '';
-        };
+      const obterHora = () => {
+        const hora = new Date().getHours();
+        if (hora >= 5 && hora < 12) return 'manhã';
+        if (hora >= 12 && hora < 18) return 'tarde';
+        return 'noite';
+      };
 
-        // Envia dados para o webhook do n8n
-        await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id_unico: `fw-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
-            Nome: name.trim(),
-            Whatsapp: `${selectedCountry.ddi}${whatsapp.replace(/\D/g, '')}`,
-            DDI: selectedCountry.ddi,
-            Status: "Novo",
-            Data: formatarData(),
-            Hora: obterHora(),
-            Dia_Semana: obterDiaSemana(),
-            Tag: "captura-wpp",
-            Origem: "Formulário Landing Page",
-            Grupo: "Grupo Paula Oráculos",
-            Pais: country,
-            URL: window.location.href,
-            UTM_Source: obterUTM('utm_source'),
-            UTM_Campaign: obterUTM('utm_campaign'),
-            UTM_Medium: obterUTM('utm_medium'),
-            Dispositivo: obterDispositivo(),
-          })
-        });
+      const obterDispositivo = () => {
+        const ua = navigator.userAgent;
+        if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
+        if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
+        return 'desktop';
+      };
 
-        // Com no-cors não conseguimos verificar response.ok, então assumimos sucesso
-        console.log('Cadastro enviado!');
-        window.open('https://api.whatsapp.com/message/BIKYOKADPBMEF1?autoload=1&app_absent=0', '_blank');
-        
-        // Limpa os campos
-        setName('');
-        setWhatsapp('');
-      } catch (error) {
-        console.error('Erro ao cadastrar:', error);
-        alert('Houve um erro ao processar seu cadastro. Mas vamos te levar ao grupo mesmo assim! 😊');
-        // Mesmo com erro, redireciona para o grupo
-        window.open('https://api.whatsapp.com/message/BIKYOKADPBMEF1?autoload=1&app_absent=0', '_blank');
-      } finally {
-        setIsSubmitting(false);
-      }
-    } else {
-      alert('Por favor, preencha seu nome e WhatsApp');
+      const obterUTM = (param: string) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param) || '';
+      };
+
+      await fetch('https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id_unico: `fw-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
+          Nome: name,
+          Whatsapp: formattedPhone,
+          DDI: selectedCountry.ddi,
+          Status: 'Novo',
+          Data: formatarData(),
+          Hora: obterHora(),
+          Dia_Semana: obterDiaSemana(),
+          Tag: 'captura-wpp',
+          Origem: 'Formulário Landing Page',
+          Grupo: 'Grupo Paula Oráculos',
+          Pais: selectedCountry.name,
+          URL: window.location.href,
+          UTM_Source: obterUTM('utm_source'),
+          UTM_Campaign: obterUTM('utm_campaign'),
+          UTM_Medium: obterUTM('utm_medium'),
+          Dispositivo: obterDispositivo(),
+        }),
+      });
+    } catch (error) {
+      console.error('Webhook error:', error);
     }
+
+    window.open('https://api.whatsapp.com/message/BIKYOKADPBMEF1?autoload=1&app_absent=0', '_blank');
+    setIsSubmitting(false);
   };
 
-  const selectedCountry = countries.find(c => c.name === country) || countries[0];
-  const phoneConfig = getPhoneConfig(selectedCountry.ddi);
 
-  const handleWhatsappChange = (value: string) => {
-    const maskedValue = applyPhoneMask(value, selectedCountry.ddi);
-    setWhatsapp(maskedValue);
-    const validation = validatePhone(maskedValue, selectedCountry.ddi);
-    setPhoneError(validation.valid ? "" : validation.message);
-  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -319,7 +307,7 @@ const FormCapturaWpp = () => {
             </div>
 
             {/* Form */}
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <input
                   type="text"
@@ -349,14 +337,15 @@ const FormCapturaWpp = () => {
                       <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-purple-900 border border-purple-300/50 rounded-2xl shadow-lg backdrop-blur-sm">
                         {countries.map((c) => (
                           <button
-                            key={c.name}
+                            key={`${c.ddi}-${c.name}`}
                             type="button"
                             onClick={() => {
-                              setCountry(c.name);
+                              setSelectedCountry(c);
                               setIsDropdownOpen(false);
+                              setWhatsapp('');
                             }}
                             className={`w-full px-3 py-2 flex items-center gap-2 hover:bg-purple-400/20 transition-colors text-left ${
-                              country === c.name ? 'bg-purple-400/30' : ''
+                              selectedCountry.name === c.name ? 'bg-purple-400/30' : ''
                             }`}
                           >
                             <span className="text-lg">{c.flag}</span>
@@ -371,11 +360,10 @@ const FormCapturaWpp = () => {
                     type="tel"
                     placeholder={phoneConfig.placeholder}
                     value={whatsapp}
-                    onChange={(e) => handleWhatsappChange(e.target.value)}
+                    onChange={handleWhatsappChange}
                     className={`flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/20 border text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all ${
                       phoneError ? 'border-red-400' : 'border-purple-300/50'
                     }`}
-                    onKeyPress={(e) => e.key === 'Enter' && handleJoinGroup()}
                   />
                 </div>
                 {phoneError ? (
@@ -388,7 +376,7 @@ const FormCapturaWpp = () => {
               </div>
 
               <button
-                onClick={handleJoinGroup}
+                type="submit"
                 disabled={isSubmitting}
                 className="relative w-full bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 hover:from-amber-500 hover:via-yellow-600 hover:to-amber-500 text-gray-900 font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-3 overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
@@ -411,7 +399,7 @@ const FormCapturaWpp = () => {
                   <div className="relative z-10 w-6 h-6 border-3 border-gray-900 border-t-transparent rounded-full animate-spin"></div>
                 )}
               </button>
-            </div>
+            </form>
 
             {/* Footer note */}
             <p className="text-center text-purple-200 text-sm mt-6">
