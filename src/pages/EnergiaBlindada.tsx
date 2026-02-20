@@ -110,7 +110,7 @@ const EnergiaBlindada = () => {
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id_unico: `eb-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
+          id_unico: `ga-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
           Nome: name,
           Whatsapp: formattedPhone,
           DDI: selectedCountry.ddi,
@@ -118,9 +118,9 @@ const EnergiaBlindada = () => {
           Data: formatarData(),
           Hora: obterHora(),
           Dia_Semana: obterDiaSemana(),
-          Tag: "energia-blindada",
-          Origem: "Formulário Energia Blindada",
-          Grupo: "VIP Energia Blindada",
+          Tag: "aguadeiro-gratuito",
+          Origem: "Formulário Paulla Oráculos",
+          Grupo: "Grupo Gratuito Aguadeiro",
           Pais: selectedCountry.name,
           URL: window.location.href,
           UTM_Source: obterUTM('utm_source'),
@@ -147,10 +147,10 @@ const EnergiaBlindada = () => {
   return (
     <>
       <Helmet>
-        <title>Energia Blindada | Pare de Ter Sua Energia Drenada e Recupere Sua Vitalidade</title>
+        <title>Grupo Gratuito Paulla Oráculos | Clareza, Paz e Evolução</title>
         <meta
           name="description"
-          content="Descubra técnicas práticas para proteger sua energia, deixar de absorver emoções alheias e recuperar sua vitalidade. Grupo VIP exclusivo com Paula Oráculos."
+          content="Onde a sua confusão vira clareza. Entre para o grupo gratuito de Paulla Oráculos e receba ferramentas práticas para limpar sua energia e colocar sua vida nos trilhos."
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -158,15 +158,15 @@ const EnergiaBlindada = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden font-['Inter',sans-serif]">
+      <div className="min-h-screen bg-[#0A1F15] text-white overflow-x-hidden font-['Inter',sans-serif]">
         {/* Gradient Background */}
         <div
           className="fixed inset-0 z-0 pointer-events-none"
           style={{
             background: `
-              radial-gradient(circle at 20% 50%, rgba(201, 163, 82, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(201, 163, 82, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(201, 163, 82, 0.05) 0%, transparent 40%)
+              radial-gradient(circle at 20% 50%, rgba(31, 143, 90, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(31, 143, 90, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(31, 143, 90, 0.05) 0%, transparent 40%)
             `,
           }}
         />
@@ -176,7 +176,7 @@ const EnergiaBlindada = () => {
           {particles.map((particle) => (
             <div
               key={particle.id}
-              className="absolute w-[3px] h-[3px] bg-[#c9a352] rounded-full opacity-0"
+              className="absolute w-[3px] h-[3px] bg-[#2FAE66] rounded-full opacity-0"
               style={{
                 left: `${particle.left}%`,
                 animation: `float-gold-particle ${particle.duration}s linear infinite`,
@@ -194,57 +194,55 @@ const EnergiaBlindada = () => {
               {/* Animated Logo */}
               <div className="w-10 h-14 mb-5 relative animate-[glow-gold_3s_ease-in-out_infinite]">
                 <div 
-                  className="w-full h-full border-2 border-[#c9a352] rounded-sm bg-[rgba(201,163,82,0.05)] relative"
-                  style={{ boxShadow: "0 0 20px rgba(201, 163, 82, 0.3)" }}
+                  className="w-full h-full border-2 border-[#A18F5A] rounded-sm bg-[rgba(161,143,90,0.05)] relative"
+                  style={{ boxShadow: "0 0 20px rgba(161, 143, 90, 0.3)" }}
                 >
-                  <div className="absolute inset-1.5 border border-[#c9a352]/50 rounded-sm flex items-center justify-center">
-                    <span className="text-[#c9a352] text-xl">✦</span>
+                  <div className="absolute inset-1.5 border border-[#A18F5A]/50 rounded-sm flex items-center justify-center">
+                    <span className="text-[#A18F5A] text-xl">✦</span>
                   </div>
-                  <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-[#c9a352]/70" />
-                  <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-[#c9a352]/70" />
-                  <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-[#c9a352]/70" />
-                  <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-[#c9a352]/70" />
+                  <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-[#A18F5A]/70" />
+                  <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-[#A18F5A]/70" />
+                  <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-[#A18F5A]/70" />
+                  <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-[#A18F5A]/70" />
                 </div>
               </div>
 
               <h1
                 className="font-['Playfair_Display',serif] text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold leading-[1.2] mb-5"
                 style={{
-                  background: "linear-gradient(135deg, #e8d4a0 0%, #c9a352 100%)",
+                  background: "linear-gradient(135deg, #7EB47C 0%, #1F8F5A 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   letterSpacing: "-0.5px",
                 }}
               >
-                Pare de Ser a{" "}
-                <span className="block text-[1.15em] mt-2">Lixeira Emocional dos Outros</span>
+                Grupo Gratuito Paulla Oráculos
               </h1>
 
               <p className="text-[1.1rem] md:text-[1.15rem] text-white font-normal leading-[1.7] mb-6">
-                Aqui você aprende de forma prática como proteger sua energia, deixar de
-                absorver as emoções dos outros e recuperar sua vitalidade.
+                Onde a sua confusão vira clareza. Chega de se sentir perdido(a) e com a mente pesada. Entre para o nosso grupo gratuito e receba ferramentas práticas para limpar sua energia e colocar sua vida nos trilhos.
               </p>
 
-              <div className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[rgba(201,163,82,0.1)] border border-[rgba(201,163,82,0.2)] rounded-[30px] text-[0.85rem] text-[#c5c5c5] mb-6">
-                <span>✨</span>
+              <div className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[rgba(47,174,102,0.1)] border border-[rgba(47,174,102,0.2)] rounded-[30px] text-[0.85rem] text-[#c5c5c5] mb-6">
+                <span>🌿</span>
                 <span>
-                  Com <strong className="text-[#e8d4a0] font-semibold">Paula Oráculos</strong>
+                  Com <strong className="text-[#7EB47C] font-semibold">Paulla Oráculos</strong>
                 </span>
               </div>
 
               <ul className="list-none mb-4 space-y-2.5">
                 {[
-                  "Pare de absorver as emoções e problemas dos outros",
-                  "Recupere sua energia e vitalidade",
-                  "Crie uma blindagem energética poderosa",
-                  "Sua mente limpa, seus pensamentos em ordem",
+                  "Alívio para o peso emocional — técnicas simples para tirar o cansaço das costas e recuperar sua paz",
+                  "Pare de repetir os mesmos erros — entenda por que você trava e como destravar sua mente de vez",
+                  "Sua caixa de ferramentas de bem-estar — aprenda a se cuidar e transformar sua realidade todos os dias",
+                  "Você não está mais sozinho(a) — comunidade que entende o que você sente e busca a mesma evolução",
                 ].map((item, index) => (
                   <li
                     key={index}
                     className="text-base text-white/90 pl-7 relative leading-[1.6]"
                   >
-                    <span className="absolute left-0 text-[#c9a352] font-bold text-[1.2rem]">
+                    <span className="absolute left-0 text-[#2FAE66] font-bold text-[1.2rem]">
                       ✓
                     </span>
                     {item}
@@ -277,30 +275,28 @@ const EnergiaBlindada = () => {
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
                   style={{
-                    background: "linear-gradient(90deg, transparent, #c9a352, transparent)",
+                    background: "linear-gradient(90deg, transparent, #A18F5A, transparent)",
                   }}
                 />
 
-                <p className="text-center text-[0.75rem] uppercase tracking-[2px] text-[#c9a352] mb-3 font-semibold">
-                  🔒 Acesso Exclusivo
+                <p className="text-center text-[0.75rem] uppercase tracking-[2px] text-[#A18F5A] mb-3 font-semibold">
+                  🌿 Acesso 100% Gratuito
                 </p>
 
                 <h2
                   className="font-['Playfair_Display',serif] text-[1.75rem] lg:text-[1.9rem] text-center mb-2 font-semibold leading-[1.3]"
                   style={{
-                    background: "linear-gradient(135deg, #e8d4a0 0%, #c9a352 100%)",
+                    background: "linear-gradient(135deg, #7EB47C 0%, #1F8F5A 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                   }}
                 >
-                  Grupo VIP
-                  <br />
-                  Energia Blindada
+                  Grupo Gratuito Aguadeiro
                 </h2>
 
                 <p className="text-center text-[0.9rem] text-[#c5c5c5] mb-7 font-light leading-[1.5]">
-                  Esteja entre quem vai blindar sua energia primeiro
+                  Entre para a comunidade que vai transformar sua realidade
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -325,8 +321,8 @@ const EnergiaBlindada = () => {
                       }}
                       onFocus={(e) => {
                         e.target.style.background = "rgba(255,255,255,0.06)";
-                        e.target.style.borderColor = "#c9a352";
-                        e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
+                        e.target.style.borderColor = "#2FAE66";
+                        e.target.style.boxShadow = "0 0 0 4px rgba(47, 174, 102, 0.4)";
                       }}
                       onBlur={(e) => {
                         e.target.style.background = "rgba(255,255,255,0.04)";
@@ -359,15 +355,15 @@ const EnergiaBlindada = () => {
                           <span className="text-sm text-white/70">+{selectedCountry.ddi}</span>
                           <ChevronDown className={`w-4 h-4 text-white/50 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
                         </button>
-                        
+
                         {/* Dropdown */}
                         {isCountryDropdownOpen && (
-                          <div 
+                          <div
                             className="absolute top-full left-0 mt-2 w-64 max-h-60 overflow-y-auto rounded-xl z-50"
                             style={{
-                              background: "rgba(20, 20, 20, 0.98)",
+                              background: "rgba(10, 31, 21, 0.98)",
                               backdropFilter: "blur(20px)",
-                              border: "1px solid rgba(201, 163, 82, 0.3)",
+                              border: "1px solid rgba(47, 174, 102, 0.3)",
                               boxShadow: "0 20px 40px rgba(0,0,0,0.6)",
                             }}
                           >
@@ -378,10 +374,10 @@ const EnergiaBlindada = () => {
                                 onClick={() => {
                                   setSelectedCountry(country);
                                   setIsCountryDropdownOpen(false);
-                                  setWhatsapp(""); // Reset phone when changing country
+                                  setWhatsapp("");
                                 }}
-                                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(201,163,82,0.15)] ${
-                                  selectedCountry.name === country.name ? 'bg-[rgba(201,163,82,0.2)]' : ''
+                                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(47,174,102,0.15)] ${
+                                  selectedCountry.name === country.name ? 'bg-[rgba(47,174,102,0.2)]' : ''
                                 }`}
                               >
                                 <span className="text-xl">{country.flag}</span>
@@ -410,8 +406,8 @@ const EnergiaBlindada = () => {
                           onFocus={(e) => {
                             e.target.style.background = "rgba(255,255,255,0.06)";
                             if (!phoneError) {
-                              e.target.style.borderColor = "#c9a352";
-                              e.target.style.boxShadow = "0 0 0 4px rgba(201, 163, 82, 0.4)";
+                              e.target.style.borderColor = "#2FAE66";
+                              e.target.style.boxShadow = "0 0 0 4px rgba(47, 174, 102, 0.4)";
                             }
                           }}
                           onBlur={(e) => {
@@ -432,81 +428,23 @@ const EnergiaBlindada = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-[18px] rounded-xl text-base font-bold uppercase tracking-[1.5px] text-[#050505] mt-2 relative overflow-hidden transition-all duration-400 hover:-translate-y-[3px] disabled:opacity-70"
+                    className="w-full py-[18px] rounded-xl text-base font-bold uppercase tracking-[1.5px] text-white mt-2 relative overflow-hidden transition-all duration-400 hover:-translate-y-[3px] disabled:opacity-70"
                     style={{
-                      background: "linear-gradient(135deg, #c9a352, #e8d4a0)",
-                      boxShadow: "0 15px 40px rgba(201, 163, 82, 0.4)",
+                      background: "linear-gradient(135deg, #2FAE66, #1F8F5A)",
+                      boxShadow: "0 15px 40px rgba(47, 174, 102, 0.4)",
                     }}
                   >
                     <span className="relative z-10">
-                      {isSubmitting ? "Enviando..." : "Quero Blindar Minha Energia"}
+                      {isSubmitting ? "Enviando..." : "Quero Fazer Parte"}
                     </span>
                   </button>
                 </form>
 
                 <div className="text-center mt-4 text-[0.8rem] text-[#c5c5c5] flex items-center justify-center gap-2">
-                  <span className="text-[#c9a352] text-[1.1rem]">🔒</span>
+                  <span className="text-[#2FAE66] text-[1.1rem]">🔒</span>
                   <span>Seus dados estão 100% seguros</span>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Pain Section */}
-          <section className="py-16 md:py-20">
-            <h2 className="font-['Playfair_Display',serif] text-[2rem] md:text-[2.5rem] text-center mb-10 text-white/95 font-semibold leading-[1.3] px-2 animate-[slideUpFade_0.8s_ease-out_forwards]">
-              Se você sente isso, você precisa estar aqui...
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
-              {[
-                {
-                  emoji: "😓",
-                  title: "Cansaço que nunca acaba.",
-                  text: "Você acorda sem energia, vai dormir sem energia. É como se algo estivesse te drenando 24 horas por dia, sugando toda sua vitalidade.",
-                },
-                {
-                  emoji: "🌧️",
-                  title: "Você sente TUDO.",
-                  text: "As emoções das outras pessoas, os ambientes pesados, as energias densas. É como se você fosse uma esponja que absorve tudo ao seu redor.",
-                },
-                {
-                  emoji: "⚡",
-                  title: "Você carrega o peso do mundo.",
-                  text: "Todos os problemas parecem seus. Você atrai pessoas que te usam como muleta emocional e você não consegue dizer não.",
-                },
-                {
-                  emoji: "😞",
-                  title: "Ninguém te entende.",
-                  text: 'Eles acham que é frescura, que você está inventando. Mas você SABE que é real e não aguenta mais se sentir só nisso.',
-                },
-              ].map((card, index) => (
-                <article
-                  key={index}
-                  className="rounded-[18px] p-6 relative overflow-hidden transition-all duration-400 hover:-translate-y-2.5 cursor-pointer group"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
-                    backdropFilter: "blur(30px)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    animationDelay: `${0.2 * (index + 1)}s`,
-                  }}
-                >
-                  {/* Top gradient line */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-px opacity-50"
-                    style={{
-                      background: "linear-gradient(90deg, transparent, #c9a352, transparent)",
-                    }}
-                  />
-
-                  <span className="text-[2.2rem] mb-3 block">{card.emoji}</span>
-                  <p className="text-base leading-[1.7] text-white/90">
-                    <strong className="text-[#e8d4a0] font-semibold">{card.title}</strong>{" "}
-                    {card.text}
-                  </p>
-                </article>
-              ))}
             </div>
           </section>
         </div>
@@ -516,3 +454,4 @@ const EnergiaBlindada = () => {
 };
 
 export default EnergiaBlindada;
+
