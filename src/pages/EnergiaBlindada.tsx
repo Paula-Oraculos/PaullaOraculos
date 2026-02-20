@@ -22,7 +22,7 @@ const EnergiaBlindada = () => {
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const maskedValue = applyPhoneMask(e.target.value, selectedCountry.ddi);
     setWhatsapp(maskedValue);
-    
+
     // Valida em tempo real
     const validation = validatePhone(maskedValue, selectedCountry.ddi);
     setPhoneError(validation.valid ? "" : validation.message);
@@ -45,8 +45,8 @@ const EnergiaBlindada = () => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!formCardRef.current) return;
     const rect = formCardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const x = (e.clientX - rect.left) / rect.width * 100;
+    const y = (e.clientY - rect.top) / rect.height * 100;
     formCardRef.current.style.setProperty("--mouse-x", `${x}%`);
     formCardRef.current.style.setProperty("--mouse-y", `${y}%`);
   };
@@ -68,7 +68,7 @@ const EnergiaBlindada = () => {
       // Format phone: remove mask and add country code
       const phoneDigits = whatsapp.replace(/\D/g, "");
       const formattedPhone = `${selectedCountry.ddi}${phoneDigits}`;
-      
+
       // Funções para formatar data
       const formatarData = () => {
         const agora = new Date();
@@ -126,8 +126,8 @@ const EnergiaBlindada = () => {
           UTM_Source: obterUTM('utm_source'),
           UTM_Campaign: obterUTM('utm_campaign'),
           UTM_Medium: obterUTM('utm_medium'),
-          Dispositivo: obterDispositivo(),
-        }),
+          Dispositivo: obterDispositivo()
+        })
       });
     } catch (error) {
       console.error("Webhook error:", error);
@@ -141,7 +141,7 @@ const EnergiaBlindada = () => {
     id: i,
     left: Math.random() * 100,
     delay: Math.random() * 8,
-    duration: Math.random() * 4 + 6,
+    duration: Math.random() * 4 + 6
   }));
 
   return (
@@ -150,12 +150,12 @@ const EnergiaBlindada = () => {
         <title>Grupo Gratuito Paulla Oráculos | Clareza, Paz e Evolução</title>
         <meta
           name="description"
-          content="Onde a sua confusão vira clareza. Entre para o grupo gratuito de Paulla Oráculos e receba ferramentas práticas para limpar sua energia e colocar sua vida nos trilhos."
-        />
+          content="Onde a sua confusão vira clareza. Entre para o grupo gratuito de Paulla Oráculos e receba ferramentas práticas para limpar sua energia e colocar sua vida nos trilhos." />
+
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
+          rel="stylesheet" />
+
       </Helmet>
 
       <div className="min-h-screen bg-[#0A1F15] text-white overflow-x-hidden font-['Inter',sans-serif]">
@@ -167,23 +167,23 @@ const EnergiaBlindada = () => {
               radial-gradient(circle at 20% 50%, rgba(31, 143, 90, 0.08) 0%, transparent 50%),
               radial-gradient(circle at 80% 80%, rgba(31, 143, 90, 0.06) 0%, transparent 50%),
               radial-gradient(circle at 40% 20%, rgba(31, 143, 90, 0.05) 0%, transparent 40%)
-            `,
-          }}
-        />
+            `
+          }} />
+
 
         {/* Floating Particles */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          {particles.map((particle) => (
-            <div
-              key={particle.id}
-              className="absolute w-[3px] h-[3px] bg-[#2FAE66] rounded-full opacity-0"
-              style={{
-                left: `${particle.left}%`,
-                animation: `float-gold-particle ${particle.duration}s linear infinite`,
-                animationDelay: `${particle.delay}s`,
-              }}
-            />
-          ))}
+          {particles.map((particle) =>
+          <div
+            key={particle.id}
+            className="absolute w-[3px] h-[3px] bg-[#2FAE66] rounded-full opacity-0"
+            style={{
+              left: `${particle.left}%`,
+              animation: `float-gold-particle ${particle.duration}s linear infinite`,
+              animationDelay: `${particle.delay}s`
+            }} />
+
+          )}
         </div>
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -193,10 +193,10 @@ const EnergiaBlindada = () => {
             <div className="animate-[fadeInLeft_1s_ease-out]">
               {/* Animated Logo */}
               <div className="w-10 h-14 mb-5 relative animate-[glow-gold_3s_ease-in-out_infinite]">
-                <div 
+                <div
                   className="w-full h-full border-2 border-[#A18F5A] rounded-sm bg-[rgba(161,143,90,0.05)] relative"
-                  style={{ boxShadow: "0 0 20px rgba(161, 143, 90, 0.3)" }}
-                >
+                  style={{ boxShadow: "0 0 20px rgba(161, 143, 90, 0.3)" }}>
+
                   <div className="absolute inset-1.5 border border-[#A18F5A]/50 rounded-sm flex items-center justify-center">
                     <span className="text-[#A18F5A] text-xl">✦</span>
                   </div>
@@ -208,15 +208,15 @@ const EnergiaBlindada = () => {
               </div>
 
               <h1
-                className="font-['Playfair_Display',serif] text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold leading-[1.2] mb-5"
+                className="font-['Playfair_Display',serif] text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold leading-[1.2] mb-5 text-[#958656]"
                 style={{
                   background: "linear-gradient(135deg, #7EB47C 0%, #1F8F5A 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
-                  letterSpacing: "-0.5px",
-                }}
-              >
+                  letterSpacing: "-0.5px"
+                }}>
+
                 Grupo Gratuito Paulla Oráculos
               </h1>
 
@@ -233,21 +233,21 @@ const EnergiaBlindada = () => {
 
               <ul className="list-none mb-4 space-y-2.5">
                 {[
-                  "Alívio para o peso emocional — técnicas simples para tirar o cansaço das costas e recuperar sua paz",
-                  "Pare de repetir os mesmos erros — entenda por que você trava e como destravar sua mente de vez",
-                  "Sua caixa de ferramentas de bem-estar — aprenda a se cuidar e transformar sua realidade todos os dias",
-                  "Você não está mais sozinho(a) — comunidade que entende o que você sente e busca a mesma evolução",
-                ].map((item, index) => (
-                  <li
-                    key={index}
-                    className="text-base text-white/90 pl-7 relative leading-[1.6]"
-                  >
+                "Alívio para o peso emocional — técnicas simples para tirar o cansaço das costas e recuperar sua paz",
+                "Pare de repetir os mesmos erros — entenda por que você trava e como destravar sua mente de vez",
+                "Sua caixa de ferramentas de bem-estar — aprenda a se cuidar e transformar sua realidade todos os dias",
+                "Você não está mais sozinho(a) — comunidade que entende o que você sente e busca a mesma evolução"].
+                map((item, index) =>
+                <li
+                  key={index}
+                  className="text-base text-white/90 pl-7 relative leading-[1.6]">
+
                     <span className="absolute left-0 text-[#2FAE66] font-bold text-[1.2rem]">
                       ✓
                     </span>
                     {item}
                   </li>
-                ))}
+                )}
               </ul>
             </div>
 
@@ -265,33 +265,33 @@ const EnergiaBlindada = () => {
                 className="relative rounded-[20px] p-8 sm:p-10 lg:p-11 overflow-hidden transition-all duration-400 hover:-translate-y-2"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%)",
+                  "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%)",
                   backdropFilter: "blur(30px)",
                   border: "1px solid rgba(255,255,255,0.12)",
-                  boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-                }}
-              >
+                  boxShadow: "0 30px 80px rgba(0,0,0,0.5)"
+                }}>
+
                 {/* Top gradient line */}
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
                   style={{
-                    background: "linear-gradient(90deg, transparent, #A18F5A, transparent)",
-                  }}
-                />
+                    background: "linear-gradient(90deg, transparent, #A18F5A, transparent)"
+                  }} />
+
 
                 <p className="text-center text-[0.75rem] uppercase tracking-[2px] text-[#A18F5A] mb-3 font-semibold">
                   🌿 Acesso 100% Gratuito
                 </p>
 
                 <h2
-                  className="font-['Playfair_Display',serif] text-[1.75rem] lg:text-[1.9rem] text-center mb-2 font-semibold leading-[1.3]"
+                  className="font-['Playfair_Display',serif] text-[1.75rem] lg:text-[1.9rem] text-center mb-2 font-semibold leading-[1.3] text-[#a08e5a]"
                   style={{
                     background: "linear-gradient(135deg, #7EB47C 0%, #1F8F5A 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
+                    backgroundClip: "text"
+                  }}>
+
                   Grupo Gratuito Aguadeiro
                 </h2>
 
@@ -303,8 +303,8 @@ const EnergiaBlindada = () => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-[0.85rem] text-white mb-2 uppercase tracking-[1px] font-medium"
-                    >
+                      className="block text-[0.85rem] text-white mb-2 uppercase tracking-[1px] font-medium">
+
                       Seu Nome
                     </label>
                     <input
@@ -317,7 +317,7 @@ const EnergiaBlindada = () => {
                       className="w-full px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none focus:ring-[4px]"
                       style={{
                         background: "rgba(255,255,255,0.04)",
-                        border: "2px solid rgba(255,255,255,0.15)",
+                        border: "2px solid rgba(255,255,255,0.15)"
                       }}
                       onFocus={(e) => {
                         e.target.style.background = "rgba(255,255,255,0.06)";
@@ -328,15 +328,15 @@ const EnergiaBlindada = () => {
                         e.target.style.background = "rgba(255,255,255,0.04)";
                         e.target.style.borderColor = "rgba(255,255,255,0.15)";
                         e.target.style.boxShadow = "none";
-                      }}
-                    />
+                      }} />
+
                   </div>
 
                   <div>
                     <label
                       htmlFor="whatsapp"
-                      className="block text-[0.85rem] text-white mb-2 uppercase tracking-[1px] font-medium"
-                    >
+                      className="block text-[0.85rem] text-white mb-2 uppercase tracking-[1px] font-medium">
+
                       Seu WhatsApp
                     </label>
                     <div className="flex gap-2 items-stretch">
@@ -348,45 +348,45 @@ const EnergiaBlindada = () => {
                           className="h-full flex items-center gap-1.5 px-3 rounded-xl text-base text-white transition-all duration-300 whitespace-nowrap min-h-[56px]"
                           style={{
                             background: "rgba(255,255,255,0.04)",
-                            border: "2px solid rgba(255,255,255,0.15)",
-                          }}
-                        >
+                            border: "2px solid rgba(255,255,255,0.15)"
+                          }}>
+
                           <span className="text-xl">{selectedCountry.flag}</span>
                           <span className="text-sm text-white/70">+{selectedCountry.ddi}</span>
                           <ChevronDown className={`w-4 h-4 text-white/50 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
                         </button>
 
                         {/* Dropdown */}
-                        {isCountryDropdownOpen && (
-                          <div
-                            className="absolute top-full left-0 mt-2 w-64 max-h-60 overflow-y-auto rounded-xl z-50"
-                            style={{
-                              background: "rgba(10, 31, 21, 0.98)",
-                              backdropFilter: "blur(20px)",
-                              border: "1px solid rgba(47, 174, 102, 0.3)",
-                              boxShadow: "0 20px 40px rgba(0,0,0,0.6)",
+                        {isCountryDropdownOpen &&
+                        <div
+                          className="absolute top-full left-0 mt-2 w-64 max-h-60 overflow-y-auto rounded-xl z-50"
+                          style={{
+                            background: "rgba(10, 31, 21, 0.98)",
+                            backdropFilter: "blur(20px)",
+                            border: "1px solid rgba(47, 174, 102, 0.3)",
+                            boxShadow: "0 20px 40px rgba(0,0,0,0.6)"
+                          }}>
+
+                            {countries.map((country) =>
+                          <button
+                            key={`${country.ddi}-${country.name}`}
+                            type="button"
+                            onClick={() => {
+                              setSelectedCountry(country);
+                              setIsCountryDropdownOpen(false);
+                              setWhatsapp("");
                             }}
-                          >
-                            {countries.map((country) => (
-                              <button
-                                key={`${country.ddi}-${country.name}`}
-                                type="button"
-                                onClick={() => {
-                                  setSelectedCountry(country);
-                                  setIsCountryDropdownOpen(false);
-                                  setWhatsapp("");
-                                }}
-                                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(47,174,102,0.15)] ${
-                                  selectedCountry.name === country.name ? 'bg-[rgba(47,174,102,0.2)]' : ''
-                                }`}
-                              >
+                            className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(47,174,102,0.15)] ${
+                            selectedCountry.name === country.name ? 'bg-[rgba(47,174,102,0.2)]' : ''}`
+                            }>
+
                                 <span className="text-xl">{country.flag}</span>
                                 <span className="text-white text-sm flex-1">{country.name}</span>
                                 <span className="text-white/50 text-sm">+{country.ddi}</span>
                               </button>
-                            ))}
+                          )}
                           </div>
-                        )}
+                        }
                       </div>
 
                       {/* Phone Input */}
@@ -401,7 +401,7 @@ const EnergiaBlindada = () => {
                           className="w-full px-[18px] py-4 rounded-xl text-base text-white placeholder-white/35 transition-all duration-300 focus:outline-none min-h-[56px]"
                           style={{
                             background: "rgba(255,255,255,0.04)",
-                            border: phoneError ? "2px solid #ef4444" : "2px solid rgba(255,255,255,0.15)",
+                            border: phoneError ? "2px solid #ef4444" : "2px solid rgba(255,255,255,0.15)"
                           }}
                           onFocus={(e) => {
                             e.target.style.background = "rgba(255,255,255,0.06)";
@@ -416,11 +416,11 @@ const EnergiaBlindada = () => {
                               e.target.style.borderColor = "rgba(255,255,255,0.15)";
                             }
                             e.target.style.boxShadow = "none";
-                          }}
-                        />
-                        {phoneError && (
-                          <span className="text-red-400 text-xs mt-1">{phoneError}</span>
-                        )}
+                          }} />
+
+                        {phoneError &&
+                        <span className="text-red-400 text-xs mt-1">{phoneError}</span>
+                        }
                       </div>
                     </div>
                   </div>
@@ -428,12 +428,12 @@ const EnergiaBlindada = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-[18px] rounded-xl text-base font-bold uppercase tracking-[1.5px] text-white mt-2 relative overflow-hidden transition-all duration-400 hover:-translate-y-[3px] disabled:opacity-70"
+                    className="w-full py-[18px] rounded-xl text-base font-bold uppercase tracking-[1.5px] text-white mt-2 relative overflow-hidden transition-all duration-400 hover:-translate-y-[3px] disabled:opacity-70 bg-[#958656]"
                     style={{
                       background: "linear-gradient(135deg, #2FAE66, #1F8F5A)",
-                      boxShadow: "0 15px 40px rgba(47, 174, 102, 0.4)",
-                    }}
-                  >
+                      boxShadow: "0 15px 40px rgba(47, 174, 102, 0.4)"
+                    }}>
+
                     <span className="relative z-10">
                       {isSubmitting ? "Enviando..." : "Quero Fazer Parte"}
                     </span>
@@ -449,9 +449,8 @@ const EnergiaBlindada = () => {
           </section>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default EnergiaBlindada;
-
