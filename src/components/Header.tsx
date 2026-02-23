@@ -24,7 +24,7 @@ export const Header = () => {
             height="447"
             className="h-10 md:h-12 w-auto drop-shadow-[0_0_8px_rgba(218,165,32,0.5)] hover:drop-shadow-[0_0_12px_rgba(218,165,32,0.7)] transition-all duration-300" 
           />
-          <h1 className="text-lg md:text-xl font-serif gradient-text hidden sm:block">Paula Oráculos</h1>
+          <h1 className="text-lg md:text-xl font-serif gradient-text hidden sm:block">Paulla Oráculos</h1>
         </div>
         <Button 
           onClick={scrollToOffer}

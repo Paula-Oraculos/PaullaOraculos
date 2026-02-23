@@ -23,7 +23,7 @@ const pains = [
 export const PainVsSolution = () => {
   return (
     <section className="py-20 px-4 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-base/10 to-transparent" />
       
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Pain Section */}

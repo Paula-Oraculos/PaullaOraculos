@@ -40,7 +40,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 px-4 relative overflow-hidden bg-gradient-to-b from-background via-secondary/20 to-background">
+    <section className="py-16 md:py-20 px-4 relative overflow-hidden bg-gradient-to-b from-transparent via-emerald-base/10 to-transparent">
       {/* Shooting Stars Background */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <ShootingStars

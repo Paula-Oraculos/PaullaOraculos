@@ -16,7 +16,6 @@ const FormCapturaWpp = () => {
   const rafRef = useRef<number>();
 
   useEffect(() => {
-    // Cache window dimensions
     windowSizeRef.current = {
       width: window.innerWidth,
       height: window.innerHeight
@@ -30,12 +29,9 @@ const FormCapturaWpp = () => {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Cancel previous RAF if it exists
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
-
-      // Use RAF to batch DOM updates and avoid forced reflows
       rafRef.current = requestAnimationFrame(() => {
         const { width, height } = windowSizeRef.current;
         setMousePosition({
@@ -133,7 +129,7 @@ const FormCapturaWpp = () => {
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          id_unico: `fw-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
+          id_unico: `ga-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
           Nome: name,
           Whatsapp: formattedPhone,
           DDI: selectedCountry.ddi,
@@ -141,9 +137,9 @@ const FormCapturaWpp = () => {
           Data: formatarData(),
           Hora: obterHora(),
           Dia_Semana: obterDiaSemana(),
-          Tag: 'captura-wpp',
-          Origem: 'Formulário Landing Page',
-          Grupo: 'Grupo Paula Oráculos',
+          Tag: 'aguadeiro-gratuito',
+          Origem: 'Formulário Paulla Oráculos',
+          Grupo: 'Grupo Gratuito Aguadeiro',
           Pais: selectedCountry.name,
           URL: window.location.href,
           UTM_Source: obterUTM('utm_source'),
@@ -160,24 +156,22 @@ const FormCapturaWpp = () => {
     setIsSubmitting(false);
   };
 
-
-
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
-      {/* Animated Galaxy Background */}
+    <div className="relative min-h-screen overflow-hidden bg-emerald-deep">
+      {/* Animated Background */}
       <div className="absolute inset-0">
-        {/* Base gradient - tom mais escuro de noite */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-black"></div>
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-deep via-[#0D2A1C] to-emerald-deep"></div>
         
         {/* Animated nebula effect */}
         <div 
           className="absolute inset-0 opacity-30 transition-all duration-300 ease-out"
           style={{
-            background: `radial-gradient(circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, rgba(88, 28, 135, 0.5) 0%, transparent 50%)`,
+            background: `radial-gradient(circle at ${50 + mousePosition.x}% ${50 + mousePosition.y}%, rgba(31, 143, 90, 0.3) 0%, transparent 50%)`,
           }}
         ></div>
         
-        {/* Stars layer 1 - small stars */}
+        {/* Stars layer 1 */}
         <div className="absolute inset-0">
           {[...Array(100)].map((_, i) => (
             <div
@@ -196,12 +190,12 @@ const FormCapturaWpp = () => {
           ))}
         </div>
         
-        {/* Stars layer 2 - medium stars */}
+        {/* Stars layer 2 */}
         <div className="absolute inset-0">
           {[...Array(50)].map((_, i) => (
             <div
               key={`star2-${i}`}
-              className="absolute rounded-full bg-purple-200 animate-pulse"
+              className="absolute rounded-full bg-emerald-soft animate-pulse"
               style={{
                 width: Math.random() * 3 + 2 + 'px',
                 height: Math.random() * 3 + 2 + 'px',
@@ -238,7 +232,7 @@ const FormCapturaWpp = () => {
           {[...Array(20)].map((_, i) => (
             <div
               key={`particle-${i}`}
-              className="absolute rounded-full bg-purple-300 animate-float"
+              className="absolute rounded-full bg-emerald-vibrant/30 animate-float"
               style={{
                 width: Math.random() * 4 + 1 + 'px',
                 height: Math.random() * 4 + 1 + 'px',
@@ -259,13 +253,13 @@ const FormCapturaWpp = () => {
           {/* Logo/Brand */}
           <div className="text-center mb-6 sm:mb-8 animate-fade-in">
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <Moon className="h-8 w-8 md:h-10 md:w-10 text-purple-300 animate-pulse" />
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 animate-gradient-text">
-                Paula Oráculos
+              <Moon className="h-8 w-8 md:h-10 md:w-10 text-emerald-soft animate-pulse" />
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-soft via-gold-accent to-emerald-soft animate-gradient-text">
+                Paulla Oráculos
               </h1>
-              <Stars className="h-8 w-8 md:h-10 md:w-10 text-pink-300 animate-pulse" />
+              <Stars className="h-8 w-8 md:h-10 md:w-10 text-gold-accent animate-pulse" />
             </div>
-            <div className="flex items-center justify-center gap-2 text-purple-300">
+            <div className="flex items-center justify-center gap-2 text-emerald-soft">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
               <p className="text-base sm:text-lg md:text-xl font-light tracking-wide">
                 Desperte sua Consciência Espiritual
@@ -275,32 +269,32 @@ const FormCapturaWpp = () => {
           </div>
 
           {/* Main Card */}
-          <div className="backdrop-blur-lg bg-white/10 border border-purple-400/30 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl animate-slide-up">
+          <div className="backdrop-blur-lg bg-white/5 border border-emerald-vibrant/30 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl animate-slide-up">
             {/* Title */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-3 sm:mb-4 leading-tight">
               Junte-se ao Nosso Grupo Gratuito
             </h2>
             
             {/* Subtitle */}
-            <p className="text-purple-200 text-center mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
+            <p className="text-emerald-soft/70 text-center mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">
               Receba mensagens diárias de orientação espiritual, tarot, oráculos e conexão com o universo místico
             </p>
 
             {/* Benefits */}
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               {[
-                '🌙 Leituras exclusivas de tarot e oráculos',
-                '✨ Rituais e simpatias para manifestação',
-                '🔮 Previsões astrológicas semanais',
-                '💜 Comunidade acolhedora e espiritual',
-                '🌟 Conteúdo gratuito todos os dias'
+                '🌿 Alívio para o peso emocional — recupere sua paz',
+                '✨ Pare de repetir os mesmos erros — destrave sua mente',
+                '🔮 Sua caixa de ferramentas de bem-estar diário',
+                '💚 Comunidade que entende o que você sente',
+                '🌟 Acesso 100% Gratuito'
               ].map((benefit, index) => (
                 <div 
                   key={index}
                   className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="flex-shrink-0 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  <div className="flex-shrink-0 w-2 h-2 bg-emerald-vibrant rounded-full animate-pulse"></div>
                   <span>{benefit}</span>
                 </div>
               ))}
@@ -314,7 +308,7 @@ const FormCapturaWpp = () => {
                   placeholder="Digite seu nome"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-6 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-lg transition-all"
+                  className="w-full px-6 py-4 rounded-2xl bg-white/10 border border-emerald-vibrant/30 text-white placeholder-emerald-soft/50 focus:outline-none focus:ring-2 focus:ring-emerald-vibrant focus:border-transparent backdrop-blur-sm text-lg transition-all"
                 />
               </div>
 
@@ -324,7 +318,7 @@ const FormCapturaWpp = () => {
                     <button
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="w-full px-2 sm:px-3 py-4 rounded-2xl bg-white/20 border border-purple-300/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base transition-all flex items-center justify-between"
+                      className="w-full px-2 sm:px-3 py-4 rounded-2xl bg-white/10 border border-emerald-vibrant/30 text-white focus:outline-none focus:ring-2 focus:ring-emerald-vibrant focus:border-transparent backdrop-blur-sm text-base transition-all flex items-center justify-between"
                     >
                       <span className="flex items-center gap-1">
                         <span className="text-xl">{selectedCountry.flag}</span>
@@ -334,7 +328,7 @@ const FormCapturaWpp = () => {
                     </button>
                     
                     {isDropdownOpen && (
-                      <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-purple-900 border border-purple-300/50 rounded-2xl shadow-lg backdrop-blur-sm">
+                      <div className="absolute z-50 top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-emerald-deep border border-emerald-vibrant/30 rounded-2xl shadow-lg backdrop-blur-sm">
                         {countries.map((c) => (
                           <button
                             key={`${c.ddi}-${c.name}`}
@@ -344,13 +338,13 @@ const FormCapturaWpp = () => {
                               setIsDropdownOpen(false);
                               setWhatsapp('');
                             }}
-                            className={`w-full px-3 py-2 flex items-center gap-2 hover:bg-purple-400/20 transition-colors text-left ${
-                              selectedCountry.name === c.name ? 'bg-purple-400/30' : ''
+                            className={`w-full px-3 py-2 flex items-center gap-2 hover:bg-emerald-vibrant/20 transition-colors text-left ${
+                              selectedCountry.name === c.name ? 'bg-emerald-vibrant/30' : ''
                             }`}
                           >
                             <span className="text-lg">{c.flag}</span>
                             <span className="text-sm text-white flex-1">{c.name}</span>
-                            <span className="text-xs text-purple-200">+{c.ddi}</span>
+                            <span className="text-xs text-emerald-soft/70">+{c.ddi}</span>
                           </button>
                         ))}
                       </div>
@@ -361,15 +355,15 @@ const FormCapturaWpp = () => {
                     placeholder={phoneConfig.placeholder}
                     value={whatsapp}
                     onChange={handleWhatsappChange}
-                    className={`flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/20 border text-white placeholder-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all ${
-                      phoneError ? 'border-red-400' : 'border-purple-300/50'
+                    className={`flex-1 min-w-0 px-4 sm:px-6 py-4 rounded-2xl bg-white/10 border text-white placeholder-emerald-soft/50 focus:outline-none focus:ring-2 focus:ring-emerald-vibrant focus:border-transparent backdrop-blur-sm text-base sm:text-lg transition-all ${
+                      phoneError ? 'border-red-400' : 'border-emerald-vibrant/30'
                     }`}
                   />
                 </div>
                 {phoneError ? (
                   <p className="text-red-400 text-xs mt-2 ml-2">{phoneError}</p>
                 ) : (
-                  <p className="text-purple-200 text-xs mt-2 ml-2">
+                  <p className="text-emerald-soft/70 text-xs mt-2 ml-2">
                     {selectedCountry.flag} {selectedCountry.name} (+{selectedCountry.ddi})
                   </p>
                 )}
@@ -402,7 +396,7 @@ const FormCapturaWpp = () => {
             </form>
 
             {/* Footer note */}
-            <p className="text-center text-purple-200 text-sm mt-6">
+            <p className="text-center text-emerald-soft/70 text-sm mt-6">
               🔒 Seu número fica protegido • Grupo 100% gratuito • Sem spam
             </p>
           </div>

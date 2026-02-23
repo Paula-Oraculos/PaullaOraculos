@@ -15,7 +15,6 @@ const WhatsAppIcon = () => (
 const EnergiaBlindadaObrigado = () => {
   const whatsappLink = "https://chat.whatsapp.com/L8GzY29UNAvBHq1VXR2XHK?mode=hqrc";
 
-  // Generate particles
   const particles = Array.from({ length: 15 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
@@ -26,10 +25,10 @@ const EnergiaBlindadaObrigado = () => {
   return (
     <>
       <Helmet>
-        <title>Obrigado | Energia Blindada - Paula Oráculos</title>
+        <title>Obrigado | Grupo Gratuito - Paulla Oráculos</title>
         <meta
           name="description"
-          content="Sua solicitação foi realizada! Siga as instruções para acessar o grupo VIP Energia Blindada."
+          content="Sua solicitação foi realizada! Siga as instruções para acessar o Grupo Gratuito Paulla Oráculos."
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -37,15 +36,15 @@ const EnergiaBlindadaObrigado = () => {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden font-['Inter',sans-serif] flex items-center justify-center px-4 py-12">
+      <div className="min-h-screen bg-emerald-deep text-white overflow-x-hidden font-['Inter',sans-serif] flex items-center justify-center px-4 py-12">
         {/* Gradient Background */}
         <div
           className="fixed inset-0 z-0 pointer-events-none"
           style={{
             background: `
-              radial-gradient(circle at 20% 50%, rgba(201, 163, 82, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(201, 163, 82, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(201, 163, 82, 0.05) 0%, transparent 40%)
+              radial-gradient(circle at 20% 50%, rgba(31, 143, 90, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(31, 143, 90, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(47, 174, 102, 0.05) 0%, transparent 40%)
             `,
           }}
         />
@@ -55,7 +54,7 @@ const EnergiaBlindadaObrigado = () => {
           {particles.map((particle) => (
             <div
               key={particle.id}
-              className="absolute w-[3px] h-[3px] bg-[#c9a352] rounded-full opacity-0"
+              className="absolute w-[3px] h-[3px] bg-emerald-vibrant rounded-full opacity-0"
               style={{
                 left: `${particle.left}%`,
                 animation: `float-gold-particle ${particle.duration}s linear infinite`,
@@ -81,7 +80,7 @@ const EnergiaBlindadaObrigado = () => {
             <div
               className="absolute top-0 left-0 right-0 h-[2px] opacity-60"
               style={{
-                background: "linear-gradient(90deg, transparent, #c9a352, transparent)",
+                background: "linear-gradient(90deg, transparent, #2FAE66, transparent)",
               }}
             />
 
@@ -90,8 +89,8 @@ const EnergiaBlindadaObrigado = () => {
               <div
                 className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 animate-[glow-gold_3s_ease-in-out_infinite]"
                 style={{
-                  background: "linear-gradient(135deg, rgba(201,163,82,0.2), rgba(201,163,82,0.1))",
-                  border: "2px solid #c9a352",
+                  background: "linear-gradient(135deg, rgba(47,174,102,0.2), rgba(47,174,102,0.1))",
+                  border: "2px solid #2FAE66",
                 }}
               >
                 <span className="text-3xl">✓</span>
@@ -100,16 +99,14 @@ const EnergiaBlindadaObrigado = () => {
 
             {/* Title */}
             <h1 className="text-center mb-6">
-              <span
-                className="block text-[#c9a352] font-bold text-xl mb-2"
-              >
+              <span className="block text-emerald-vibrant font-bold text-xl mb-2">
                 Atenção:
               </span>
               <span className="block text-white text-lg font-normal leading-relaxed">
                 Sua solicitação foi realizada!
                 <br />
-                O link <em className="text-[#e8d4a0]">será enviado</em> no seu{" "}
-                <em className="text-[#e8d4a0]">WhatsApp</em> em breve.
+                O link <em className="text-emerald-soft">será enviado</em> no seu{" "}
+                <em className="text-emerald-soft">WhatsApp</em> em breve.
               </span>
             </h1>
 
@@ -117,40 +114,40 @@ const EnergiaBlindadaObrigado = () => {
             <div
               className="rounded-xl p-5 mb-6"
               style={{
-                background: "rgba(201, 163, 82, 0.08)",
-                border: "1px solid rgba(201, 163, 82, 0.2)",
+                background: "rgba(47, 174, 102, 0.08)",
+                border: "1px solid rgba(47, 174, 102, 0.2)",
               }}
             >
               <div className="flex items-start gap-2 mb-4">
-                <span className="text-[#c9a352] text-base">ℹ️</span>
+                <span className="text-emerald-vibrant text-base">ℹ️</span>
                 <p className="text-white/90 text-sm leading-relaxed">
-                  Para acessar <strong className="text-[#e8d4a0]">imediatamente</strong> siga as instruções abaixo:
+                  Para acessar <strong className="text-emerald-soft">imediatamente</strong> siga as instruções abaixo:
                 </p>
               </div>
 
               <ol className="space-y-4 text-white/90 text-sm">
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-vibrant/20 text-emerald-vibrant flex items-center justify-center text-xs font-bold mt-0.5">
                     1
                   </span>
                   <span className="leading-relaxed">
-                    Clique nos <strong className="text-[#e8d4a0]">três pontinhos</strong> no canto superior direito dessa janela 📱
+                    Clique nos <strong className="text-emerald-soft">três pontinhos</strong> no canto superior direito dessa janela 📱
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-vibrant/20 text-emerald-vibrant flex items-center justify-center text-xs font-bold mt-0.5">
                     2
                   </span>
                   <span className="leading-relaxed">
-                    Em seguida clique na opção <strong className="text-[#e8d4a0]">"Abrir com o navegador"</strong>
+                    Em seguida clique na opção <strong className="text-emerald-soft">"Abrir com o navegador"</strong>
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[rgba(201,163,82,0.2)] text-[#c9a352] flex items-center justify-center text-xs font-bold mt-0.5">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-vibrant/20 text-emerald-vibrant flex items-center justify-center text-xs font-bold mt-0.5">
                     3
                   </span>
                   <span className="leading-relaxed">
-                    Depois de abrir com o navegador, <strong className="text-[#e8d4a0]">clique no botão abaixo</strong>
+                    Depois de abrir com o navegador, <strong className="text-emerald-soft">clique no botão abaixo</strong>
                   </span>
                 </li>
               </ol>
@@ -172,8 +169,8 @@ const EnergiaBlindadaObrigado = () => {
             </a>
 
             {/* Trust Badge */}
-            <div className="text-center mt-5 text-[0.8rem] text-[#c5c5c5] flex items-center justify-center gap-2">
-              <span className="text-[#c9a352]">🔒</span>
+            <div className="text-center mt-5 text-[0.8rem] text-ivory-muted flex items-center justify-center gap-2">
+              <span className="text-emerald-vibrant">🔒</span>
               <span>Grupo exclusivo e gratuito</span>
             </div>
           </div>
