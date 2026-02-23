@@ -40,7 +40,7 @@ export const TheChoice = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-emerald-base/20 rounded-2xl blur-2xl -z-10" />
           </motion.div>
 
           <motion.div

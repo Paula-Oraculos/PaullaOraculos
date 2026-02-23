@@ -116,14 +116,14 @@ export const OfferSection = () => {
                 </div>
 
                 {/* Bonuses */}
-                <div className="p-4 sm:p-5 rounded-xl bg-purple-900/20 border border-purple-500/30">
+                <div className="p-4 sm:p-5 rounded-xl bg-emerald-base/20 border border-emerald-vibrant/30">
                   <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                    <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
-                    <h4 className="text-lg sm:text-xl font-semibold text-purple-300">Bônus Exclusivos</h4>
+                    <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-vibrant" />
+                    <h4 className="text-lg sm:text-xl font-semibold text-emerald-soft">Bônus Exclusivos</h4>
                   </div>
                   <ul className="space-y-2 sm:space-y-3">
-                    {bonuses.map((bonus, index) => <li key={index} className="flex items-start gap-2 sm:gap-3 text-slate-300 text-sm sm:text-base">
-                        <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                     {bonuses.map((bonus, index) => <li key={index} className="flex items-start gap-2 sm:gap-3 text-slate-300 text-sm sm:text-base">
+                        <div className="w-2 h-2 rounded-full bg-emerald-vibrant mt-2 flex-shrink-0" />
                         <span>{bonus}</span>
                       </li>)}
                   </ul>

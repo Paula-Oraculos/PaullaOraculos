@@ -149,7 +149,6 @@ const CatalogoProdutos = () => {
   const [phoneError, setPhoneError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Floating particles with stable random values
   const particles = useMemo(() => 
     Array.from({ length: 15 }, (_, i) => ({
       id: i,
@@ -257,17 +256,17 @@ const CatalogoProdutos = () => {
   return (
     <>
       <Helmet>
-        <title>Paula Oráculos | Cursos, Workshops e Mentoria para Oraculistas</title>
-        <meta name="description" content="Transforme seu dom espiritual em prosperidade. Conheça os cursos e mentorias de Paula Oráculos para se tornar uma oraculista profissional." />
+        <title>Paulla Oráculos | Cursos, Workshops e Mentoria para Oraculistas</title>
+        <meta name="description" content="Transforme seu dom espiritual em prosperidade. Conheça os cursos e mentorias de Paulla Oráculos para se tornar uma oraculista profissional." />
       </Helmet>
 
-      <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden">
+      <div className="min-h-screen bg-emerald-deep text-white overflow-x-hidden">
         {/* Floating Particles */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
           {particles.map((particle) => (
             <div
               key={particle.id}
-              className="absolute rounded-full bg-[#c9a352]"
+              className="absolute rounded-full bg-emerald-vibrant"
               style={{
                 width: `${particle.size}px`,
                 height: `${particle.size}px`,
@@ -281,25 +280,25 @@ const CatalogoProdutos = () => {
         </div>
 
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/90 backdrop-blur-md border-b border-[#c9a352]/20">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-emerald-deep/90 backdrop-blur-md border-b border-emerald-vibrant/20">
           <div className="container mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-            <h1 className="text-xl sm:text-2xl font-serif bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
-              Paula Oráculos
+            <h1 className="text-xl sm:text-2xl font-serif bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
+              Paulla Oráculos
             </h1>
             <nav className="hidden md:flex items-center gap-6 text-sm">
-              <button onClick={scrollToProducts} className="text-white/70 hover:text-[#c9a352] transition-colors">
+              <button onClick={scrollToProducts} className="text-white/70 hover:text-emerald-vibrant transition-colors">
                 Produtos
               </button>
-              <a href="#depoimentos" className="text-white/70 hover:text-[#c9a352] transition-colors">
+              <a href="#depoimentos" className="text-white/70 hover:text-emerald-vibrant transition-colors">
                 Depoimentos
               </a>
-              <a href="#sobre" className="text-white/70 hover:text-[#c9a352] transition-colors">
+              <a href="#sobre" className="text-white/70 hover:text-emerald-vibrant transition-colors">
                 Sobre
               </a>
             </nav>
             <Button 
               onClick={scrollToForm}
-              className="bg-gradient-to-r from-[#c9a352] to-[#e8d4a0] text-[#050505] font-semibold hover:opacity-90 transition-opacity text-sm px-4 py-2"
+              className="bg-gradient-to-r from-gold-mystic to-gold-bright text-emerald-deep font-semibold hover:opacity-90 transition-opacity text-sm px-4 py-2"
             >
               Grupo Gratuito
             </Button>
@@ -308,7 +307,7 @@ const CatalogoProdutos = () => {
 
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex items-center justify-center pt-20 px-4">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#c9a352]/5 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-vibrant/5 via-transparent to-transparent" />
           
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -316,13 +315,13 @@ const CatalogoProdutos = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto relative z-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#c9a352]/30 bg-[#c9a352]/10 mb-6">
-              <Star className="w-4 h-4 text-[#c9a352]" />
-              <span className="text-sm text-[#c9a352]">Oraculista e Mentora de Oraculistas</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-vibrant/30 bg-emerald-vibrant/10 mb-6">
+              <Star className="w-4 h-4 text-emerald-vibrant" />
+              <span className="text-sm text-emerald-vibrant">Oraculista e Mentora de Oraculistas</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                 Desperte Seu
               </span>
               <br />
@@ -337,7 +336,7 @@ const CatalogoProdutos = () => {
               <Button 
                 onClick={scrollToProducts}
                 size="lg"
-                className="bg-gradient-to-r from-[#c9a352] to-[#e8d4a0] text-[#050505] font-bold hover:opacity-90 text-lg px-8 py-6 h-auto"
+                className="bg-gradient-to-r from-gold-mystic to-gold-bright text-emerald-deep font-bold hover:opacity-90 text-lg px-8 py-6 h-auto"
               >
                 Conhecer Produtos
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -346,7 +345,7 @@ const CatalogoProdutos = () => {
                 onClick={scrollToForm}
                 variant="outline"
                 size="lg"
-                className="border-[#c9a352]/50 text-[#c9a352] hover:bg-[#c9a352]/10 text-lg px-8 py-6 h-auto"
+                className="border-emerald-vibrant/50 text-emerald-vibrant hover:bg-emerald-vibrant/10 text-lg px-8 py-6 h-auto"
               >
                 Grupo Gratuito
                 <MessageCircle className="w-5 h-5 ml-2" />
@@ -358,7 +357,7 @@ const CatalogoProdutos = () => {
               transition={{ duration: 2, repeat: Infinity }}
               className="mt-12"
             >
-              <ChevronDown className="w-8 h-8 text-[#c9a352]/50 mx-auto" />
+              <ChevronDown className="w-8 h-8 text-emerald-vibrant/50 mx-auto" />
             </motion.div>
           </motion.div>
         </section>
@@ -373,7 +372,7 @@ const CatalogoProdutos = () => {
               className="text-center mb-16"
             >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4">
-                <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                   Trilhas de Transformação
                 </span>
               </h2>
@@ -395,24 +394,24 @@ const CatalogoProdutos = () => {
                     relative h-full p-6 lg:p-8 bg-white/[0.03] backdrop-blur-sm 
                     border transition-all duration-300 hover:scale-[1.02]
                     ${product.highlight 
-                      ? 'border-[#c9a352] shadow-[0_0_30px_rgba(201,163,82,0.2)]' 
-                      : 'border-[#c9a352]/20 hover:border-[#c9a352]/40'
+                      ? 'border-emerald-vibrant shadow-[0_0_30px_rgba(47,174,102,0.2)]' 
+                      : 'border-emerald-vibrant/20 hover:border-emerald-vibrant/40'
                     }
                   `}>
                     {product.highlight && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#c9a352] to-[#e8d4a0] rounded-full">
-                        <span className="text-xs font-bold text-[#050505]">MAIS COMPLETO</span>
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-gold-mystic to-gold-bright rounded-full">
+                        <span className="text-xs font-bold text-emerald-deep">MAIS COMPLETO</span>
                       </div>
                     )}
                     
                     <div className="flex flex-col h-full">
                       <div className="mb-6">
-                        <span className="inline-block px-3 py-1 text-xs font-semibold bg-[#c9a352]/20 text-[#c9a352] rounded-full mb-4">
+                        <span className="inline-block px-3 py-1 text-xs font-semibold bg-emerald-vibrant/20 text-emerald-vibrant rounded-full mb-4">
                           {product.tag}
                         </span>
                         
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center mb-4">
-                          <product.icon className="w-7 h-7 text-[#050505]" />
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center mb-4">
+                          <product.icon className="w-7 h-7 text-white" />
                         </div>
                         
                         <h3 className="text-2xl font-serif text-white mb-3">
@@ -428,7 +427,7 @@ const CatalogoProdutos = () => {
                         <ul className="space-y-3 mb-6">
                           {product.benefits.map((benefit, i) => (
                             <li key={i} className="flex items-start gap-3">
-                              <Check className="w-5 h-5 text-[#c9a352] flex-shrink-0 mt-0.5" />
+                              <Check className="w-5 h-5 text-emerald-vibrant flex-shrink-0 mt-0.5" />
                               <span className="text-sm text-white/70">{benefit}</span>
                             </li>
                           ))}
@@ -440,8 +439,8 @@ const CatalogoProdutos = () => {
                         className={`
                           block w-full text-center py-4 rounded-lg font-semibold transition-all duration-300
                           ${product.highlight 
-                            ? 'bg-gradient-to-r from-[#c9a352] to-[#e8d4a0] text-[#050505] hover:opacity-90' 
-                            : 'border border-[#c9a352]/50 text-[#c9a352] hover:bg-[#c9a352]/10'
+                            ? 'bg-gradient-to-r from-gold-mystic to-gold-bright text-emerald-deep hover:opacity-90' 
+                            : 'border border-emerald-vibrant/50 text-emerald-vibrant hover:bg-emerald-vibrant/10'
                           }
                         `}
                       >
@@ -456,7 +455,7 @@ const CatalogoProdutos = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section id="depoimentos" className="py-20 px-4 relative bg-gradient-to-b from-transparent via-[#c9a352]/5 to-transparent">
+        <section id="depoimentos" className="py-20 px-4 relative bg-gradient-to-b from-transparent via-emerald-vibrant/5 to-transparent">
           <div className="container mx-auto max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -465,14 +464,14 @@ const CatalogoProdutos = () => {
               className="text-center mb-12"
             >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-4">
-                <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                   Transformações Reais
                 </span>
               </h2>
               <p className="text-lg text-white/60">
                 Veja o que nossas alunas estão alcançando
               </p>
-              <p className="text-sm text-[#c9a352]/70 mt-2 md:hidden">
+              <p className="text-sm text-emerald-vibrant/70 mt-2 md:hidden">
                 👉 Deslize para ver mais
               </p>
             </motion.div>
@@ -493,8 +492,8 @@ const CatalogoProdutos = () => {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Card className="bg-white/[0.03] border-[#c9a352]/20 hover:border-[#c9a352]/40 overflow-hidden transition-all duration-300">
-                        <div className="aspect-[9/16] w-full bg-[#0a0a0a] relative">
+                      <Card className="bg-white/[0.03] border-emerald-vibrant/20 hover:border-emerald-vibrant/40 overflow-hidden transition-all duration-300">
+                        <div className="aspect-[9/16] w-full bg-emerald-deep relative">
                           {activeVideo === video.id ? (
                             <iframe
                               src={`https://www.youtube.com/embed/${video.id}?rel=0&autoplay=1`}
@@ -516,8 +515,8 @@ const CatalogoProdutos = () => {
                               />
                               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
                               <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-16 h-16 bg-[#c9a352] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                  <Play className="w-7 h-7 text-[#050505] ml-1" fill="#050505" />
+                                <div className="w-16 h-16 bg-emerald-vibrant rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                  <Play className="w-7 h-7 text-white ml-1" fill="white" />
                                 </div>
                               </div>
                             </div>
@@ -529,15 +528,15 @@ const CatalogoProdutos = () => {
                 ))}
               </CarouselContent>
               <CarouselDots className="mt-6" />
-              <CarouselPrevious className="hidden sm:flex -left-12 bg-[#c9a352]/20 hover:bg-[#c9a352]/40 border-[#c9a352]/30 text-[#c9a352]" />
-              <CarouselNext className="hidden sm:flex -right-12 bg-[#c9a352]/20 hover:bg-[#c9a352]/40 border-[#c9a352]/30 text-[#c9a352]" />
+              <CarouselPrevious className="hidden sm:flex -left-12 bg-emerald-vibrant/20 hover:bg-emerald-vibrant/40 border-emerald-vibrant/30 text-emerald-vibrant" />
+              <CarouselNext className="hidden sm:flex -right-12 bg-emerald-vibrant/20 hover:bg-emerald-vibrant/40 border-emerald-vibrant/30 text-emerald-vibrant" />
             </Carousel>
           </div>
         </section>
 
         {/* About Section */}
         <section id="sobre" className="py-20 px-4 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#c9a352]/5 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-vibrant/5 to-transparent" />
           
           <div className="container mx-auto max-w-6xl relative z-10">
             <motion.div
@@ -547,7 +546,7 @@ const CatalogoProdutos = () => {
               className="text-center mb-12"
             >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif">
-                <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                   Sua Guia Nesta Jornada
                 </span>
               </h2>
@@ -560,14 +559,14 @@ const CatalogoProdutos = () => {
                 viewport={{ once: true }}
                 className="relative order-2 md:order-1"
               >
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#c9a352]/30">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-emerald-vibrant/30">
                   <img 
                     src={paulaPortrait} 
-                    alt="Paula Oráculos - Mentora e Criadora do Método Oraculista Desperta" 
+                    alt="Paulla Oráculos - Mentora e Criadora do Método Oraculista Desperta" 
                     className="w-full h-full object-cover object-[center_35%]"
                   />
                 </div>
-                <div className="absolute -inset-4 bg-gradient-to-r from-[#c9a352]/20 to-[#c9a352]/10 rounded-2xl blur-2xl -z-10" />
+                <div className="absolute -inset-4 bg-gradient-to-r from-emerald-vibrant/20 to-emerald-base/10 rounded-2xl blur-2xl -z-10" />
               </motion.div>
 
               <motion.div
@@ -576,22 +575,22 @@ const CatalogoProdutos = () => {
                 viewport={{ once: true }}
                 className="space-y-6 order-1 md:order-2"
               >
-                <h3 className="text-3xl font-serif bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
-                  Paula Oráculos
+                <h3 className="text-3xl font-serif bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
+                  Paulla Oráculos
                 </h3>
                 
                 <p className="text-lg text-white/70 leading-relaxed">
-                  Oraculista profissional e mentora de oraculistas, Paula desenvolveu o Método 
+                  Oraculista profissional e mentora de oraculistas, Paulla desenvolveu o Método 
                   Oraculista Desperta após atender milhares de consulentes e perceber que 
                   o verdadeiro poder não está em "prever o futuro", mas em ativar a sabedoria 
                   interior de cada pessoa.
                 </p>
 
                 <div className="space-y-4">
-                  <Card className="p-5 bg-white/[0.03] border-[#c9a352]/30 transition-all duration-300 hover:scale-[1.02] hover:border-[#c9a352]/50">
+                  <Card className="p-5 bg-white/[0.03] border-emerald-vibrant/30 transition-all duration-300 hover:scale-[1.02] hover:border-emerald-vibrant/50">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center flex-shrink-0">
-                        <Sparkles className="w-6 h-6 text-[#050505]" />
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center flex-shrink-0">
+                        <Sparkles className="w-6 h-6 text-white" />
                       </div>
                       <div>
                         <p className="font-semibold text-white">Criadora do Método</p>
@@ -600,10 +599,10 @@ const CatalogoProdutos = () => {
                     </div>
                   </Card>
 
-                  <Card className="p-5 bg-white/[0.03] border-[#c9a352]/30 transition-all duration-300 hover:scale-[1.02] hover:border-[#c9a352]/50">
+                  <Card className="p-5 bg-white/[0.03] border-emerald-vibrant/30 transition-all duration-300 hover:scale-[1.02] hover:border-emerald-vibrant/50">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center flex-shrink-0">
-                        <Users className="w-6 h-6 text-[#050505]" />
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center flex-shrink-0">
+                        <Users className="w-6 h-6 text-white" />
                       </div>
                       <div>
                         <p className="font-semibold text-white">+50 alunas formadas</p>
@@ -612,10 +611,10 @@ const CatalogoProdutos = () => {
                     </div>
                   </Card>
 
-                  <Card className="p-5 bg-white/[0.03] border-[#c9a352]/30 transition-all duration-300 hover:scale-[1.02] hover:border-[#c9a352]/50">
+                  <Card className="p-5 bg-white/[0.03] border-emerald-vibrant/30 transition-all duration-300 hover:scale-[1.02] hover:border-emerald-vibrant/50">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center flex-shrink-0">
-                        <Heart className="w-6 h-6 text-[#050505]" />
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center flex-shrink-0">
+                        <Heart className="w-6 h-6 text-white" />
                       </div>
                       <div>
                         <p className="font-semibold text-white">Missão de ativar curadoras</p>
@@ -625,7 +624,7 @@ const CatalogoProdutos = () => {
                   </Card>
                 </div>
 
-                <p className="text-white/50 italic border-l-2 border-[#c9a352] pl-4">
+                <p className="text-white/50 italic border-l-2 border-emerald-vibrant pl-4">
                   "Minha missão é provar que você não precisa nascer com o dom. 
                   Você só precisa acordar para ele."
                 </p>
@@ -643,11 +642,11 @@ const CatalogoProdutos = () => {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center mx-auto mb-4">
-                <HelpCircle className="w-8 h-8 text-[#050505]" />
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center mx-auto mb-4">
+                <HelpCircle className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif mb-4">
-                <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                   Perguntas Frequentes
                 </span>
               </h2>
@@ -666,10 +665,10 @@ const CatalogoProdutos = () => {
                   <AccordionItem 
                     key={index} 
                     value={`item-${index}`}
-                    className="bg-white/[0.03] border border-[#c9a352]/20 rounded-xl px-6 data-[state=open]:border-[#c9a352]/50 transition-colors"
+                    className="bg-white/[0.03] border border-emerald-vibrant/20 rounded-xl px-6 data-[state=open]:border-emerald-vibrant/50 transition-colors"
                   >
                     <AccordionTrigger className="text-left py-5 hover:no-underline group">
-                      <span className="text-white font-medium pr-4 group-hover:text-[#c9a352] transition-colors">
+                      <span className="text-white font-medium pr-4 group-hover:text-emerald-vibrant transition-colors">
                         {item.question}
                       </span>
                     </AccordionTrigger>
@@ -691,7 +690,7 @@ const CatalogoProdutos = () => {
               <Button 
                 onClick={scrollToForm}
                 variant="outline"
-                className="border-[#c9a352]/50 text-[#c9a352] hover:bg-[#c9a352]/10"
+                className="border-emerald-vibrant/50 text-emerald-vibrant hover:bg-emerald-vibrant/10"
               >
                 Entre no grupo e fale conosco
                 <MessageCircle className="w-4 h-4 ml-2" />
@@ -702,7 +701,7 @@ const CatalogoProdutos = () => {
 
         {/* Form Section */}
         <section id="formulario" className="py-20 px-4 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#c9a352]/10 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-emerald-vibrant/10 via-transparent to-transparent" />
           
           <div className="container mx-auto max-w-xl relative z-10">
             <motion.div
@@ -710,14 +709,14 @@ const CatalogoProdutos = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8 sm:p-10 bg-white/[0.03] backdrop-blur-sm border-[#c9a352]/30">
+              <Card className="p-8 sm:p-10 bg-white/[0.03] backdrop-blur-sm border-emerald-vibrant/30">
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#c9a352] to-[#e8d4a0] flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="w-8 h-8 text-[#050505]" />
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-vibrant to-emerald-base flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="w-8 h-8 text-white" />
                   </div>
                   
                   <h2 className="text-2xl sm:text-3xl font-serif mb-2">
-                    <span className="bg-gradient-to-r from-[#e8d4a0] to-[#c9a352] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-emerald-soft to-emerald-base bg-clip-text text-transparent">
                       Oráculo Diário
                     </span>
                   </h2>
@@ -734,13 +733,13 @@ const CatalogoProdutos = () => {
                       placeholder="Seu nome"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="h-14 bg-white/5 border-[#c9a352]/30 text-white placeholder:text-white/40 focus:border-[#c9a352]"
+                      className="h-14 bg-white/5 border-emerald-vibrant/30 text-white placeholder:text-white/40 focus:border-emerald-vibrant"
                     />
                   </div>
 
                   <div className="flex items-stretch gap-2 min-h-[56px]">
                     <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                      <SelectTrigger className="w-[100px] h-14 bg-white/5 border-[#c9a352]/30 text-white">
+                      <SelectTrigger className="w-[100px] h-14 bg-white/5 border-emerald-vibrant/30 text-white">
                         <SelectValue>
                           {selectedCountryData && (
                             <span className="flex items-center gap-1">
@@ -750,12 +749,12 @@ const CatalogoProdutos = () => {
                           )}
                         </SelectValue>
                       </SelectTrigger>
-                      <SelectContent className="bg-[#0a0a0a] border-[#c9a352]/30 max-h-[300px]">
+                      <SelectContent className="bg-emerald-deep border-emerald-vibrant/30 max-h-[300px]">
                         {countries.map((country) => (
                           <SelectItem 
                             key={`${country.ddi}-${country.name}`} 
                             value={country.ddi}
-                            className="text-white hover:bg-[#c9a352]/20"
+                            className="text-white hover:bg-emerald-vibrant/20"
                           >
                             <span className="flex items-center gap-2">
                               <span>{country.flag}</span>
@@ -772,7 +771,7 @@ const CatalogoProdutos = () => {
                       placeholder={phoneConfig.placeholder}
                       value={phone}
                       onChange={(e) => handlePhoneChange(e.target.value)}
-                      className={`flex-1 h-14 min-w-0 bg-white/5 border-[#c9a352]/30 text-white placeholder:text-white/40 focus:border-[#c9a352] ${phoneError ? 'border-red-500' : ''}`}
+                      className={`flex-1 h-14 min-w-0 bg-white/5 border-emerald-vibrant/30 text-white placeholder:text-white/40 focus:border-emerald-vibrant ${phoneError ? 'border-red-500' : ''}`}
                     />
                   </div>
                   
@@ -782,15 +781,15 @@ const CatalogoProdutos = () => {
 
                   <div className="space-y-2 text-sm text-white/50">
                     <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-[#c9a352]" />
+                      <Check className="w-4 h-4 text-emerald-vibrant" />
                       <span>Mensagens diárias de sabedoria oracular</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-[#c9a352]" />
+                      <Check className="w-4 h-4 text-emerald-vibrant" />
                       <span>Conteúdos exclusivos e meditações guiadas</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-[#c9a352]" />
+                      <Check className="w-4 h-4 text-emerald-vibrant" />
                       <span>Comunidade de apoio e acolhimento</span>
                     </div>
                   </div>
@@ -798,7 +797,7 @@ const CatalogoProdutos = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-14 bg-gradient-to-r from-[#c9a352] to-[#e8d4a0] text-[#050505] font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="w-full h-14 bg-gradient-to-r from-gold-mystic to-gold-bright text-emerald-deep font-bold text-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
                     {isSubmitting ? "Entrando..." : "QUERO FAZER PARTE"}
                   </Button>
@@ -809,10 +808,10 @@ const CatalogoProdutos = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-4 border-t border-[#c9a352]/20">
+        <footer className="py-8 px-4 border-t border-emerald-vibrant/20">
           <div className="container mx-auto max-w-6xl text-center">
             <p className="text-sm text-white/40">
-              © 2025 Paula Oráculos - Todos os direitos reservados
+              © {new Date().getFullYear()} Paulla Oráculos - Todos os direitos reservados
             </p>
           </div>
         </footer>

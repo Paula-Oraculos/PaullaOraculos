@@ -56,13 +56,25 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         cosmic: {
-          dark: '#0f0c29',
-          mid: '#302b63',
-          light: '#24243e',
+          dark: '#0A1F15',
+          mid: '#1F8F5A',
+          light: '#0A1F15',
+        },
+        emerald: {
+          deep: '#0A1F15',
+          base: '#1F8F5A',
+          vibrant: '#2FAE66',
+          soft: '#7EB47C',
         },
         gold: {
           mystic: '#D4AF37',
           bright: '#FFD700',
+          accent: '#A18F5A',
+          light: '#E8D4A0',
+        },
+        ivory: {
+          DEFAULT: '#F5F0E8',
+          muted: '#C5C5C5',
         },
         "color-1": "hsl(var(--color-1))",
         "color-2": "hsl(var(--color-2))",
@@ -77,28 +89,26 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         "pulse-glow": {
-          "0%, 100%": {
-            boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)",
-          },
-          "50%": {
-            boxShadow: "0 0 40px rgba(212, 175, 55, 0.6)",
-          },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)" },
+          "50%": { boxShadow: "0 0 40px rgba(212, 175, 55, 0.6)" },
+        },
+        "aura-drift-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(80px, 40px) scale(1.1)" },
+          "66%": { transform: "translate(-40px, 80px) scale(0.95)" },
+        },
+        "aura-drift-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(-60px, -30px) scale(1.05)" },
+          "66%": { transform: "translate(50px, -60px) scale(0.9)" },
         },
         rainbow: {
           "0%": { "background-position": "0%" },
@@ -109,6 +119,8 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "aura-drift-1": "aura-drift-1 30s ease-in-out infinite",
+        "aura-drift-2": "aura-drift-2 25s ease-in-out infinite reverse",
         rainbow: "rainbow var(--speed, 2s) infinite linear",
       },
     },

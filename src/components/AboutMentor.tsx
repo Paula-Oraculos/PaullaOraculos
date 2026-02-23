@@ -4,7 +4,7 @@ import { Sparkles, Heart, Users } from "lucide-react";
 import paulaPortrait from "@/assets/paula-portrait.webp";
 export const AboutMentor = () => {
   return <section className="py-20 px-4 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-purple-900/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-base/10 via-transparent to-emerald-base/10" />
       
       <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div initial={{
@@ -37,7 +37,7 @@ export const AboutMentor = () => {
           delay: 0.2
         }} className="space-y-4 sm:space-y-6">
             <h3 className="text-2xl sm:text-3xl font-serif gradient-text">
-              Paula Oráculos
+              Paulla Oráculos
             </h3>
             
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
@@ -105,7 +105,7 @@ export const AboutMentor = () => {
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden glassmorphism border border-gold-mystic/30">
               <img src={paulaPortrait} alt="Paula Oráculos - Mentora e Criadora do Método Oraculista Desperta" width="800" height="1067" className="w-full h-full object-cover object-[center_35%]" />
             </div>
-            <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-purple-500/20 rounded-2xl blur-2xl -z-10" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-gold-mystic/20 to-emerald-base/20 rounded-2xl blur-2xl -z-10" />
           </motion.div>
         </div>
       </div>
