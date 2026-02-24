@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import FormWpp from "./pages/FormWpp";
 import EnergiaBlindada from "./pages/EnergiaBlindada";
 import EnergiaBlindadaObrigado from "./pages/EnergiaBlindadaObrigado";
 import CatalogoProdutos from "./pages/CatalogoProdutos";
@@ -28,9 +27,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/produtos" element={<CatalogoProdutos />} />
-          <Route path="/form-wpp" element={<FormWpp />} />
-          <Route path="/wp-energiablindada" element={<EnergiaBlindada />} />
-          <Route path="/wp-energiablindada/obrigado" element={<EnergiaBlindadaObrigado />} />
+          <Route path="/wp-gratuito" element={<EnergiaBlindada />} />
+          <Route path="/wp-gratuito/obrigado" element={<EnergiaBlindadaObrigado />} />
+          {/* Redirects from old routes */}
+          <Route path="/wp-energiablindada" element={<Navigate to="/wp-gratuito" replace />} />
+          <Route path="/wp-energiablindada/obrigado" element={<Navigate to="/wp-gratuito/obrigado" replace />} />
           
           {/* Dashboard Routes */}
           <Route path="/dash" element={<DashLayout />}>
