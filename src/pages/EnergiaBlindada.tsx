@@ -206,17 +206,17 @@ const EnergiaBlindada = () => {
                 </div>
               </div>
 
-              {/* Title with gold gradient + subtle shimmer */}
+              {/* Title with gold gradient + shimmer animation */}
               <h1
                 className="font-['Playfair_Display',serif] text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] font-bold leading-[1.2] mb-5"
                 style={{
-                  background: "linear-gradient(90deg, #A18F5A, #D4AF37, #E8D4A0, #D4AF37, #A18F5A)",
-                  backgroundSize: "300% 100%",
+                  background: "linear-gradient(135deg, #D4AF37 0%, #E8D4A0 25%, #D4AF37 50%, #A18F5A 75%, #D4AF37 100%)",
+                  backgroundSize: "200% auto",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   letterSpacing: "-0.5px",
-                  animation: "title-shimmer 8s ease-in-out infinite"
+                  animation: "title-shimmer 6s ease-in-out infinite"
                 }}>
                 Grupo Gratuito Paulla Oráculos
               </h1>
@@ -412,8 +412,8 @@ const EnergiaBlindada = () => {
                       disabled={isSubmitting}
                       className="w-full py-[18px] rounded-xl text-base font-bold uppercase tracking-[1.5px] text-[#0A1F15] mt-2 relative overflow-hidden transition-all duration-400 hover:-translate-y-[3px] disabled:opacity-70"
                       style={{
-                        background: "linear-gradient(135deg, #8B7331 0%, #C9A24D 30%, #D4AF37 50%, #C9A24D 70%, #8B7331 100%)",
-                        boxShadow: "0 12px 30px rgba(139, 115, 49, 0.4), inset 0 1px 0 rgba(232, 212, 160, 0.4)"
+                        background: "linear-gradient(135deg, #D4AF37 0%, #E8D4A0 40%, #D4AF37 70%, #A18F5A 100%)",
+                        boxShadow: "0 15px 40px rgba(212, 175, 55, 0.35), 0 0 20px rgba(212, 175, 55, 0.15)"
                       }}>
                       <span className="relative z-10">
                         {isSubmitting ? "Enviando..." : "Quero Fazer Parte"}
