@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { countries } from "@/lib/countries";
@@ -128,12 +128,27 @@ const EnergiaBlindada = () => {
     navigate("/wp-gratuito/obrigado");
   };
 
-  const particles = Array.from({ length: 15 }, (_, i) => ({
+  // Enhanced particles: 25 mixed green + gold
+  const particles = useMemo(() => Array.from({ length: 25 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    delay: Math.random() * 8,
-    duration: Math.random() * 4 + 6
-  }));
+    delay: Math.random() * 10,
+    duration: Math.random() * 5 + 6,
+    size: Math.random() * 2 + 2,
+    color: i % 3 === 0 ? '#D4AF37' : '#2FAE66',
+    opacity: Math.random() * 0.4 + 0.3,
+  })), []);
+
+  // Constellation stars: stable positions
+  const constellationStars = useMemo(() => Array.from({ length: 35 }, (_, i) => ({
+    id: i,
+    left: `${(i * 2.7 + 1.5) % 100}%`,
+    top: `${(i * 3.1 + 2.3) % 100}%`,
+    size: Math.random() > 0.5 ? 2 : 1,
+    color: i % 4 === 0 ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.3)',
+    duration: 3 + (i % 4) * 1,
+    delay: (i % 7) * 0.6,
+  })), []);
 
   return (
     <>
@@ -159,33 +174,127 @@ const EnergiaBlindada = () => {
             initial-value: 0deg;
             inherits: false;
           }
+          @keyframes aura-float-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(80px, 60px) scale(1.1); }
+            50% { transform: translate(-40px, 100px) scale(0.95); }
+            75% { transform: translate(60px, -30px) scale(1.05); }
+          }
+          @keyframes aura-float-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-70px, -50px) scale(1.08); }
+            50% { transform: translate(50px, -80px) scale(0.92); }
+            75% { transform: translate(-30px, 70px) scale(1.03); }
+          }
+          @keyframes aura-float-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(1.06); }
+            66% { transform: translate(-50px, 50px) scale(0.97); }
+          }
+          @keyframes star-pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.6; }
+          }
+          @keyframes light-ray {
+            0% { transform: translateX(-100%) rotate(35deg); }
+            100% { transform: translateX(200%) rotate(35deg); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .aura-blob, .star-dot, .light-beam, .bg-particle { animation: none !important; }
+          }
         `}</style>
       </Helmet>
 
       <div className="min-h-screen bg-[#0A1F15] text-white overflow-x-hidden font-['Inter',sans-serif]">
-        {/* Gradient Background */}
-        <div
-          className="fixed inset-0 z-0 pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 50%, rgba(31, 143, 90, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(31, 143, 90, 0.06) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(31, 143, 90, 0.05) 0%, transparent 40%)
-            `
-          }} />
-
-        {/* Floating Particles */}
+        {/* Layer 1 — Auric Nebulas */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          {particles.map((particle) =>
+          <div
+            className="aura-blob absolute rounded-full"
+            style={{
+              width: 700, height: 700, top: '10%', left: '15%',
+              background: 'radial-gradient(circle, rgba(31,143,90,0.12) 0%, transparent 70%)',
+              filter: 'blur(150px)',
+              animation: 'aura-float-1 25s ease-in-out infinite',
+            }}
+          />
+          <div
+            className="aura-blob absolute rounded-full"
+            style={{
+              width: 500, height: 500, top: '50%', right: '10%',
+              background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)',
+              filter: 'blur(120px)',
+              animation: 'aura-float-2 35s ease-in-out infinite',
+            }}
+          />
+          <div
+            className="aura-blob absolute rounded-full"
+            style={{
+              width: 600, height: 600, bottom: '5%', left: '40%',
+              background: 'radial-gradient(circle, rgba(126,180,124,0.10) 0%, transparent 70%)',
+              filter: 'blur(140px)',
+              animation: 'aura-float-3 30s ease-in-out infinite',
+            }}
+          />
+        </div>
+
+        {/* Layer 2 — Constellation Stars */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          {constellationStars.map((star) => (
+            <div
+              key={star.id}
+              className="star-dot absolute rounded-full"
+              style={{
+                left: star.left,
+                top: star.top,
+                width: star.size,
+                height: star.size,
+                backgroundColor: star.color,
+                animation: `star-pulse ${star.duration}s ease-in-out infinite`,
+                animationDelay: `${star.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Layer 3 — Golden Light Rays */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <div
+            className="light-beam absolute"
+            style={{
+              width: '200%', height: 80, top: '30%', left: '-50%',
+              background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.04), rgba(212,175,55,0.07), rgba(212,175,55,0.04), transparent)',
+              transform: 'rotate(35deg)',
+              animation: 'light-ray 50s linear infinite',
+            }}
+          />
+          <div
+            className="light-beam absolute"
+            style={{
+              width: '200%', height: 50, top: '60%', left: '-50%',
+              background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.03), rgba(212,175,55,0.05), rgba(212,175,55,0.03), transparent)',
+              transform: 'rotate(35deg)',
+              animation: 'light-ray 60s linear infinite',
+              animationDelay: '15s',
+            }}
+          />
+        </div>
+
+        {/* Layer 4 — Enhanced Floating Particles */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          {particles.map((particle) => (
             <div
               key={particle.id}
-              className="absolute w-[3px] h-[3px] bg-[#2FAE66] rounded-full opacity-0"
+              className="bg-particle absolute rounded-full opacity-0"
               style={{
                 left: `${particle.left}%`,
+                width: particle.size,
+                height: particle.size,
+                backgroundColor: particle.color,
                 animation: `float-gold-particle ${particle.duration}s linear infinite`,
-                animationDelay: `${particle.delay}s`
-              }} />
-          )}
+                animationDelay: `${particle.delay}s`,
+              }}
+            />
+          ))}
         </div>
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
