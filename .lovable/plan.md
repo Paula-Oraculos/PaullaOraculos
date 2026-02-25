@@ -1,70 +1,74 @@
 
 
-## Foto da Paulla + Correcao das Bandeiras
+## Background Animado Espiritual Premium para `/wp-gratuito`
 
-### 1. Adicionar Foto Oval da Paulla com Borda Dourada Animada
+### Problema Atual
+O fundo da pagina e um verde chapado (`#0A1F15`) com apenas radial-gradients estaticos de baixa opacidade e 15 particulas pequenas. O resultado e visualmente monotono e sem vida.
 
-**Posicionamento escolhido:** Substituir o icone de carta de tarot (linhas 195-207) pela foto oval da Paulla. Este e o melhor local porque:
-- Fica acima do titulo, dando autoridade e presenca imediata
-- No mobile, aparece primeiro que o formulario, criando conexao antes do CTA
-- No desktop, alinha perfeitamente com o lado esquerdo do hero
-- Evita poluir a area do titulo ou do badge
+### Solucao: Background Animado com Camadas Espirituais
 
-**Especificacoes da foto:**
-- Formato oval (120x120px desktop, 100x100px mobile)
-- Borda dourada animada usando a mesma tecnica `conic-gradient` + `border-rotate` ja existente no card do formulario, porem mais sutil (3px de borda, rotacao mais lenta ~12s)
-- Foto importada de `src/assets/paulla-portrait.webp` (ja existe no projeto) ou a foto enviada pelo usuario
-- `object-fit: cover` para enquadrar o rosto
-- Sombra dourada sutil ao redor (`box-shadow` com `rgba(212,175,55,0.3)`)
-
-**Arquivo:** Copiar a foto enviada para `src/assets/paulla-avatar.jpeg` e importar no componente.
-
-### 2. Corrigir Bandeiras em Todos os Dispositivos
-
-**Problema:** No Windows, flag emojis como a bandeira do Brasil nao renderizam corretamente — aparecem como letras (ex: "BR" duas vezes: uma do `country.code` + outra do `country.flag` que vira texto).
-
-**Solucao:** Usar imagens SVG de bandeiras do CDN `flagcdn.com` em vez de emoji. Cada pais ja tem um `code` (ISO 3166-1 alpha-2) no arquivo `countries.ts`, entao a URL da bandeira sera:
-
-```
-https://flagcdn.com/w40/{code_lowercase}.png
-```
-
-Exemplo: Brasil = `https://flagcdn.com/w40/br.png`
-
-**Mudancas:**
-- No botao do seletor: substituir `{selectedCountry.flag}` por uma tag `<img>` com a URL do flagcdn
-- Remover o `{selectedCountry.code}` em texto (ja que a bandeira agora e visual)
-- No dropdown de paises: mesma substituicao de emoji por `<img>`
-- Tamanho da imagem: 20x15px com `rounded-sm` para elegancia
-
-### 3. Remover Icone de Carta de Tarot
-
-O bloco de linhas 195-207 (div com `✦` e bordas decorativas) sera substituido inteiramente pela foto oval.
+Criar um background com multiplas camadas CSS animadas que evoquem espiritualidade e luxo, sem distrair do formulario.
 
 ---
 
-### Technical Details
+### Camadas do Background (da mais profunda para a mais visivel)
 
-**Arquivos modificados:**
-1. `src/pages/EnergiaBlindada.tsx` — substituir icone tarot por foto oval, trocar emoji flags por `<img>` do flagcdn
+**Camada 1 — Nebulosas Auricas (CSS puro)**
+3 blobs grandes e desfocados que se movem lentamente, simulando campos de energia:
+- Blob esmeralda (700px, opacidade 0.12, ciclo 25s)
+- Blob dourado (500px, opacidade 0.08, ciclo 35s)
+- Blob esmeralda claro (600px, opacidade 0.10, ciclo 30s)
+- Movimento suave com `translateX/Y` e `scale` via keyframes
 
-**Novo arquivo:**
-1. `src/assets/paulla-avatar.jpeg` — copia da foto enviada pelo usuario
+**Camada 2 — Constelacoes Sutis (Pontos Estaticos com Pulso)**
+30-40 pontos minusculos (1-2px) em posicoes fixas espalhados pela tela, com opacidade baixa e um pulso lento individual (fade in/out em 3-6s), simulando estrelas/constelacoes espirituais. Cores alternando entre branco (`rgba(255,255,255,0.3)`) e dourado (`rgba(212,175,55,0.2)`).
 
-**Estrutura HTML da foto oval:**
+**Camada 3 — Raios de Luz Dourada (Shimmer)**
+2 feixes diagonais de luz dourada muito sutis que atravessam a tela lentamente (40-60s), simulando raios de sol entrando por uma janela de templo. Implementados com `linear-gradient` rotacionado e animacao de `translateX`.
+
+**Camada 4 — Particulas Ascendentes (ja existentes, melhoradas)**
+Aumentar de 15 para 25 particulas, adicionar variacao de tamanho (2-4px) e misturar cores entre verde (`#2FAE66`) e dourado (`#D4AF37`), com opacidade variada.
+
+---
+
+### Detalhes Tecnicos
+
+**Arquivo modificado:** `src/pages/EnergiaBlindada.tsx`
+
+**Novos keyframes** (adicionados ao bloco `<style>` do Helmet):
+- `@keyframes aura-float-1` — blob 1 movimento orbital lento (25s)
+- `@keyframes aura-float-2` — blob 2 movimento diferente (35s)
+- `@keyframes aura-float-3` — blob 3 movimento terciario (30s)
+- `@keyframes light-ray` — shimmer diagonal (50s)
+- `@keyframes star-pulse` — pulso de estrela individual (3-6s)
+
+**Estrutura HTML do background:**
 ```text
-<div class="p-[3px] rounded-full" style="conic-gradient rotating border">
-  <img src={paullaAvatar} class="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full object-cover" />
+<!-- Nebulosas Auricas -->
+<div class="fixed inset-0 z-0">
+  <div class="blob emerald 700px blur-[150px] opacity-12 animate aura-float-1" />
+  <div class="blob gold 500px blur-[120px] opacity-8 animate aura-float-2" />
+  <div class="blob soft-green 600px blur-[140px] opacity-10 animate aura-float-3" />
+</div>
+
+<!-- Constelacoes -->
+<div class="fixed inset-0 z-0">
+  {stars.map(star => <div class="1-2px dot animate star-pulse" />)}
+</div>
+
+<!-- Raios de Luz -->
+<div class="fixed inset-0 z-0 overflow-hidden">
+  <div class="light-ray diagonal gold animate" />
+  <div class="light-ray diagonal gold animate delayed" />
+</div>
+
+<!-- Particulas (melhoradas) -->
+<div class="fixed inset-0 z-0">
+  {particles.map(...)} <!-- 25 particulas verde+dourado -->
 </div>
 ```
 
-**Estrutura HTML da bandeira (seletor):**
-```text
-<img
-  src={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png`}
-  alt={country.name}
-  class="w-5 h-[15px] rounded-sm object-cover"
-/>
-```
+**Performance:** Tudo em CSS puro (transform + opacity), respeitando `prefers-reduced-motion`. As estrelas usam `useMemo` para posicoes estaveis.
 
-Animacao da borda da foto: reutiliza `@keyframes border-rotate` e `@property --border-angle` ja definidos no `<style>` do Helmet, com duracao mais lenta (12s) para sutileza.
+**Resultado esperado:** Sensacao de estar dentro de um templo mistico iluminado por energia esmeralda e dourada, com profundidade e movimento sutil que da vida a pagina sem competir com o formulario.
+
