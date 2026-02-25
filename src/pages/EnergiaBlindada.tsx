@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { countries } from "@/lib/countries";
 import { applyPhoneMask, getPhoneConfig, validatePhone } from "@/lib/phoneUtils";
 import { ChevronDown } from "lucide-react";
+import paullaAvatar from "@/assets/paulla-avatar.jpeg";
 
 const EnergiaBlindada = () => {
   const [name, setName] = useState("");
@@ -192,17 +193,20 @@ const EnergiaBlindada = () => {
             {/* Hero Content */}
             <div className="animate-[fadeInLeft_1s_ease-out]">
               {/* Animated Logo */}
-              <div className="w-10 h-14 mb-5 relative animate-[glow-gold_3s_ease-in-out_infinite]">
+              {/* Paulla Avatar with animated gold border */}
+              <div className="mb-5">
                 <div
-                  className="w-full h-full border-2 border-[#A18F5A] rounded-sm bg-[rgba(161,143,90,0.05)] relative"
-                  style={{ boxShadow: "0 0 20px rgba(161, 143, 90, 0.3)" }}>
-                  <div className="absolute inset-1.5 border border-[#A18F5A]/50 rounded-sm flex items-center justify-center">
-                    <span className="text-[#A18F5A] text-xl">✦</span>
-                  </div>
-                  <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-[#A18F5A]/70" />
-                  <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-[#A18F5A]/70" />
-                  <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-[#A18F5A]/70" />
-                  <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-[#A18F5A]/70" />
+                  className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full p-[3px]"
+                  style={{
+                    background: `conic-gradient(from var(--border-angle, 0deg), transparent 30%, #D4AF37 45%, #E8D4A0 50%, #D4AF37 55%, transparent 70%)`,
+                    animation: "border-rotate 12s linear infinite",
+                    boxShadow: "0 0 25px rgba(212, 175, 55, 0.3)"
+                  }}>
+                  <img
+                    src={paullaAvatar}
+                    alt="Paulla Oráculos"
+                    className="w-full h-full rounded-full object-cover"
+                  />
                 </div>
               </div>
 
@@ -335,8 +339,7 @@ const EnergiaBlindada = () => {
                               background: "rgba(255,255,255,0.04)",
                               border: "2px solid rgba(255,255,255,0.15)"
                             }}>
-                            <span className="text-sm font-semibold text-white/80">{selectedCountry.code}</span>
-                            <span className="text-xl">{selectedCountry.flag}</span>
+                            <img src={`https://flagcdn.com/w40/${selectedCountry.code.toLowerCase()}.png`} alt={selectedCountry.name} className="w-5 h-[15px] rounded-sm object-cover" />
                             <span className="text-sm text-white/70">+{selectedCountry.ddi}</span>
                             <ChevronDown className={`w-4 h-4 text-white/50 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
                           </button>
@@ -361,8 +364,7 @@ const EnergiaBlindada = () => {
                                   }}
                                   className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 hover:bg-[rgba(47,174,102,0.15)] ${
                                     selectedCountry.name === country.name ? 'bg-[rgba(47,174,102,0.2)]' : ''}`}>
-                                  <span className="text-sm font-bold text-white/70 w-6">{country.code}</span>
-                                  <span className="text-xl">{country.flag}</span>
+                                  <img src={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png`} alt={country.name} className="w-5 h-[15px] rounded-sm object-cover" />
                                   <span className="text-white text-sm flex-1">{country.name}</span>
                                   <span className="text-white/50 text-sm">+{country.ddi}</span>
                                 </button>
