@@ -18,6 +18,8 @@ interface ApiLead {
   created_at: string;
   updated_at: string;
   tipo_lead: string;
+  courses: string[];
+  kanban_stage: string | null;
 }
 
 interface LeadStats {
@@ -32,9 +34,10 @@ const mapApiLeadToKanban = (lead: ApiLead, stageMap: Record<string, FunnelStage>
   id: String(lead.id),
   name: lead.nome || 'Sem nome',
   phone: lead.whatsapp || '',
-  stage: stageMap[String(lead.id)] || (lead.tipo_lead === 'reengajamento' ? 'engajados' : 'novos'),
+  // Prioridade: localStorage (movimentos manuais) > banco (movimentos automáticos via Greenn) > padrão
+  stage: stageMap[String(lead.id)] || (lead.kanban_stage as FunnelStage) || (lead.tipo_lead === 'reengajamento' ? 'engajados' : 'novos'),
   tags: lead.tag ? [lead.tag] : [],
-  courses: [],
+  courses: Array.isArray(lead.courses) ? lead.courses : [],
   notas: '',
   nivelConsciencia: 'frio',
   createdAt: lead.created_at,
@@ -138,14 +141,31 @@ export const useApiLeads = () => {
     if (lead) updateLead(leadId, { tags: lead.tags.filter(t => t !== tagName) });
   }, [leads, updateLead]);
 
-  const addCourse = useCallback((leadId: string, courseName: string) => {
+  const addCourse = useCallback(async (leadId: string, courseName: string) => {
     const lead = leads.find(l => l.id === leadId);
-    if (lead && !lead.courses.includes(courseName)) updateLead(leadId, { courses: [...lead.courses, courseName] });
+    if (!lead || lead.courses.includes(courseName)) return;
+    const newCourses = [...lead.courses, courseName];
+    updateLead(leadId, { courses: newCourses });
+    try {
+      await fetch(`${API_URL}/leads/${leadId}/courses`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'add', course: courseName }),
+      });
+    } catch {}
   }, [leads, updateLead]);
 
-  const removeCourse = useCallback((leadId: string, courseName: string) => {
+  const removeCourse = useCallback(async (leadId: string, courseName: string) => {
     const lead = leads.find(l => l.id === leadId);
-    if (lead) updateLead(leadId, { courses: lead.courses.filter(c => c !== courseName) });
+    if (!lead) return;
+    updateLead(leadId, { courses: lead.courses.filter(c => c !== courseName) });
+    try {
+      await fetch(`${API_URL}/leads/${leadId}/courses`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'remove', course: courseName }),
+      });
+    } catch {}
   }, [leads, updateLead]);
 
   const getLeadsByStage = useCallback((stage: FunnelStage) => {
