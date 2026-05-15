@@ -228,11 +228,11 @@ export const OraculoCRM = () => {
       {/* Lead Detail Modal */}
       <Dialog open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
         <DialogContent
-          className="max-w-lg w-full max-h-[85vh] overflow-y-auto p-0"
+          className="max-w-lg w-full max-h-[85vh] p-0 overflow-hidden"
           style={{ background: '#0f0f17', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}
         >
           {selectedLead && (
-            <div className="flex flex-col">
+            <div className="flex flex-col h-full max-h-[85vh]">
               {/* Modal Header */}
               <div className="p-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="flex items-center gap-4">
@@ -264,7 +264,7 @@ export const OraculoCRM = () => {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-5 space-y-5">
+              <div className="flex-1 overflow-y-auto p-5 space-y-5 modal-scroll">
 
                 {/* Campos editáveis */}
                 <div className="grid grid-cols-2 gap-3">
