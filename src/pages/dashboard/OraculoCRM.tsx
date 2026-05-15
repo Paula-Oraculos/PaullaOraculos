@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  DndContext, 
+import {
+  DndContext,
   DragOverlay,
   closestCorners,
   KeyboardSensor,
@@ -11,42 +11,43 @@ import {
   DragStartEvent,
   DragEndEvent,
 } from '@dnd-kit/core';
-import { 
-  SortableContext, 
+import {
+  SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Sparkles, Plus, Search, Filter, X, Phone, Calendar, ArrowLeft, Trash2 } from 'lucide-react';
+import {
+  Users, Search, X, Phone, Trash2, Plus,
+  RefreshCw, TrendingUp, UserCheck, Star, Globe,
+  CalendarDays, Tag, BookOpen, StickyNote, Clock,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { useKanbanLeads, FUNNEL_STAGES, type KanbanLead, type FunnelStage } from '@/hooks/useKanbanLeads';
+import { FUNNEL_STAGES, type KanbanLead, type FunnelStage } from '@/hooks/useKanbanLeads';
+import { useApiLeads } from '@/hooks/useApiLeads';
 import { useTags } from '@/hooks/useTags';
-import { useDashTheme } from '@/hooks/useDashTheme';
 import { KanbanLeadCard } from '@/components/dashboard/KanbanLeadCard';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+const STAT_CARDS = [
+  { key: 'total', label: 'Total de Leads', icon: Users, color: '#a78bfa', bg: 'rgba(167,139,250,0.1)' },
+  { key: 'hoje', label: 'Hoje', icon: TrendingUp, color: '#34d399', bg: 'rgba(52,211,153,0.1)' },
+  { key: 'novos', label: 'Novos', icon: Star, color: '#fbbf24', bg: 'rgba(251,191,36,0.1)' },
+  { key: 'brasil', label: 'Do Brasil', icon: Globe, color: '#60a5fa', bg: 'rgba(96,165,250,0.1)' },
+];
+
 export const OraculoCRM = () => {
-  const { 
-    leads, 
-    selectedLead, 
-    setSelectedLead, 
-    moveToStage, 
-    updateLead, 
-    addTag, 
-    removeTag,
-    addCourse,
-    removeCourse,
-    deleteLead,
-    getLeadsByStage 
-  } = useKanbanLeads();
+  const {
+    leads, stats, selectedLead, setSelectedLead, loading,
+    moveToStage, updateLead, deleteLead,
+    addTag, removeTag, addCourse, removeCourse, refetch,
+  } = useApiLeads();
   const { tags } = useTags();
-  const { colors } = useDashTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [newTag, setNewTag] = useState('');
   const [newCourse, setNewCourse] = useState('');
 
   const sensors = useSensors(
@@ -54,128 +55,132 @@ export const OraculoCRM = () => {
     useSensor(KeyboardSensor)
   );
 
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string);
-  };
+  const handleDragStart = (event: DragStartEvent) => setActiveId(event.active.id as string);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     setActiveId(null);
-
     if (!over) return;
-
-    const leadId = active.id as string;
-    const overId = over.id as string;
-
-    // Check if dropped on a column
-    const targetStage = FUNNEL_STAGES.find(s => s.id === overId);
-    if (targetStage) {
-      moveToStage(leadId, targetStage.id);
-    }
+    const targetStage = FUNNEL_STAGES.find(s => s.id === over.id as string);
+    if (targetStage) moveToStage(active.id as string, targetStage.id);
   };
 
-  const filteredLeads = leads.filter(lead => 
+  const filteredLeads = leads.filter(lead =>
     lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     lead.phone.includes(searchQuery)
   );
 
   const activeLead = activeId ? leads.find(l => l.id === activeId) : null;
 
-  const nivelColors = { 
-    frio: { bg: '#3B82F620', text: '#60A5FA' }, 
-    morno: { bg: '#F59E0B20', text: '#FBBF24' }, 
-    quente: { bg: '#EF444420', text: '#F87171' } 
-  };
-
-  const formatPhone = (phone: string) => phone.replace(/\D/g, '');
-
   return (
-    <div className="h-[calc(100vh-140px)] md:h-[calc(100vh-100px)] flex flex-col">
+    <div className="h-full flex flex-col gap-4" style={{ color: '#e2e8f0' }}>
+
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <Sparkles className="w-6 h-6" style={{ color: colors.accent }} />
-          <h1 className="text-2xl font-serif" style={{ color: colors.text }}>Oráculo CRM</h1>
-          <span 
-            className="text-xs px-2 py-1 rounded-full"
-            style={{ background: `${colors.accent}20`, color: colors.accent }}
-          >
-            {leads.length} leads
-          </span>
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.3)' }}>
+            <Users className="w-5 h-5" style={{ color: '#a78bfa' }} />
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold" style={{ color: '#f1f5f9' }}>Oráculo CRM</h1>
+            <p className="text-xs" style={{ color: '#64748b' }}>{leads.length} leads no funil</p>
+          </div>
         </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: colors.textSecondary }} />
-          <Input
-            placeholder="Buscar por nome ou telefone..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 w-full sm:w-64"
-            style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-          />
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#475569' }} />
+            <Input
+              placeholder="Buscar lead..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 h-9 w-56 text-sm border-0"
+              style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
+            />
+          </div>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={refetch}
+            className="h-9 w-9 p-0"
+            style={{ background: 'rgba(255,255,255,0.05)' }}
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} style={{ color: '#64748b' }} />
+          </Button>
         </div>
       </div>
 
-      {/* Kanban Board */}
+      {/* Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {STAT_CARDS.map(({ key, label, icon: Icon, color, bg }) => (
+          <div
+            key={key}
+            className="rounded-xl p-3 flex items-center gap-3"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+          >
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: bg }}>
+              <Icon className="w-4 h-4" style={{ color }} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold leading-none" style={{ color }}>{(stats as any)[key] ?? 0}</p>
+              <p className="text-xs mt-0.5" style={{ color: '#475569' }}>{label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Kanban */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex-1 overflow-x-auto">
-          <div className="flex gap-4 h-full min-w-max pb-4">
+        <div className="flex-1 overflow-x-auto pb-2">
+          <div className="flex gap-3 h-full min-w-max">
             {FUNNEL_STAGES.map((stage) => {
               const stageLeads = filteredLeads.filter(l => l.stage === stage.id);
               return (
-                <div 
+                <div
                   key={stage.id}
-                  className="w-72 flex-shrink-0 rounded-xl flex flex-col"
-                  style={{ background: colors.card, border: `1px solid ${colors.border}` }}
+                  className="w-64 flex-shrink-0 flex flex-col rounded-xl overflow-hidden"
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
                 >
                   {/* Column Header */}
-                  <div 
-                    className="p-3 border-b flex items-center justify-between"
-                    style={{ borderColor: colors.border }}
-                  >
+                  <div className="px-3 py-2.5 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <div className="flex items-center gap-2">
-                      <span>{stage.icon}</span>
-                      <span className="font-medium text-sm" style={{ color: colors.text }}>
-                        {stage.label}
-                      </span>
+                      <span className="text-base">{stage.icon}</span>
+                      <span className="text-sm font-medium" style={{ color: '#cbd5e1' }}>{stage.label}</span>
                     </div>
-                    <span 
-                      className="text-xs px-2 py-0.5 rounded-full font-medium"
-                      style={{ background: `${stage.color}20`, color: stage.color }}
+                    <span
+                      className="text-xs px-2 py-0.5 rounded-full font-semibold"
+                      style={{ background: `${stage.color}18`, color: stage.color }}
                     >
                       {stageLeads.length}
                     </span>
                   </div>
 
-                  {/* Column Content */}
-                  <SortableContext 
-                    items={stageLeads.map(l => l.id)} 
+                  {/* Cards */}
+                  <SortableContext
+                    items={stageLeads.map(l => l.id)}
                     strategy={verticalListSortingStrategy}
                     id={stage.id}
                   >
-                    <div 
-                      className="flex-1 p-2 overflow-y-auto space-y-2 min-h-[200px]"
-                      data-stage={stage.id}
-                    >
+                    <div className="flex-1 p-2 overflow-y-auto space-y-2 min-h-[200px]" data-stage={stage.id}>
                       <AnimatePresence mode="popLayout">
                         {stageLeads.map((lead) => (
-                          <KanbanLeadCard 
-                            key={lead.id} 
-                            lead={lead} 
+                          <KanbanLeadCard
+                            key={lead.id}
+                            lead={lead}
                             onClick={() => setSelectedLead(lead)}
                           />
                         ))}
                       </AnimatePresence>
                       {stageLeads.length === 0 && (
-                        <div 
-                          className="h-24 rounded-lg border-2 border-dashed flex items-center justify-center text-sm"
-                          style={{ borderColor: colors.border, color: colors.textSecondary }}
+                        <div
+                          className="h-20 rounded-lg border border-dashed flex items-center justify-center text-xs"
+                          style={{ borderColor: 'rgba(255,255,255,0.08)', color: '#334155' }}
                         >
-                          Arraste leads aqui
+                          Arraste aqui
                         </div>
                       )}
                     </div>
@@ -188,23 +193,24 @@ export const OraculoCRM = () => {
 
         <DragOverlay>
           {activeLead && (
-            <div 
-              className="rounded-lg p-3 shadow-2xl"
-              style={{ 
-                background: colors.cardHover,
-                border: `2px solid ${colors.accent}`,
-                transform: 'rotate(3deg)',
+            <div
+              className="rounded-xl p-3 shadow-2xl"
+              style={{
+                background: 'rgba(167,139,250,0.15)',
+                border: '1px solid rgba(167,139,250,0.4)',
+                transform: 'rotate(2deg)',
+                backdropFilter: 'blur(12px)',
               }}
             >
               <div className="flex items-center gap-3">
-                <img 
-                  src={activeLead.photo || `https://ui-avatars.com/api/?name=${activeLead.name}`}
+                <img
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(activeLead.name)}&background=7c3aed&color=fff&size=40`}
                   alt={activeLead.name}
-                  className="w-10 h-10 rounded-full"
+                  className="w-9 h-9 rounded-full"
                 />
                 <div>
-                  <p style={{ color: colors.text }}>{activeLead.name}</p>
-                  <p className="text-xs" style={{ color: colors.textSecondary }}>{activeLead.phone}</p>
+                  <p className="text-sm font-medium" style={{ color: '#f1f5f9' }}>{activeLead.name}</p>
+                  <p className="text-xs" style={{ color: '#94a3b8' }}>{activeLead.phone}</p>
                 </div>
               </div>
             </div>
@@ -214,112 +220,108 @@ export const OraculoCRM = () => {
 
       {/* Lead Detail Sheet */}
       <Sheet open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
-        <SheetContent 
-          className="w-full sm:max-w-lg overflow-y-auto"
-          style={{ background: colors.background, borderColor: colors.border }}
+        <SheetContent
+          className="w-full sm:max-w-md overflow-y-auto p-0"
+          style={{ background: '#0f0f17', borderColor: 'rgba(255,255,255,0.08)' }}
         >
           {selectedLead && (
-            <>
-              <SheetHeader className="pb-4">
+            <div className="flex flex-col h-full">
+              {/* Sheet Header */}
+              <div className="p-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="flex items-center gap-4">
-                  <img 
-                    src={selectedLead.photo || `https://ui-avatars.com/api/?name=${selectedLead.name}&background=${colors.accent.slice(1)}&color=fff`}
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(selectedLead.name)}&background=7c3aed&color=fff&size=64`}
                     alt={selectedLead.name}
-                    className="w-16 h-16 rounded-full object-cover"
-                    style={{ border: `3px solid ${colors.accent}` }}
+                    className="w-14 h-14 rounded-full"
+                    style={{ border: '2px solid rgba(167,139,250,0.4)' }}
                   />
-                  <div className="flex-1">
-                    <SheetTitle style={{ color: colors.text }}>{selectedLead.name}</SheetTitle>
-                    <a 
-                      href={`https://wa.me/${formatPhone(selectedLead.phone)}`}
+                  <div className="flex-1 min-w-0">
+                    <SheetTitle className="text-base font-semibold truncate" style={{ color: '#f1f5f9' }}>
+                      {selectedLead.name}
+                    </SheetTitle>
+                    <a
+                      href={`https://wa.me/${selectedLead.phone.replace(/\D/g, '')}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sm hover:underline"
-                      style={{ color: '#25D366' }}
+                      className="flex items-center gap-1.5 text-xs mt-1 hover:underline w-fit"
+                      style={{ color: '#4ade80' }}
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-3 h-3" />
                       {selectedLead.phone}
                     </a>
+                    <p className="text-xs mt-1" style={{ color: '#475569' }}>
+                      <Clock className="w-3 h-3 inline mr-1" />
+                      {format(new Date(selectedLead.createdAt), "dd MMM yyyy", { locale: ptBR })}
+                    </p>
                   </div>
                 </div>
-              </SheetHeader>
+              </div>
 
-              <div className="space-y-6">
-                {/* Editable Fields */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>Nome</label>
-                    <Input 
-                      value={selectedLead.name}
-                      onChange={(e) => updateLead(selectedLead.id, { name: e.target.value })}
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>WhatsApp</label>
-                    <Input 
-                      value={selectedLead.phone}
-                      onChange={(e) => updateLead(selectedLead.id, { phone: e.target.value })}
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>Signo / Elemento</label>
-                    <Input 
-                      value={selectedLead.signoElemento || ''}
-                      onChange={(e) => updateLead(selectedLead.id, { signoElemento: e.target.value })}
-                      placeholder="Ex: Áries / Fogo"
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>Nível</label>
-                    <Select 
-                      value={selectedLead.nivelConsciencia} 
-                      onValueChange={(v: 'frio' | 'morno' | 'quente') => updateLead(selectedLead.id, { nivelConsciencia: v })}
-                    >
-                      <SelectTrigger style={{ background: colors.card, borderColor: colors.border, color: colors.text }}>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="frio">❄️ Frio</SelectItem>
-                        <SelectItem value="morno">🌤️ Morno</SelectItem>
-                        <SelectItem value="quente">🔥 Quente</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>TikTok</label>
-                    <Input 
-                      value={selectedLead.tiktokUsername || ''}
-                      onChange={(e) => updateLead(selectedLead.id, { tiktokUsername: e.target.value })}
-                      placeholder="@usuario"
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>Data Nascimento</label>
-                    <Input 
-                      type="date"
-                      value={selectedLead.dataNascimento || ''}
-                      onChange={(e) => updateLead(selectedLead.id, { dataNascimento: e.target.value })}
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
-                    />
-                  </div>
+              <div className="flex-1 overflow-y-auto p-5 space-y-5">
+
+                {/* Campos editáveis */}
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: 'Nome', field: 'name', type: 'text' },
+                    { label: 'WhatsApp', field: 'phone', type: 'text' },
+                    { label: 'Signo / Elemento', field: 'signoElemento', placeholder: 'Áries / Fogo', type: 'text' },
+                    { label: 'TikTok', field: 'tiktokUsername', placeholder: '@usuario', type: 'text' },
+                  ].map(({ label, field, placeholder, type }) => (
+                    <div key={field}>
+                      <label className="text-xs mb-1 block" style={{ color: '#475569' }}>{label}</label>
+                      <Input
+                        type={type}
+                        value={(selectedLead as any)[field] || ''}
+                        onChange={(e) => updateLead(selectedLead.id, { [field]: e.target.value })}
+                        placeholder={placeholder}
+                        className="h-8 text-sm border-0"
+                        style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
+                      />
+                    </div>
+                  ))}
                 </div>
 
-                {/* Stage */}
+                {/* Nível */}
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: colors.textSecondary }}>Estágio do Funil</label>
-                  <div className="flex flex-wrap gap-2">
+                  <label className="text-xs mb-2 block" style={{ color: '#475569' }}>Temperatura do Lead</label>
+                  <div className="flex gap-2">
+                    {[
+                      { value: 'frio', label: '❄️ Frio', color: '#60a5fa' },
+                      { value: 'morno', label: '🌤️ Morno', color: '#fbbf24' },
+                      { value: 'quente', label: '🔥 Quente', color: '#f87171' },
+                    ].map(({ value, label, color }) => (
+                      <button
+                        key={value}
+                        onClick={() => updateLead(selectedLead.id, { nivelConsciencia: value as any })}
+                        className="flex-1 py-1.5 rounded-lg text-xs font-medium transition-all"
+                        style={{
+                          background: selectedLead.nivelConsciencia === value ? `${color}25` : 'rgba(255,255,255,0.04)',
+                          border: `1px solid ${selectedLead.nivelConsciencia === value ? color : 'rgba(255,255,255,0.08)'}`,
+                          color: selectedLead.nivelConsciencia === value ? color : '#475569',
+                        }}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Estágio */}
+                <div>
+                  <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
+                    <Tag className="w-3 h-3 inline mr-1" />
+                    Estágio do Funil
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
                     {FUNNEL_STAGES.map(stage => (
                       <button
                         key={stage.id}
                         onClick={() => moveToStage(selectedLead.id, stage.id)}
-                        className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
-                        style={{ 
-                          background: selectedLead.stage === stage.id ? stage.color : `${stage.color}20`,
-                          color: selectedLead.stage === stage.id ? '#fff' : stage.color,
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium transition-all"
+                        style={{
+                          background: selectedLead.stage === stage.id ? `${stage.color}25` : 'rgba(255,255,255,0.04)',
+                          border: `1px solid ${selectedLead.stage === stage.id ? stage.color : 'rgba(255,255,255,0.08)'}`,
+                          color: selectedLead.stage === stage.id ? stage.color : '#475569',
                         }}
                       >
                         {stage.icon} {stage.label}
@@ -330,15 +332,18 @@ export const OraculoCRM = () => {
 
                 {/* Tags */}
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: colors.textSecondary }}>Tags</label>
-                  <div className="flex flex-wrap gap-2 mb-2">
+                  <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
+                    <Star className="w-3 h-3 inline mr-1" />
+                    Tags
+                  </label>
+                  <div className="flex flex-wrap gap-1.5 mb-2">
                     {selectedLead.tags.map(tag => {
                       const tagData = tags.find(t => t.name === tag);
                       return (
-                        <span 
+                        <span
                           key={tag}
                           className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
-                          style={{ background: `${tagData?.color || colors.accent}20`, color: tagData?.color || colors.accent }}
+                          style={{ background: `${tagData?.color || '#a78bfa'}18`, color: tagData?.color || '#a78bfa', border: `1px solid ${tagData?.color || '#a78bfa'}30` }}
                         >
                           {tag}
                           <button onClick={() => removeTag(selectedLead.id, tag)}>
@@ -348,34 +353,35 @@ export const OraculoCRM = () => {
                       );
                     })}
                   </div>
-                  <div className="flex gap-2">
-                    <Select value="" onValueChange={(v) => { addTag(selectedLead.id, v); }}>
-                      <SelectTrigger style={{ background: colors.card, borderColor: colors.border, color: colors.text }}>
-                        <SelectValue placeholder="Adicionar tag..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {tags.filter(t => !selectedLead.tags.includes(t.name)).map(tag => (
-                          <SelectItem key={tag.id} value={tag.name}>
-                            <span className="flex items-center gap-2">
-                              <span className="w-2 h-2 rounded-full" style={{ background: tag.color }} />
-                              {tag.name}
-                            </span>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <Select value="" onValueChange={(v) => addTag(selectedLead.id, v)}>
+                    <SelectTrigger className="h-8 text-xs border-0" style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}>
+                      <SelectValue placeholder="+ Adicionar tag" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {tags.filter(t => !selectedLead.tags.includes(t.name)).map(tag => (
+                        <SelectItem key={tag.id} value={tag.name}>
+                          <span className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full" style={{ background: tag.color }} />
+                            {tag.name}
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {/* Courses */}
+                {/* Cursos */}
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: colors.textSecondary }}>Cursos Associados</label>
-                  <div className="flex flex-wrap gap-2 mb-2">
+                  <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
+                    <BookOpen className="w-3 h-3 inline mr-1" />
+                    Cursos Associados
+                  </label>
+                  <div className="flex flex-wrap gap-1.5 mb-2">
                     {selectedLead.courses.map(course => (
-                      <span 
+                      <span
                         key={course}
                         className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
-                        style={{ background: `${colors.accent}20`, color: colors.accent }}
+                        style={{ background: 'rgba(167,139,250,0.12)', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.2)' }}
                       >
                         {course}
                         <button onClick={() => removeCourse(selectedLead.id, course)}>
@@ -389,63 +395,70 @@ export const OraculoCRM = () => {
                       value={newCourse}
                       onChange={(e) => setNewCourse(e.target.value)}
                       placeholder="Nome do curso..."
-                      style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
+                      className="h-8 text-xs border-0"
+                      style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
                     />
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
+                      className="h-8 w-8 p-0 flex-shrink-0"
+                      style={{ background: 'rgba(167,139,250,0.2)', color: '#a78bfa' }}
                       onClick={() => { if (newCourse) { addCourse(selectedLead.id, newCourse); setNewCourse(''); } }}
-                      style={{ background: colors.accent, color: colors.background }}
                     >
                       <Plus className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
 
-                {/* Notes */}
+                {/* Notas */}
                 <div>
-                  <label className="text-xs mb-1 block" style={{ color: colors.textSecondary }}>Anotações</label>
-                  <Textarea 
+                  <label className="text-xs mb-1 block" style={{ color: '#475569' }}>
+                    <StickyNote className="w-3 h-3 inline mr-1" />
+                    Anotações
+                  </label>
+                  <Textarea
                     value={selectedLead.notas || ''}
                     onChange={(e) => updateLead(selectedLead.id, { notas: e.target.value })}
                     placeholder="Observações sobre o lead..."
-                    className="min-h-[100px]"
-                    style={{ background: colors.card, borderColor: colors.border, color: colors.text }}
+                    className="text-sm min-h-[80px] border-0 resize-none"
+                    style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
                   />
                 </div>
 
-                {/* History */}
-                <div>
-                  <label className="text-xs mb-2 block" style={{ color: colors.textSecondary }}>Histórico</label>
-                  <div className="space-y-2">
-                    {selectedLead.history.map(item => (
-                      <div 
-                        key={item.id}
-                        className="flex items-start gap-3 p-3 rounded-lg"
-                        style={{ background: colors.card }}
-                      >
-                        <div className="w-2 h-2 rounded-full mt-1.5" style={{ background: colors.accent }} />
-                        <div className="flex-1">
-                          <p className="text-sm" style={{ color: colors.text }}>{item.description}</p>
-                          <p className="text-xs mt-1" style={{ color: colors.textSecondary }}>
-                            {format(new Date(item.date), "dd MMM yyyy 'às' HH:mm", { locale: ptBR })}
-                          </p>
+                {/* Histórico */}
+                {selectedLead.history.length > 0 && (
+                  <div>
+                    <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
+                      <CalendarDays className="w-3 h-3 inline mr-1" />
+                      Histórico
+                    </label>
+                    <div className="space-y-2">
+                      {selectedLead.history.map(item => (
+                        <div key={item.id} className="flex items-start gap-3 p-2.5 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                          <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: '#a78bfa' }} />
+                          <div>
+                            <p className="text-xs" style={{ color: '#cbd5e1' }}>{item.description}</p>
+                            <p className="text-xs mt-0.5" style={{ color: '#334155' }}>
+                              {format(new Date(item.date), "dd MMM yyyy 'às' HH:mm", { locale: ptBR })}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Delete */}
-                <Button 
-                  variant="ghost" 
-                  className="w-full text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                  onClick={() => { deleteLead(selectedLead.id); setSelectedLead(null); }}
+                {/* Deletar */}
+                <Button
+                  variant="ghost"
+                  className="w-full text-xs h-9"
+                  style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.15)' }}
+                  onClick={() => deleteLead(selectedLead.id)}
                 >
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Excluir Lead
+                  <Trash2 className="w-3.5 h-3.5 mr-2" />
+                  Arquivar Lead
                 </Button>
               </div>
-            </>
+            </div>
           )}
         </SheetContent>
       </Sheet>
