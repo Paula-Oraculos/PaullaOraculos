@@ -25,7 +25,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { FUNNEL_STAGES, type KanbanLead, type FunnelStage } from '@/hooks/useKanbanLeads';
 import { useApiLeads } from '@/hooks/useApiLeads';
 import { useTags } from '@/hooks/useTags';
@@ -225,15 +225,15 @@ export const OraculoCRM = () => {
         </DragOverlay>
       </DndContext>
 
-      {/* Lead Detail Sheet */}
-      <Sheet open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
-        <SheetContent
-          className="w-full sm:max-w-md overflow-y-auto p-0"
-          style={{ background: '#0f0f17', borderColor: 'rgba(255,255,255,0.08)' }}
+      {/* Lead Detail Modal */}
+      <Dialog open={!!selectedLead} onOpenChange={() => setSelectedLead(null)}>
+        <DialogContent
+          className="max-w-lg w-full max-h-[85vh] overflow-y-auto p-0"
+          style={{ background: '#0f0f17', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}
         >
           {selectedLead && (
-            <div className="flex flex-col h-full">
-              {/* Sheet Header */}
+            <div className="flex flex-col">
+              {/* Modal Header */}
               <div className="p-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="flex items-center gap-4">
                   <img
@@ -243,9 +243,9 @@ export const OraculoCRM = () => {
                     style={{ border: '2px solid rgba(167,139,250,0.4)' }}
                   />
                   <div className="flex-1 min-w-0">
-                    <SheetTitle className="text-base font-semibold truncate" style={{ color: '#f1f5f9' }}>
+                    <DialogTitle className="text-base font-semibold truncate" style={{ color: '#f1f5f9' }}>
                       {selectedLead.name}
-                    </SheetTitle>
+                    </DialogTitle>
                     <a
                       href={`https://wa.me/${selectedLead.phone.replace(/\D/g, '')}`}
                       target="_blank"
@@ -467,8 +467,8 @@ export const OraculoCRM = () => {
               </div>
             </div>
           )}
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
