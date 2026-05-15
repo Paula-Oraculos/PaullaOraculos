@@ -63,10 +63,14 @@ export const OraculoCRM = () => {
     moveToStage, updateLead, deleteLead,
     addTag, removeTag, addCourse, removeCourse, refetch,
   } = useApiLeads();
-  const { tags } = useTags();
+  const { tags, addTag: addTagToLibrary, updateTag: updateTagInLibrary, deleteTag: deleteTagFromLibrary } = useTags();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeId, setActiveId] = useState<string | null>(null);
   const [newCourse, setNewCourse] = useState('');
+  const [showTagManager, setShowTagManager] = useState(false);
+  const [newTagName, setNewTagName] = useState('');
+  const [newTagColor, setNewTagColor] = useState('#a78bfa');
+  const [editingTag, setEditingTag] = useState<{ id: string; name: string; color: string } | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -372,10 +376,25 @@ export const OraculoCRM = () => {
 
                 {/* Tags */}
                 <div>
-                  <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
-                    <Star className="w-3 h-3 inline mr-1" />
-                    Tags
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs" style={{ color: '#475569' }}>
+                      <Star className="w-3 h-3 inline mr-1" />
+                      Tags
+                    </label>
+                    <button
+                      onClick={() => { setShowTagManager(!showTagManager); setEditingTag(null); }}
+                      className="text-xs px-2 py-0.5 rounded-md transition-colors"
+                      style={{
+                        color: showTagManager ? '#a78bfa' : '#475569',
+                        background: showTagManager ? 'rgba(167,139,250,0.12)' : 'transparent',
+                        border: `1px solid ${showTagManager ? 'rgba(167,139,250,0.3)' : 'rgba(255,255,255,0.06)'}`,
+                      }}
+                    >
+                      ⚙ Gerenciar
+                    </button>
+                  </div>
+
+                  {/* Tags do lead */}
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {selectedLead.tags.map(tag => {
                       const tagData = tags.find(t => t.name === tag);
@@ -393,9 +412,11 @@ export const OraculoCRM = () => {
                       );
                     })}
                   </div>
+
+                  {/* Adicionar tag ao lead */}
                   <Select value="" onValueChange={(v) => addTag(selectedLead.id, v)}>
                     <SelectTrigger className="h-8 text-xs border-0" style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}>
-                      <SelectValue placeholder="+ Adicionar tag" />
+                      <SelectValue placeholder="+ Adicionar tag ao lead" />
                     </SelectTrigger>
                     <SelectContent>
                       {tags.filter(t => !selectedLead.tags.includes(t.name)).map(tag => (
@@ -408,45 +429,138 @@ export const OraculoCRM = () => {
                       ))}
                     </SelectContent>
                   </Select>
+
+                  {/* Gerenciador de biblioteca de tags */}
+                  {showTagManager && (
+                    <div className="mt-3 p-3 rounded-xl space-y-2" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      <p className="text-xs font-medium mb-1" style={{ color: '#64748b' }}>Biblioteca de Tags</p>
+
+                      {tags.map(tag => (
+                        editingTag?.id === tag.id ? (
+                          <div key={tag.id} className="flex items-center gap-2">
+                            <input
+                              type="color"
+                              value={editingTag.color}
+                              onChange={(e) => setEditingTag({ ...editingTag, color: e.target.value })}
+                              className="w-6 h-6 rounded cursor-pointer flex-shrink-0"
+                              style={{ border: 'none', padding: 0, background: 'none' }}
+                            />
+                            <Input
+                              value={editingTag.name}
+                              onChange={(e) => setEditingTag({ ...editingTag, name: e.target.value })}
+                              className="h-7 text-xs border-0 flex-1"
+                              style={{ background: 'rgba(255,255,255,0.08)', color: '#e2e8f0' }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') { updateTagInLibrary(tag.id, { name: editingTag.name, color: editingTag.color }); setEditingTag(null); }
+                                if (e.key === 'Escape') setEditingTag(null);
+                              }}
+                            />
+                            <button onClick={() => { updateTagInLibrary(tag.id, { name: editingTag.name, color: editingTag.color }); setEditingTag(null); }} style={{ color: '#22c55e', fontSize: '14px' }}>✓</button>
+                            <button onClick={() => setEditingTag(null)} style={{ color: '#475569', fontSize: '12px' }}>✕</button>
+                          </div>
+                        ) : (
+                          <div key={tag.id} className="flex items-center gap-2 group">
+                            <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: tag.color }} />
+                            <span className="text-xs flex-1" style={{ color: '#cbd5e1' }}>{tag.name}</span>
+                            <button
+                              onClick={() => setEditingTag({ id: tag.id, name: tag.name, color: tag.color })}
+                              className="opacity-0 group-hover:opacity-100 text-xs transition-opacity"
+                              style={{ color: '#94a3b8' }}
+                            >✏</button>
+                            <button
+                              onClick={() => deleteTagFromLibrary(tag.id)}
+                              className="opacity-0 group-hover:opacity-100 text-xs transition-opacity"
+                              style={{ color: '#ef4444' }}
+                            >🗑</button>
+                          </div>
+                        )
+                      ))}
+
+                      {/* Nova tag */}
+                      <div className="flex items-center gap-2 pt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                        <input
+                          type="color"
+                          value={newTagColor}
+                          onChange={(e) => setNewTagColor(e.target.value)}
+                          className="w-6 h-6 rounded cursor-pointer flex-shrink-0"
+                          style={{ border: 'none', padding: 0, background: 'none' }}
+                        />
+                        <Input
+                          value={newTagName}
+                          onChange={(e) => setNewTagName(e.target.value)}
+                          placeholder="Nome da nova tag..."
+                          className="h-7 text-xs border-0 flex-1"
+                          style={{ background: 'rgba(255,255,255,0.08)', color: '#e2e8f0' }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && newTagName.trim()) { addTagToLibrary(newTagName.trim(), newTagColor); setNewTagName(''); }
+                          }}
+                        />
+                        <Button
+                          size="sm"
+                          className="h-7 w-7 p-0 flex-shrink-0"
+                          style={{ background: 'rgba(167,139,250,0.2)', color: '#a78bfa' }}
+                          onClick={() => { if (newTagName.trim()) { addTagToLibrary(newTagName.trim(), newTagColor); setNewTagName(''); } }}
+                        >
+                          <Plus className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Cursos */}
                 <div>
                   <label className="text-xs mb-2 block" style={{ color: '#475569' }}>
                     <BookOpen className="w-3 h-3 inline mr-1" />
-                    Cursos Associados
+                    Cursos / Produtos Associados
                   </label>
+
+                  {selectedLead.courses.length === 0 && (
+                    <p className="text-xs mb-2" style={{ color: '#334155' }}>Nenhum curso cadastrado ainda.</p>
+                  )}
+
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {selectedLead.courses.map(course => (
                       <span
                         key={course}
-                        className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
+                        className="px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1.5"
                         style={{ background: 'rgba(167,139,250,0.12)', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.2)' }}
                       >
                         {course}
-                        <button onClick={() => removeCourse(selectedLead.id, course)}>
+                        <button
+                          onClick={() => removeCourse(selectedLead.id, course)}
+                          title="Remover curso"
+                          style={{ color: '#a78bfa', opacity: 0.7 }}
+                          className="hover:opacity-100"
+                        >
                           <X className="w-3 h-3" />
                         </button>
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-2">
+
+                  <div className="flex gap-2 items-center">
                     <Input
                       value={newCourse}
                       onChange={(e) => setNewCourse(e.target.value)}
-                      placeholder="Nome do curso..."
+                      placeholder="Ex: Energia Blindada, Mentoria..."
                       className="h-8 text-xs border-0"
                       style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && newCourse.trim()) { addCourse(selectedLead.id, newCourse.trim()); setNewCourse(''); }
+                      }}
                     />
                     <Button
                       size="sm"
-                      className="h-8 w-8 p-0 flex-shrink-0"
+                      className="h-8 px-3 flex-shrink-0 text-xs font-medium"
                       style={{ background: 'rgba(167,139,250,0.2)', color: '#a78bfa' }}
-                      onClick={() => { if (newCourse) { addCourse(selectedLead.id, newCourse); setNewCourse(''); } }}
+                      onClick={() => { if (newCourse.trim()) { addCourse(selectedLead.id, newCourse.trim()); setNewCourse(''); } }}
                     >
-                      <Plus className="w-4 h-4" />
+                      <Plus className="w-3.5 h-3.5 mr-1" />
+                      Incluir
                     </Button>
                   </div>
+                  <p className="text-xs mt-1" style={{ color: '#334155' }}>Digite o nome e clique em Incluir (ou pressione Enter)</p>
                 </div>
 
                 {/* Notas */}
