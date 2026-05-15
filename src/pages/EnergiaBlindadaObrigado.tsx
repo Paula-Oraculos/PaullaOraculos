@@ -13,7 +13,7 @@ const WhatsAppIcon = () => (
 );
 
 const EnergiaBlindadaObrigado = () => {
-  const whatsappLink = "https://chat.whatsapp.com/L8GzY29UNAvBHq1VXR2XHK?mode=hqrc";
+  const whatsappLink = "https://chat.whatsapp.com/HRKM7t5DY54Da7HUoFiIXi";
 
   const particles = Array.from({ length: 15 }, (_, i) => ({
     id: i,
