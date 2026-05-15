@@ -8,6 +8,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  useDroppable,
   DragStartEvent,
   DragEndEvent,
 } from '@dnd-kit/core';
@@ -32,6 +33,22 @@ import { useTags } from '@/hooks/useTags';
 import { KanbanLeadCard } from '@/components/dashboard/KanbanLeadCard';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+
+const DroppableColumn = ({ id, children }: { id: string; children: React.ReactNode }) => {
+  const { setNodeRef, isOver } = useDroppable({ id });
+  return (
+    <div
+      ref={setNodeRef}
+      className="flex-1 p-2 overflow-y-auto space-y-2 min-h-[200px] transition-colors duration-150"
+      style={{
+        background: isOver ? 'rgba(167,139,250,0.06)' : 'transparent',
+        borderRadius: '8px',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const STAT_CARDS = [
   { key: 'total', label: 'Total de Leads', icon: Users, color: '#a78bfa', bg: 'rgba(167,139,250,0.1)' },
@@ -61,9 +78,23 @@ export const OraculoCRM = () => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     setActiveId(null);
-    if (!over) return;
-    const targetStage = FUNNEL_STAGES.find(s => s.id === over.id as string);
-    if (targetStage) moveToStage(active.id as string, targetStage.id);
+    if (!over || active.id === over.id) return;
+
+    // Dropped on a stage column (droppable or sortable context)
+    const targetStage = FUNNEL_STAGES.find(s => s.id === (over.id as string));
+    if (targetStage) {
+      moveToStage(active.id as string, targetStage.id);
+      return;
+    }
+
+    // Dropped on top of another card — move active to that card's stage
+    const overLead = leads.find(l => l.id === (over.id as string));
+    if (overLead) {
+      const activeLead = leads.find(l => l.id === (active.id as string));
+      if (activeLead && activeLead.stage !== overLead.stage) {
+        moveToStage(active.id as string, overLead.stage);
+      }
+    }
   };
 
   const filteredLeads = leads.filter(lead =>
@@ -170,9 +201,8 @@ export const OraculoCRM = () => {
                   <SortableContext
                     items={stageLeads.map(l => l.id)}
                     strategy={verticalListSortingStrategy}
-                    id={stage.id}
                   >
-                    <div className="flex-1 p-2 overflow-y-auto space-y-2 min-h-[200px]" data-stage={stage.id}>
+                    <DroppableColumn id={stage.id}>
                       <AnimatePresence mode="popLayout">
                         {stageLeads.map((lead) => (
                           <KanbanLeadCard
@@ -190,7 +220,7 @@ export const OraculoCRM = () => {
                           Arraste aqui
                         </div>
                       )}
-                    </div>
+                    </DroppableColumn>
                   </SortableContext>
                 </div>
               );
