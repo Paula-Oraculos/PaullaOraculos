@@ -424,10 +424,18 @@ export const OraculoCRM = () => {
                   </label>
                   <Textarea
                     value={selectedLead.notas || ''}
-                    onChange={(e) => updateLead(selectedLead.id, { notas: e.target.value })}
+                    onChange={(e) => {
+                      updateLead(selectedLead.id, { notas: e.target.value });
+                      e.target.style.height = 'auto';
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.height = 'auto';
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                    }}
                     placeholder="Observações sobre o lead..."
-                    className="text-sm min-h-[80px] border-0 resize-none"
-                    style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0' }}
+                    className="text-sm border-0 resize-none overflow-hidden"
+                    style={{ background: 'rgba(255,255,255,0.05)', color: '#e2e8f0', minHeight: '80px' }}
                   />
                 </div>
 
