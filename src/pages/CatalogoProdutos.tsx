@@ -234,7 +234,7 @@ const CatalogoProdutos = () => {
     };
 
     try {
-      await fetch("https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos", {
+      await fetch("https://bk.paulaoraculos.com.br/webhook/paulaoraculos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

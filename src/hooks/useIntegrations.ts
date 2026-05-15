@@ -45,7 +45,7 @@ const DEFAULT_WEBHOOKS: Webhook[] = [
   {
     id: '1',
     name: 'N8N Principal',
-    url: 'https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos',
+    url: 'https://bk.paulaoraculos.com.br/webhook/paulaoraculos',
     isActive: true,
     tag: 'leads',
   },

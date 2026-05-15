@@ -97,7 +97,7 @@ const EnergiaBlindada = () => {
         return urlParams.get(param) || '';
       };
 
-      await fetch("https://paulaoraculos-n8n.cloudfy.live/webhook/paulaoraculos", {
+      await fetch("https://bk.paulaoraculos.com.br/webhook/paulaoraculos", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
