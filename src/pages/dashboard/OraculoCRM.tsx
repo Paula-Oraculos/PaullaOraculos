@@ -17,8 +17,9 @@ import {
 } from '@dnd-kit/sortable';
 import {
   Users, Search, X, Phone, Trash2, Plus,
-  RefreshCw, TrendingUp, UserCheck, Star, Globe,
+  RefreshCw, TrendingUp, Star, Globe,
   CalendarDays, Tag, BookOpen, StickyNote, Clock,
+  Inbox, Flame, MessageCircle, CheckCircle2, XCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -148,7 +149,13 @@ export const OraculoCRM = () => {
                   {/* Column Header */}
                   <div className="px-3 py-2.5 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{stage.icon}</span>
+                      <div className="w-5 h-5 flex items-center justify-center" style={{ color: stage.color }}>
+                        {stage.id === 'novos' && <Inbox className="w-4 h-4" />}
+                        {stage.id === 'engajados' && <Flame className="w-4 h-4" />}
+                        {stage.id === 'negociacao' && <MessageCircle className="w-4 h-4" />}
+                        {stage.id === 'convertidos' && <CheckCircle2 className="w-4 h-4" />}
+                        {stage.id === 'perdidos' && <XCircle className="w-4 h-4" />}
+                      </div>
                       <span className="text-sm font-medium" style={{ color: '#cbd5e1' }}>{stage.label}</span>
                     </div>
                     <span
