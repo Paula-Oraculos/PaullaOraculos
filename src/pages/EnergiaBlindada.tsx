@@ -99,7 +99,6 @@ const EnergiaBlindada = () => {
 
       await fetch("https://bk.paulaoraculos.com.br/webhook/paulaoraculos", {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_unico: `ga-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,

@@ -237,8 +237,7 @@ const CatalogoProdutos = () => {
       await fetch("https://bk.paulaoraculos.com.br/webhook/paulaoraculos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        mode: "no-cors"
+        body: JSON.stringify(payload)
       });
 
       toast.success("Cadastro realizado com sucesso!");

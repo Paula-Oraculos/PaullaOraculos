@@ -168,7 +168,6 @@ export const ExitIntentModal = () => {
       // Envia dados para o webhook do n8n
       await fetch('https://bk.paulaoraculos.com.br/webhook/paulaoraculos', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
